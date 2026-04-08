@@ -2,15 +2,15 @@
 
 **Proyecto:** Madness Expeditions
 **Iniciado:** 2026-04-06
-**Última actualización:** 2026-04-07
+**Última actualización:** 2026-04-08
 
 ---
 
 ## Estado Actual
 
-**Fase:** 2 — Trigger Mapping
-**Bloques completados:** 1A ✅ 1B ✅ 1C ✅ | Fase 2 ✅
-**Próximo paso:** Fase 3 — UX Scenarios
+**Fase:** 4 — UX Design
+**Bloques completados:** 1A ✅ 1B ✅ 1C ✅ | Fase 2 ✅ | Fase 3 ✅
+**Próximo paso:** Fase 4 — UX Design (arrancar con Escenario 01, paso 01.1 — Home)
 
 ---
 
@@ -96,7 +96,67 @@ Ruta: Documentación existente (desde Product Brief + Market Research)
 
 ---
 
+## Progreso — Fase 3: UX Scenarios (en curso)
+
+### Inventario de Páginas Aprobado (9 páginas)
+
+| # | Página | Nota |
+|---|--------|------|
+| 1 | Home | — |
+| 2 | Sobre nosotros / El equipo | — |
+| 3 | Catálogo de viajes | Solo expediciones nacionales + regionales |
+| 4 | Ficha de viaje | Template — alta variación por destino |
+| 5 | Grandes Expediciones | Kilimanjaro + Everest Base — tono y diseño propios |
+| 6 | Próximas salidas | Calendario de fechas por temporada |
+| 7 | Cómo trabajamos | Modelo de progresión personalizada |
+| 8 | Guía de equipamiento | Recurso enlazado — fuera del camino principal |
+| 9 | Contacto | Formulario principal + WhatsApp |
+
+**Decisión clave:** Grandes Expediciones tiene página propia (no dentro del catálogo) — diferenciador de posicionamiento premium + SEO independiente para Kili/Everest.
+
+### ✅ Fase 3 — UX Scenarios (completada 2026-04-08)
+
+**Calidad:** Excelente — 3/3 escenarios con scores máximos (7/7 · 7/7 · 6/6 · 4/4)
+
+**Escenarios completados:**
+
+| # | Escenario | Persona | Prioridad | Páginas | Estado |
+|---|-----------|---------|-----------|---------|--------|
+| 01 | La Primera Cumbre de Valentina | Valentina (Primaria ⭐) | 1 | 3 | ✅ Completo |
+| 02 | La Validación Técnica de Martín | Martín (Secundaria) | 1 | 3 | ✅ Completo |
+| 03 | La Gran Decisión de Diego | Diego (Terciaria) | 2 | 1 | ✅ Completo |
+
+**Artefactos generados:**
+- `_bmad-output/C-UX-Scenarios/00-ux-scenarios.md` — Índice general con matriz de cobertura
+- `_bmad-output/C-UX-Scenarios/01-valentina-primera-cumbre/01-valentina-primera-cumbre.md`
+- `_bmad-output/C-UX-Scenarios/01-valentina-primera-cumbre/01.1-home/01.1-home.md`
+- `_bmad-output/C-UX-Scenarios/01-valentina-primera-cumbre/01.2-catalogo-de-viajes/01.2-catalogo-de-viajes.md`
+- `_bmad-output/C-UX-Scenarios/01-valentina-primera-cumbre/01.3-ficha-de-viaje/01.3-ficha-de-viaje.md`
+- `_bmad-output/C-UX-Scenarios/02-martin-validacion-tecnica/02-martin-validacion-tecnica.md`
+- `_bmad-output/C-UX-Scenarios/02-martin-validacion-tecnica/02.1-proximas-salidas/02.1-proximas-salidas.md`
+- `_bmad-output/C-UX-Scenarios/02-martin-validacion-tecnica/02.2-sobre-nosotros/02.2-sobre-nosotros.md`
+- `_bmad-output/C-UX-Scenarios/02-martin-validacion-tecnica/02.3-como-trabajamos/02.3-como-trabajamos.md`
+- `_bmad-output/C-UX-Scenarios/03-diego-grandes-expediciones/03-diego-grandes-expediciones.md`
+- `_bmad-output/C-UX-Scenarios/03-diego-grandes-expediciones/03.1-grandes-expediciones/03.1-grandes-expediciones.md`
+
+**Resumen:** 3 escenarios creados cubriendo 7/9 páginas en caminos lineales (2 páginas como recursos/acceso directo). Decisión más importante: Grandes Expediciones como página independiente del catálogo para Kilimanjaro y Everest Base — SEO propio y tono diferenciado. CTA principal unificado en WhatsApp con mensaje pre-cargado por viaje, formulario como alternativa en todos los puntos de contacto.
+
+**Próximo:** Fase 4 — UX Design
+
+---
+
 ## Decisiones Clave Tomadas
+
+| Decisión | Valor | Fase | Autor |
+|----------|-------|------|-------|
+| Grandes Expediciones página independiente | Kilimanjaro + Everest Base fuera del catálogo — SEO propio + tono diferenciado para Diego | Fase 3 | Irivadeneira + Copilot |
+| CTA principal unificado | WhatsApp con mensaje pre-cargado por viaje — formulario como alternativa en todos los puntos de contacto | Fase 3 | Irivadeneira + Copilot |
+| Guía de Equipamiento como recurso | Enlazada desde Ficha de Viaje — fuera del camino de decisión de Valentina | Fase 3 | Irivadeneira + Copilot |
+| Página Contacto fuera de escenarios | Acceso directo desde menú para usuarios recurrentes — formulario incluye selector de viaje | Fase 3 | Irivadeneira + Copilot |
+| Dispositivos por persona | Valentina: mobile (primer encuentro) · Martín: desktop (búsqueda deliberada) · Diego: desktop (investigación intensa) | Fase 3 | Irivadeneira + Copilot |
+| Martín — orden de páginas | Próximas Salidas como filtro inicial (antes que El Equipo) — valida disponibilidad antes de conocer la empresa | Fase 3 | Irivadeneira |
+
+---
 
 | Decisión | Valor |
 |----------|-------|
