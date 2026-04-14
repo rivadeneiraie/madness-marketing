@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Madness Expeditions — Catálogo de Viajes [Prototipo WDS 01.2]</title>
+
+    <!-- PROTOTIPO DE DISEÑO — NO ES CÓDIGO DE PRODUCCIÓN -->
+    <!-- Escenario: 01 — La Primera Cumbre de Valentina -->
+    <!-- Página: 01.2 — Catálogo de Viajes -->
+    <!-- Dispositivo: Mobile-first (390px) -->
+    <!-- Fecha: 2026-04-10 -->
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'mx-dark': '#0D1B2A',
+                        'mx-blue': '#1a3a5c',
+                        'mx-red': '#E63030',
+                        'mx-gray': '#1C1C1E',
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Inter', system-ui, sans-serif;
+        }
+
+        /* Card background images — fotos reales por destino en producción */
+        .card-bg-1 {
+            background-image: linear-gradient(to bottom, transparent 35%, rgba(13, 27, 42, 0.95) 100%), url('https://picsum.photos/seed/cerro-catedral/600/400');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .card-bg-2 {
+            background-image: linear-gradient(to bottom, transparent 35%, rgba(13, 27, 42, 0.95) 100%), url('https://picsum.photos/seed/volcan-lanin/600/400');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .card-bg-3 {
+            background-image: linear-gradient(to bottom, transparent 35%, rgba(13, 27, 42, 0.95) 100%), url('https://picsum.photos/seed/aconcagua-camp/600/400');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .card-bg-4 {
+            background-image: linear-gradient(to bottom, transparent 35%, rgba(13, 27, 42, 0.95) 100%), url('https://picsum.photos/seed/cordon-del-plata/600/400');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .card-bg-5 {
+            background-image: linear-gradient(to bottom, transparent 35%, rgba(13, 27, 42, 0.95) 100%), url('https://picsum.photos/seed/cerro-champaqui/600/400');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .card-bg-6 {
+            background-image: linear-gradient(to bottom, transparent 35%, rgba(13, 27, 42, 0.95) 100%), url('https://picsum.photos/seed/mercedario-andes/600/400');
+            background-size: cover;
+            background-position: center;
+        }
+
+        /* Filtro chip activo */
+        .chip-active {
+            background: #E63030;
+            color: white;
+        }
+
+        .chip-inactive {
+            background: #1C1C1E;
+            color: rgba(255, 255, 255, 0.65);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+        }
+
+        /* Difficulty dots */
+        .dot {
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        .dot-on {
+            background: #E63030;
+        }
+
+        .dot-off {
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(230, 48, 48, 0.4);
+        }
+
+        /* Mobile frame */
+        .mobile-frame {
+            max-width: 390px;
+            margin: 0 auto;
+        }
+
+        @media(min-width:640px) {
+            body {
+                background: #111;
+            }
+
+            .mobile-frame {
+                margin: 32px auto;
+                box-shadow: 0 40px 80px rgba(0, 0, 0, 0.7);
+                border-radius: 40px;
+                overflow: hidden;
+            }
+        }
+
+        /* Sticky filter bar shadow */
+        .filter-bar {
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Animación entrada */
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(16px)
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0)
+            }
+        }
+
+        .card-anim {
+            animation: fadeUp 0.4s ease forwards;
+        }
+    </style>
+</head>
+
+<body class="bg-mx-dark text-white">
+    <div class="mobile-frame">
+
+        <!-- ————————————————————————————
+       NAV — igual que Home para consistencia
+  ———————————————————————————————— -->
+        <nav class="sticky top-0 z-50 flex items-center justify-between px-4 py-3"
+            style="background:rgba(13,27,42,0.97); backdrop-filter:blur(8px);">
+            <!-- Botón back -->
+            <a href="home-prototype.html" class="flex items-center gap-2 text-sm font-medium"
+                style="color:rgba(255,255,255,0.75);">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M19 12H5M12 5l-7 7 7 7" />
+                </svg>
+                Inicio
+            </a>
+            <!-- Logo compacto -->
+            <div class="flex items-center gap-1.5">
+                <div class="w-7 h-7 rounded-full bg-white flex items-center justify-center flex-shrink-0">
+                    <svg viewBox="0 0 40 40" width="22" height="22">
+                        <circle cx="20" cy="20" r="19" fill="#0D1B2A" />
+                        <ellipse cx="20" cy="13" rx="3" ry="3.2" fill="white" />
+                        <path d="M17 16 Q14 20 13 28 L20 26 L27 28 Q26 20 23 16 Z" fill="white" />
+                        <path d="M13 28 L10 34" stroke="white" stroke-width="1.5" stroke-linecap="round" />
+                        <path d="M27 28 L30 34" stroke="white" stroke-width="1.5" stroke-linecap="round" />
+                    </svg>
+                </div>
+                <span class="font-black text-xs uppercase tracking-wider">Madness</span>
+            </div>
+            <!-- WhatsApp -->
+            <a href="https://wa.me/54XXXXXXXXXX" class="text-green-400">
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="#4ade80">
+                    <path
+                        d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.114.549 4.097 1.508 5.817L.057 23.886l6.219-1.427A11.944 11.944 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm.029 21.818a9.946 9.946 0 01-5.064-1.379l-.363-.215-3.763.863.943-3.653-.237-.375A9.932 9.932 0 012.09 12c0-5.478 4.461-9.939 9.939-9.939 5.478 0 9.939 4.461 9.939 9.939 0 5.478-4.461 9.818-9.939 9.818z" />
+                </svg>
+            </a>
+        </nav>
+
+
+        <!-- ————————————————————————————
+       HEADER DE PÁGINA
+       Contexto: Valentina viene del Home — sabe que hay viajes
+       Refuerza que hay opciones para su nivel
+  ———————————————————————————————— -->
+        <header class="px-5 pt-7 pb-5 bg-mx-dark">
+            <p class="text-mx-red text-xs font-bold uppercase tracking-widest mb-1.5">Expediciones &amp; Ascensos</p>
+            <h1 class="text-3xl font-black leading-tight mb-2">Nuestros viajes</h1>
+            <p class="text-sm leading-relaxed" style="color:rgba(255,255,255,0.6);">
+                Nacionales e internacionales · Todos los niveles · Con guía incluido
+            </p>
+        </header>
+
+
+        <!-- ————————————————————————————
+       BARRA DE FILTROS — STICKY
+       Filtro primario por nivel — lo más importante para Valentina
+       Chips horizontales con scroll
+  ———————————————————————————————— -->
+        <div class="sticky top-[52px] z-40 bg-mx-dark filter-bar">
+
+            <!-- Chips de nivel — scroll horizontal -->
+            <div class="flex gap-2 px-5 py-3 overflow-x-auto scrollbar-hide"
+                style="-webkit-overflow-scrolling:touch; scrollbar-width:none;">
+                <!-- Todos (default) -->
+                <button class="chip-active flex-shrink-0 text-xs font-bold px-4 py-2 rounded-full whitespace-nowrap">
+                    Todos
+                </button>
+                <!-- Principiante — el que le importa a Valentina -->
+                <button
+                    class="chip-inactive flex-shrink-0 text-xs font-semibold px-4 py-2 rounded-full whitespace-nowrap flex items-center gap-1.5">
+                    <span class="dot dot-on"></span>
+                    <span class="dot dot-off"></span>
+                    <span class="dot dot-off"></span>
+                    <span class="dot dot-off"></span>
+                    <span class="dot dot-off"></span>
+                    <span class="ml-1">Principiante</span>
+                </button>
+                <!-- Intermedio -->
+                <button
+                    class="chip-inactive flex-shrink-0 text-xs font-semibold px-4 py-2 rounded-full whitespace-nowrap flex items-center gap-1.5">
+                    <span class="dot dot-on"></span>
+                    <span class="dot dot-on"></span>
+                    <span class="dot dot-on"></span>
+                    <span class="dot dot-off"></span>
+                    <span class="dot dot-off"></span>
+                    <span class="ml-1">Intermedio</span>
+                </button>
+                <!-- Avanzado -->
+                <button
+                    class="chip-inactive flex-shrink-0 text-xs font-semibold px-4 py-2 rounded-full whitespace-nowrap flex items-center gap-1.5">
+                    <span class="dot dot-on"></span>
+                    <span class="dot dot-on"></span>
+                    <span class="dot dot-on"></span>
+                    <span class="dot dot-on"></span>
+                    <span class="dot dot-on"></span>
+                    <span class="ml-1">Avanzado</span>
+                </button>
+                <!-- Por zona -->
+                <button
+                    class="chip-inactive flex-shrink-0 text-xs font-semibold px-4 py-2 rounded-full whitespace-nowrap">
+                    Patagonia
+                </button>
+                <button
+                    class="chip-inactive flex-shrink-0 text-xs font-semibold px-4 py-2 rounded-full whitespace-nowrap">
+                    Andes Centrales
+                </button>
+                <button
+                    class="chip-inactive flex-shrink-0 text-xs font-semibold px-4 py-2 rounded-full whitespace-nowrap">
+                    Internacionales
+                </button>
+            </div>
+
+            <!-- Separador -->
+            <div class="h-px mx-5" style="background:rgba(255,255,255,0.07);"></div>
+        </div>
+
+
+        <!-- ————————————————————————————
+       GRID DE VIAJES
+       Orden: primero principiante (para Valentina)
+       Cards grandes verticales — foto protagonista
+  ———————————————————————————————— -->
+        <main class="px-4 pt-5 pb-10 flex flex-col gap-4">
+
+            <!-- ── SECCIÓN: PARA EMPEZAR ─────────────── -->
+            <div class="flex items-center gap-3 px-1 mb-1">
+                <span class="text-xs font-bold uppercase tracking-widest" style="color:rgba(255,255,255,0.4);">Para
+                    empezar</span>
+                <div class="flex-1 h-px" style="background:rgba(255,255,255,0.08);"></div>
+            </div>
+
+            <!-- Card 1 — Cerro Catedral · Principiante ⭐ PARA VALENTINA -->
+            <a href="../01.3-ficha-de-viaje/ficha-prototype.html"
+                class="card-anim block rounded-2xl overflow-hidden relative" style="min-height:220px;">
+                <div class="card-bg-1 absolute inset-0 w-full h-full"></div>
+                <!-- Badge destacado "Ideal para empezar" -->
+                <div class="absolute top-3 left-3">
+                    <span
+                        class="bg-green-500 text-white text-xs font-black px-3 py-1.5 rounded-full uppercase tracking-wide shadow-lg">
+                        ✓ Ideal para empezar
+                    </span>
+                </div>
+                <div class="relative p-4 flex flex-col justify-end" style="min-height:220px;">
+                    <!-- Nivel -->
+                    <div class="flex items-center gap-2 mb-2">
+                        <span class="dot dot-on"></span>
+                        <span class="dot dot-off"></span>
+                        <span class="dot dot-off"></span>
+                        <span class="dot dot-off"></span>
+                        <span class="dot dot-off"></span>
+                        <span class="text-xs font-medium ml-1" style="color:rgba(255,255,255,0.65);">Sin experiencia
+                            previa</span>
+                    </div>
+                    <h2 class="font-black text-xl leading-tight">Cerro Catedral</h2>
+                    <div class="flex items-center gap-3 mt-1 mb-3">
+                        <span class="text-sm" style="color:rgba(255,255,255,0.7);">Bariloche, Río Negro</span>
+                        <span class="text-sm font-bold text-white">2.405 msnm</span>
+                    </div>
+                    <!-- Pills de datos rápidos -->
+                    <div class="flex flex-wrap gap-2">
+                        <span class="text-xs px-2.5 py-1 rounded-full" style="background:rgba(255,255,255,0.12);">2
+                            días</span>
+                        <span class="text-xs px-2.5 py-1 rounded-full" style="background:rgba(255,255,255,0.12);">Grupo
+                            reducido</span>
+                        <span class="text-xs px-2.5 py-1 rounded-full" style="background:rgba(255,255,255,0.12);">Seguro
+                            incluido</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Card 2 — Cerro Champaquí · Principiante -->
+            <a href="#" class="card-anim block rounded-2xl overflow-hidden relative" style="min-height:200px;">
+                <div class="card-bg-5 absolute inset-0 w-full h-full"></div>
+                <div class="absolute top-3 left-3">
+                    <span
+                        class="bg-green-500 text-white text-xs font-black px-3 py-1.5 rounded-full uppercase tracking-wide shadow-lg">
+                        ✓ Ideal para empezar
+                    </span>
+                </div>
+                <div class="relative p-4 flex flex-col justify-end" style="min-height:200px;">
+                    <div class="flex items-center gap-2 mb-2">
+                        <span class="dot dot-on"></span>
+                        <span class="dot dot-off"></span>
+                        <span class="dot dot-off"></span>
+                        <span class="dot dot-off"></span>
+                        <span class="dot dot-off"></span>
+                        <span class="text-xs font-medium ml-1" style="color:rgba(255,255,255,0.65);">Sin experiencia
+                            previa</span>
+                    </div>
+                    <h2 class="font-black text-xl leading-tight">Cerro Champaquí</h2>
+                    <div class="flex items-center gap-3 mt-1 mb-3">
+                        <span class="text-sm" style="color:rgba(255,255,255,0.7);">Córdoba</span>
+                        <span class="text-sm font-bold text-white">2.884 msnm</span>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="text-xs px-2.5 py-1 rounded-full" style="background:rgba(255,255,255,0.12);">2
+                            días</span>
+                        <span class="text-xs px-2.5 py-1 rounded-full" style="background:rgba(255,255,255,0.12);">Grupo
+                            reducido</span>
+                        <span class="text-xs px-2.5 py-1 rounded-full" style="background:rgba(255,255,255,0.12);">Seguro
+                            incluido</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- ── SECCIÓN: INTERMEDIO ─────────────── -->
+            <div class="flex items-center gap-3 px-1 mt-3 mb-1">
+                <span class="text-xs font-bold uppercase tracking-widest" style="color:rgba(255,255,255,0.4);">Un paso
+                    más arriba</span>
+                <div class="flex-1 h-px" style="background:rgba(255,255,255,0.08);"></div>
+            </div>
+
+            <!-- Card 3 — Volcán Lanín · Intermedio -->
+            <a href="#" class="card-anim block rounded-2xl overflow-hidden relative" style="min-height:200px;">
+                <div class="card-bg-2 absolute inset-0 w-full h-full"></div>
+                <div class="relative p-4 flex flex-col justify-end" style="min-height:200px;">
+                    <div class="flex items-center gap-2 mb-2">
+                        <span class="dot dot-on"></span>
+                        <span class="dot dot-on"></span>
+                        <span class="dot dot-on"></span>
+                        <span class="dot dot-off"></span>
+                        <span class="dot dot-off"></span>
+                        <span class="text-xs font-medium ml-1" style="color:rgba(255,255,255,0.65);">Intermedio</span>
+                    </div>
+                    <h2 class="font-black text-xl leading-tight">Volcán Lanín</h2>
+                    <div class="flex items-center gap-3 mt-1 mb-3">
+                        <span class="text-sm" style="color:rgba(255,255,255,0.7);">Neuquén</span>
+                        <span class="text-sm font-bold text-white">3.776 msnm</span>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="text-xs px-2.5 py-1 rounded-full" style="background:rgba(255,255,255,0.12);">3
+                            días</span>
+                        <span class="text-xs px-2.5 py-1 rounded-full"
+                            style="background:rgba(255,255,255,0.12);">Requiere preparación</span>
+                        <span class="text-xs px-2.5 py-1 rounded-full" style="background:rgba(255,255,255,0.12);">Seguro
+                            incluido</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Card 4 — Cordón del Plata · Intermedio -->
+            <a href="#" class="card-anim block rounded-2xl overflow-hidden relative" style="min-height:200px;">
+                <div class="card-bg-4 absolute inset-0 w-full h-full"></div>
+                <div class="relative p-4 flex flex-col justify-end" style="min-height:200px;">
+                    <div class="flex items-center gap-2 mb-2">
+                        <span class="dot dot-on"></span>
+                        <span class="dot dot-on"></span>
+                        <span class="dot dot-on"></span>
+                        <span class="dot dot-off"></span>
+                        <span class="dot dot-off"></span>
+                        <span class="text-xs font-medium ml-1" style="color:rgba(255,255,255,0.65);">Intermedio</span>
+                    </div>
+                    <h2 class="font-black text-xl leading-tight">Cordón del Plata</h2>
+                    <div class="flex items-center gap-3 mt-1 mb-3">
+                        <span class="text-sm" style="color:rgba(255,255,255,0.7);">Mendoza</span>
+                        <span class="text-sm font-bold text-white">5.000 msnm</span>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="text-xs px-2.5 py-1 rounded-full" style="background:rgba(255,255,255,0.12);">5
+                            días</span>
+                        <span class="text-xs px-2.5 py-1 rounded-full"
+                            style="background:rgba(255,255,255,0.12);">Aclimatación incluida</span>
+                        <span class="text-xs px-2.5 py-1 rounded-full" style="background:rgba(255,255,255,0.12);">Seguro
+                            incluido</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- ── SECCIÓN: AVANZADO ─────────────── -->
+            <div class="flex items-center gap-3 px-1 mt-3 mb-1">
+                <span class="text-xs font-bold uppercase tracking-widest" style="color:rgba(255,255,255,0.4);">Alta
+                    montaña</span>
+                <div class="flex-1 h-px" style="background:rgba(255,255,255,0.08);"></div>
+            </div>
+
+            <!-- Card 5 — Aconcagua · Avanzado -->
+            <a href="#" class="card-anim block rounded-2xl overflow-hidden relative" style="min-height:200px;">
+                <div class="card-bg-3 absolute inset-0 w-full h-full"></div>
+                <!-- Badge techo de América -->
+                <div class="absolute top-3 left-3">
+                    <span
+                        class="text-white text-xs font-black px-3 py-1.5 rounded-full uppercase tracking-wide shadow-lg"
+                        style="background:rgba(230,48,48,0.85);">
+                        Techo de América
+                    </span>
+                </div>
+                <div class="relative p-4 flex flex-col justify-end" style="min-height:200px;">
+                    <div class="flex items-center gap-2 mb-2">
+                        <span class="dot dot-on"></span>
+                        <span class="dot dot-on"></span>
+                        <span class="dot dot-on"></span>
+                        <span class="dot dot-on"></span>
+                        <span class="dot dot-on"></span>
+                        <span class="text-xs font-medium ml-1" style="color:rgba(255,255,255,0.65);">Avanzado</span>
+                    </div>
+                    <h2 class="font-black text-xl leading-tight">Aconcagua</h2>
+                    <div class="flex items-center gap-3 mt-1 mb-3">
+                        <span class="text-sm" style="color:rgba(255,255,255,0.7);">Mendoza</span>
+                        <span class="text-sm font-bold text-white">6.962 msnm</span>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="text-xs px-2.5 py-1 rounded-full" style="background:rgba(255,255,255,0.12);">20
+                            días</span>
+                        <span class="text-xs px-2.5 py-1 rounded-full"
+                            style="background:rgba(255,255,255,0.12);">Experiencia previa requerida</span>
+                        <span class="text-xs px-2.5 py-1 rounded-full" style="background:rgba(255,255,255,0.12);">Seguro
+                            incluido</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Card 6 — Mercedario · Avanzado -->
+            <a href="#" class="card-anim block rounded-2xl overflow-hidden relative" style="min-height:200px;">
+                <div class="card-bg-6 absolute inset-0 w-full h-full"></div>
+                <div class="relative p-4 flex flex-col justify-end" style="min-height:200px;">
+                    <div class="flex items-center gap-2 mb-2">
+                        <span class="dot dot-on"></span>
+                        <span class="dot dot-on"></span>
+                        <span class="dot dot-on"></span>
+                        <span class="dot dot-on"></span>
+                        <span class="dot dot-off"></span>
+                        <span class="text-xs font-medium ml-1" style="color:rgba(255,255,255,0.65);">Avanzado</span>
+                    </div>
+                    <h2 class="font-black text-xl leading-tight">Mercedario</h2>
+                    <div class="flex items-center gap-3 mt-1 mb-3">
+                        <span class="text-sm" style="color:rgba(255,255,255,0.7);">San Juan</span>
+                        <span class="text-sm font-bold text-white">6.770 msnm</span>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="text-xs px-2.5 py-1 rounded-full" style="background:rgba(255,255,255,0.12);">18
+                            días</span>
+                        <span class="text-xs px-2.5 py-1 rounded-full"
+                            style="background:rgba(255,255,255,0.12);">Expedición técnica</span>
+                        <span class="text-xs px-2.5 py-1 rounded-full" style="background:rgba(255,255,255,0.12);">Seguro
+                            incluido</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- ── BLOQUE: ¿NO SÉ QUÉ ELEGIR? ──────
+         Para Valentina que llega sin saber cuál le corresponde
+    ─────────────────────────────────────── -->
+            <div class="mt-4 rounded-2xl p-5 border"
+                style="background:rgba(26,58,92,0.25); border-color:rgba(26,58,92,0.6);">
+                <p class="text-sm font-black mb-1">¿No sabés cuál es tu nivel?</p>
+                <p class="text-sm leading-relaxed mb-4" style="color:rgba(255,255,255,0.65);">
+                    Normal. Escribile a Pablo y te ayuda a elegir el viaje correcto para donde estás hoy — sin
+                    compromiso.
+                </p>
+                <a href="https://wa.me/54XXXXXXXXXX?text=Hola%20Pablo%2C%20no%20sé%20qué%20nivel%20tengo%2C%20¿me%20ayudás%20a%20elegir%20un%20viaje%3F"
+                    class="flex items-center justify-center gap-2 w-full bg-green-500 text-white font-bold text-sm py-3.5 rounded-xl">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="white">
+                        <path
+                            d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.114.549 4.097 1.508 5.817L.057 23.886l6.219-1.427A11.944 11.944 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm.029 21.818a9.946 9.946 0 01-5.064-1.379l-.363-.215-3.763.863.943-3.653-.237-.375A9.932 9.932 0 012.09 12c0-5.478 4.461-9.939 9.939-9.939 5.478 0 9.939 4.461 9.939 9.939 0 5.478-4.461 9.818-9.939 9.818z" />
+                    </svg>
+                    Hablá con Pablo
+                </a>
+            </div>
+
+            <!-- ── LINK: VER GRANDES EXPEDICIONES ───
+         Acceso a página de Kili/Everest para Diego (fuera del catálogo principal)
+    ─────────────────────────────────────── -->
+            <a href="#" class="mt-2 flex items-center justify-between px-5 py-4 rounded-2xl border"
+                style="background:rgba(13,27,42,0.6); border-color:rgba(255,255,255,0.1);">
+                <div>
+                    <div class="text-sm font-black">Grandes Expediciones</div>
+                    <div class="text-xs mt-0.5" style="color:rgba(255,255,255,0.5);">Kilimanjaro · Everest Base Camp
+                    </div>
+                </div>
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="rgba(255,255,255,0.4)"
+                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M5 12h14M12 5l7 7-7 7" />
+                </svg>
+            </a>
+
+        </main>
+
+
+        <!-- ————————————————————————————
+       FLOATING WHATSAPP
+  ———————————————————————————————— -->
+        <a href="https://wa.me/54XXXXXXXXXX?text=Hola%20Pablo%2C%20me%20interesa%20una%20expedición"
+            class="fixed bottom-5 right-4 z-50 w-14 h-14 bg-green-500 rounded-full flex items-center justify-center shadow-lg shadow-green-900/50 active:scale-95 transition-transform"
+            aria-label="Contactar por WhatsApp">
+            <svg viewBox="0 0 24 24" width="28" height="28" fill="white">
+                <path
+                    d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.114.549 4.097 1.508 5.817L.057 23.886l6.219-1.427A11.944 11.944 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm.029 21.818a9.946 9.946 0 01-5.064-1.379l-.363-.215-3.763.863.943-3.653-.237-.375A9.932 9.932 0 012.09 12c0-5.478 4.461-9.939 9.939-9.939 5.478 0 9.939 4.461 9.939 9.939 0 5.478-4.461 9.818-9.939 9.818z" />
+            </svg>
+            <span
+                class="absolute top-0 right-0 w-3.5 h-3.5 bg-green-300 rounded-full border-2 border-white animate-ping"></span>
+            <span class="absolute top-0 right-0 w-3.5 h-3.5 bg-green-400 rounded-full border-2 border-white"></span>
+        </a>
+
+    </div><!-- /mobile-frame -->
+</body>
+
+</html>

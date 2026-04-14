@@ -2,7 +2,7 @@
 
 **Proyecto:** Madness Expeditions
 **Iniciado:** 2026-04-06
-**Última actualización:** 2026-04-08
+**Última actualización:** 2026-04-09
 
 ---
 
@@ -10,7 +10,7 @@
 
 **Fase:** 4 — UX Design
 **Bloques completados:** 1A ✅ 1B ✅ 1C ✅ | Fase 2 ✅ | Fase 3 ✅
-**Próximo paso:** Fase 4 — UX Design (arrancar con Escenario 01, paso 01.1 — Home)
+**Próximo paso:** Fase 4 — UX Design · Escenario 02 — La Validación Técnica de Martín · paso 02.1 — Próximas Salidas (desktop)
 
 ---
 
@@ -142,6 +142,27 @@ Ruta: Documentación existente (desde Product Brief + Market Research)
 **Resumen:** 3 escenarios creados cubriendo 7/9 páginas en caminos lineales (2 páginas como recursos/acceso directo). Decisión más importante: Grandes Expediciones como página independiente del catálogo para Kilimanjaro y Everest Base — SEO propio y tono diferenciado. CTA principal unificado en WhatsApp con mensaje pre-cargado por viaje, formulario como alternativa en todos los puntos de contacto.
 
 **Próximo:** Fase 4 — UX Design
+
+---
+
+## Fase 4 — UX Design
+
+### Design Loop Status
+
+| Escenario | Página ID | Página | Estado | Fecha |
+|-----------|-----------|--------|--------|-------|
+| 01-valentina-primera-cumbre | 01.1 | Home | prototyped | 2026-04-09 |
+| 01-valentina-primera-cumbre | 01.2 | Catálogo de Viajes | prototyped | 2026-04-10 |
+| 01-valentina-primera-cumbre | 01.3 | Ficha de Viaje | prototyped | 2026-04-10 |
+
+### Log
+
+| Fecha | Acción | Artefacto |
+|-------|--------|-----------|
+| 2026-04-09 | Prototipo HTML aprobado — Home (mobile) · Escenario 01 | `C-UX-Scenarios/01-valentina-primera-cumbre/01.1-home/prototypes/home-prototype.html` |
+| 2026-04-10 | Prototipo HTML aprobado — Catálogo de Viajes (mobile) · Escenario 01 | `C-UX-Scenarios/01-valentina-primera-cumbre/01.2-catalogo-de-viajes/prototypes/catalogo-prototype.html` |
+| 2026-04-10 | Prototipo HTML generado — Ficha de Viaje (mobile) · Escenario 01 | `C-UX-Scenarios/01-valentina-primera-cumbre/01.3-ficha-de-viaje/prototypes/ficha-prototype.html` |
+| 2026-04-10 | Escenario 01 completo — 3/3 páginas aprobadas | Home · Catálogo · Ficha de Viaje |
 
 ---
 

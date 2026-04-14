@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Madness Expeditions — Cerro Catedral [Prototipo WDS 01.3]</title>
+
+    <!-- PROTOTIPO DE DISEÑO — NO ES CÓDIGO DE PRODUCCIÓN -->
+    <!-- Escenario: 01 — La Primera Cumbre de Valentina -->
+    <!-- Página: 01.3 — Ficha de Viaje (template: Cerro Catedral) -->
+    <!-- Dispositivo: Mobile-first (390px) -->
+    <!-- Fecha: 2026-04-10 -->
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'mx-dark': '#0D1B2A',
+                        'mx-blue': '#1a3a5c',
+                        'mx-red': '#E63030',
+                        'mx-gray': '#1C1C1E',
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Inter', system-ui, sans-serif;
+        }
+
+        .hero-ficha {
+            min-height: 58vw;
+            max-height: 280px;
+            background-image:
+                linear-gradient(to bottom, rgba(13, 27, 42, 0.2) 0%, rgba(13, 27, 42, 0.0) 40%, rgba(13, 27, 42, 1) 100%),
+                url('https://picsum.photos/seed/cerro-catedral-summit/800/500');
+            background-size: cover;
+            background-position: center 35%;
+        }
+
+        .gallery-img {
+            background-size: cover;
+            background-position: center;
+            border-radius: 12px;
+            flex-shrink: 0;
+        }
+
+        /* Accordion */
+        details>summary {
+            list-style: none;
+            cursor: pointer;
+        }
+
+        details>summary::-webkit-details-marker {
+            display: none;
+        }
+
+        details[open] .chevron {
+            transform: rotate(180deg);
+        }
+
+        .chevron {
+            transition: transform 0.2s ease;
+        }
+
+        /* Sticky CTA bar — bottom */
+        .cta-bar {
+            position: fixed;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 390px;
+            z-index: 50;
+            padding: 12px 16px 20px;
+            background: linear-gradient(to top, #0D1B2A 70%, transparent);
+        }
+
+        /* Dots */
+        .dot {
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        .dot-on {
+            background: #E63030;
+        }
+
+        .dot-off {
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(230, 48, 48, 0.4);
+        }
+
+        /* Includes check */
+        .check-item::before {
+            content: '✓';
+            color: #4ade80;
+            font-weight: 700;
+            margin-right: 8px;
+        }
+
+        .cross-item::before {
+            content: '✗';
+            color: rgba(255, 255, 255, 0.3);
+            font-weight: 700;
+            margin-right: 8px;
+        }
+
+        /* Mobile frame */
+        .mobile-frame {
+            max-width: 390px;
+            margin: 0 auto;
+            padding-bottom: 80px;
+        }
+
+        @media(min-width:640px) {
+            body {
+                background: #111;
+            }
+
+            .mobile-frame {
+                margin: 32px auto;
+                box-shadow: 0 40px 80px rgba(0, 0, 0, 0.7);
+                border-radius: 40px;
+                overflow: hidden;
+            }
+
+            .cta-bar {
+                border-radius: 0 0 40px 40px;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-mx-dark text-white">
+    <div class="mobile-frame">
+
+        <!-- ————————————————————————————
+       NAV — transparente sobre hero
+  ———————————————————————————————— -->
+        <nav class="absolute top-0 left-0 right-0 z-40 flex items-center justify-between px-4 py-3 max-w-[390px] mx-auto"
+            style="background:linear-gradient(to bottom, rgba(13,27,42,0.7), transparent);">
+            <a href="../../../01.2-catalogo-de-viajes/prototypes/catalogo-prototype.html"
+                class="flex items-center gap-2 text-sm font-semibold" style="color:rgba(255,255,255,0.85);">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M19 12H5M12 5l-7 7 7 7" />
+                </svg>
+                Viajes
+            </a>
+            <!-- Share -->
+            <button class="p-2 rounded-full" style="background:rgba(255,255,255,0.12);" aria-label="Compartir">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="white" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="18" cy="5" r="3" />
+                    <circle cx="6" cy="12" r="3" />
+                    <circle cx="18" cy="19" r="3" />
+                    <line x1="8.59" y1="13.51" x2="15.42" y2="17.49" />
+                    <line x1="15.41" y1="6.51" x2="8.59" y2="10.49" />
+                </svg>
+            </button>
+        </nav>
+
+
+        <!-- ————————————————————————————
+       HERO — FOTO DEL DESTINO
+  ———————————————————————————————— -->
+        <div class="hero-ficha relative"></div>
+
+
+        <!-- ————————————————————————————
+       CABECERA DEL VIAJE
+       Nombre, nivel, datos clave de un vistazo
+  ———————————————————————————————— -->
+        <div class="bg-mx-dark px-5 pt-5 pb-4">
+
+            <!-- Nivel badge + región -->
+            <div class="flex items-center gap-2 mb-3">
+                <span
+                    class="bg-green-500 text-white text-xs font-black px-3 py-1 rounded-full uppercase tracking-wide">✓
+                    Principiante</span>
+                <span class="flex items-center gap-1">
+                    <span class="dot dot-on"></span>
+                    <span class="dot dot-off"></span>
+                    <span class="dot dot-off"></span>
+                    <span class="dot dot-off"></span>
+                    <span class="dot dot-off"></span>
+                </span>
+            </div>
+
+            <h1 class="text-3xl font-black leading-tight mb-1">Cerro Catedral</h1>
+            <p class="text-sm mb-4" style="color:rgba(255,255,255,0.55);">Bariloche, Río Negro · Patagonia</p>
+
+            <!-- Stats en fila -->
+            <div class="grid grid-cols-3 gap-2">
+                <div class="bg-mx-gray rounded-xl p-3 text-center">
+                    <div class="text-lg font-black text-mx-red">2.405</div>
+                    <div class="text-xs mt-0.5" style="color:rgba(255,255,255,0.5);">msnm</div>
+                </div>
+                <div class="bg-mx-gray rounded-xl p-3 text-center">
+                    <div class="text-lg font-black text-white">2</div>
+                    <div class="text-xs mt-0.5" style="color:rgba(255,255,255,0.5);">días</div>
+                </div>
+                <div class="bg-mx-gray rounded-xl p-3 text-center">
+                    <div class="text-lg font-black text-white">6</div>
+                    <div class="text-xs mt-0.5" style="color:rgba(255,255,255,0.5);">pers. máx.</div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- ————————————————————————————
+       DESCRIPCIÓN — PARA VALENTINA
+       Responde: "¿es para mí?" con palabras claras
+  ———————————————————————————————— -->
+        <section class="px-5 py-6 border-t" style="border-color:rgba(255,255,255,0.07);">
+            <p class="text-sm leading-relaxed" style="color:rgba(255,255,255,0.8);">
+                Una expedición diseñada para personas que nunca hicieron alta montaña. Subimos el Cerro Catedral con
+                ritmo accesible, preparación previa con Pablo y grupos de máximo 6 personas — para que nadie quede atrás
+                y nadie sienta que frena al grupo.
+            </p>
+            <p class="text-sm leading-relaxed mt-3" style="color:rgba(255,255,255,0.8);">
+                No necesitás experiencia técnica. Sí necesitás ganas y una condición física básica que trabajamos juntos
+                antes de salir.
+            </p>
+        </section>
+
+
+        <!-- ————————————————————————————
+       GALERÍA — scroll horizontal
+       Fotos: ruta, campamento, cumbre, grupo
+  ———————————————————————————————— -->
+        <section class="py-2 pb-6">
+            <div class="flex gap-3 px-5 overflow-x-auto"
+                style="-webkit-overflow-scrolling:touch; scrollbar-width:none;">
+                <div class="gallery-img w-44 h-28 flex-shrink-0"
+                    style="background-image:url('https://picsum.photos/seed/cat-ruta/400/250');"></div>
+                <div class="gallery-img w-44 h-28 flex-shrink-0"
+                    style="background-image:url('https://picsum.photos/seed/cat-camp/400/250');"></div>
+                <div class="gallery-img w-44 h-28 flex-shrink-0"
+                    style="background-image:url('https://picsum.photos/seed/cat-cumbre/400/250');"></div>
+                <div class="gallery-img w-44 h-28 flex-shrink-0"
+                    style="background-image:url('https://picsum.photos/seed/cat-grupo/400/250');"></div>
+            </div>
+        </section>
+
+
+        <!-- ————————————————————————————
+       QUÉ INCLUYE / NO INCLUYE
+       Valentina evalúa si vale la inversión
+  ———————————————————————————————— -->
+        <section class="px-5 py-6 border-t" style="border-color:rgba(255,255,255,0.07);">
+            <h2 class="text-base font-black mb-4">¿Qué incluye?</h2>
+
+            <div class="grid grid-cols-1 gap-2 mb-5">
+                <p class="text-sm check-item" style="color:rgba(255,255,255,0.85);">Guía certificado (Pablo Fortunato)
+                    durante toda la expedición</p>
+                <p class="text-sm check-item" style="color:rgba(255,255,255,0.85);">Seguro de accidentes y rescate en
+                    montaña (PAX Assistance)</p>
+                <p class="text-sm check-item" style="color:rgba(255,255,255,0.85);">Plan de preparación personalizado
+                    semanas antes</p>
+                <p class="text-sm check-item" style="color:rgba(255,255,255,0.85);">Traslado desde Bariloche hasta el
+                    punto de partida</p>
+                <p class="text-sm check-item" style="color:rgba(255,255,255,0.85);">Campamento base equipado (domo,
+                    sleeping, colchoneta)</p>
+                <p class="text-sm check-item" style="color:rgba(255,255,255,0.85);">Alimentación completa en la montaña
+                </p>
+                <p class="text-sm check-item" style="color:rgba(255,255,255,0.85);">Equipamiento técnico prestado
+                    (bastones, crampones si hace falta)</p>
+            </div>
+
+            <div class="grid grid-cols-1 gap-2">
+                <p class="text-sm cross-item" style="color:rgba(255,255,255,0.45);">Traslado desde tu ciudad a Bariloche
+                </p>
+                <p class="text-sm cross-item" style="color:rgba(255,255,255,0.45);">Alojamiento en la ciudad la noche
+                    anterior</p>
+            </div>
+        </section>
+
+
+        <!-- ————————————————————————————
+       ITINERARIO — ACCORDION
+       Detalle por día — lectura opcional, no obligatoria
+  ———————————————————————————————— -->
+        <section class="px-5 py-6 border-t" style="border-color:rgba(255,255,255,0.07);">
+            <h2 class="text-base font-black mb-4">Itinerario</h2>
+
+            <!-- Día 1 -->
+            <details class="mb-3 rounded-xl overflow-hidden" style="background:rgba(255,255,255,0.04);">
+                <summary class="flex items-center justify-between px-4 py-4">
+                    <div class="flex items-center gap-3">
+                        <span
+                            class="w-7 h-7 rounded-full bg-mx-red flex items-center justify-center text-xs font-black flex-shrink-0">1</span>
+                        <div>
+                            <div class="text-sm font-bold">Día 1 — Ascenso y campamento</div>
+                            <div class="text-xs mt-0.5" style="color:rgba(255,255,255,0.45);">Partida 7am · ~6 hs de
+                                marcha</div>
+                        </div>
+                    </div>
+                    <svg class="chevron flex-shrink-0" viewBox="0 0 24 24" width="18" height="18" fill="none"
+                        stroke="rgba(255,255,255,0.4)" stroke-width="2" stroke-linecap="round">
+                        <path d="M6 9l6 6 6-6" />
+                    </svg>
+                </summary>
+                <div class="px-4 pb-4 text-sm leading-relaxed" style="color:rgba(255,255,255,0.7);">
+                    Salida desde Bariloche a las 7am. Trekking de ascenso con paradas técnicas para hidratación y
+                    aclimatación. Llegada al campamento base hacia el mediodía. Arme del campamento, almuerzo y
+                    descanso. Tarde libre para adaptarse a la altitud. Cena grupal y briefing del día 2.
+                </div>
+            </details>
+
+            <!-- Día 2 -->
+            <details class="rounded-xl overflow-hidden" style="background:rgba(255,255,255,0.04);">
+                <summary class="flex items-center justify-between px-4 py-4">
+                    <div class="flex items-center gap-3">
+                        <span
+                            class="w-7 h-7 rounded-full bg-mx-red flex items-center justify-center text-xs font-black flex-shrink-0">2</span>
+                        <div>
+                            <div class="text-sm font-bold">Día 2 — Cumbre y regreso</div>
+                            <div class="text-xs mt-0.5" style="color:rgba(255,255,255,0.45);">Salida 6am · Cumbre ~10am
+                            </div>
+                        </div>
+                    </div>
+                    <svg class="chevron flex-shrink-0" viewBox="0 0 24 24" width="18" height="18" fill="none"
+                        stroke="rgba(255,255,255,0.4)" stroke-width="2" stroke-linecap="round">
+                        <path d="M6 9l6 6 6-6" />
+                    </svg>
+                </summary>
+                <div class="px-4 pb-4 text-sm leading-relaxed" style="color:rgba(255,255,255,0.7);">
+                    Salida temprana hacia la cumbre. Ascenso final con Pablo evaluando las condiciones. Llegada a cumbre
+                    aprox. 2.405 msnm hacia las 10am si las condiciones acompañan. Foto en cumbre, celebración y
+                    descenso. Regreso a Bariloche en la tarde. Llegada estimada 18-19hs.
+                </div>
+            </details>
+        </section>
+
+
+        <!-- ————————————————————————————
+       PRÓXIMAS SALIDAS
+       Fechas reales generan urgencia y concreción
+  ———————————————————————————————— -->
+        <section class="px-5 py-6 border-t" style="border-color:rgba(255,255,255,0.07);">
+            <h2 class="text-base font-black mb-4">Próximas salidas</h2>
+
+            <div class="flex flex-col gap-3">
+
+                <div class="flex items-center justify-between py-3 px-4 rounded-xl"
+                    style="background:rgba(255,255,255,0.05);">
+                    <div>
+                        <div class="text-sm font-bold">14–15 de junio 2026</div>
+                        <div class="text-xs mt-0.5" style="color:rgba(255,255,255,0.5);">3 lugares disponibles</div>
+                    </div>
+                    <span
+                        class="text-xs font-bold text-green-400 bg-green-900 bg-opacity-40 px-2.5 py-1 rounded-full">Disponible</span>
+                </div>
+
+                <div class="flex items-center justify-between py-3 px-4 rounded-xl"
+                    style="background:rgba(255,255,255,0.05);">
+                    <div>
+                        <div class="text-sm font-bold">5–6 de julio 2026</div>
+                        <div class="text-xs mt-0.5" style="color:rgba(255,255,255,0.5);">6 lugares disponibles</div>
+                    </div>
+                    <span
+                        class="text-xs font-bold text-green-400 bg-green-900 bg-opacity-40 px-2.5 py-1 rounded-full">Disponible</span>
+                </div>
+
+                <div class="flex items-center justify-between py-3 px-4 rounded-xl"
+                    style="background:rgba(255,255,255,0.05);">
+                    <div>
+                        <div class="text-sm font-bold">19–20 de julio 2026</div>
+                        <div class="text-xs mt-0.5" style="color:rgba(255,255,255,0.5);">Completo</div>
+                    </div>
+                    <span class="text-xs font-bold" style="color:rgba(255,255,255,0.35);">Completo</span>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- ————————————————————————————
+       TESTIMONIOS — específicos de este viaje
+  ———————————————————————————————— -->
+        <section class="px-5 py-6 border-t" style="border-color:rgba(255,255,255,0.07);">
+            <h2 class="text-base font-black mb-4">Lo que dicen quienes lo hicieron</h2>
+
+            <div class="flex flex-col gap-4">
+
+                <div class="rounded-2xl p-4"
+                    style="background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.07);">
+                    <div class="flex items-center gap-3 mb-2">
+                        <div
+                            class="w-8 h-8 rounded-full bg-mx-blue flex items-center justify-center text-sm font-bold flex-shrink-0">
+                            M</div>
+                        <div>
+                            <div class="text-sm font-semibold">María G.</div>
+                            <div class="text-xs">⭐⭐⭐⭐⭐</div>
+                        </div>
+                    </div>
+                    <p class="text-sm leading-relaxed" style="color:rgba(255,255,255,0.8);">
+                        "Nunca había hecho nada parecido. Llegué a la cumbre llorando de emoción. Pablo estuvo en cada
+                        paso."
+                    </p>
+                </div>
+
+                <div class="rounded-2xl p-4"
+                    style="background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.07);">
+                    <div class="flex items-center gap-3 mb-2">
+                        <div
+                            class="w-8 h-8 rounded-full bg-mx-red flex items-center justify-center text-sm font-bold flex-shrink-0">
+                            C</div>
+                        <div>
+                            <div class="text-sm font-semibold">Carolina R.</div>
+                            <div class="text-xs">⭐⭐⭐⭐⭐</div>
+                        </div>
+                    </div>
+                    <p class="text-sm leading-relaxed" style="color:rgba(255,255,255,0.8);">
+                        "Tenía 40 años y cero experiencia. El mejor viaje de mi vida. Ya me anoté para el Lanín."
+                    </p>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- ————————————————————————————
+       GUÍA DE EQUIPAMIENTO — ENLACE
+       Recurso secundario — fuera del camino principal de Valentina
+  ———————————————————————————————— -->
+        <section class="px-5 pb-6">
+            <a href="#" class="flex items-center justify-between px-4 py-4 rounded-xl border"
+                style="background:rgba(26,58,92,0.2); border-color:rgba(26,58,92,0.5);">
+                <div class="flex items-center gap-3">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="rgba(255,255,255,0.6)"
+                        stroke-width="1.8" stroke-linecap="round">
+                        <path
+                            d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                    </svg>
+                    <div>
+                        <div class="text-sm font-semibold">Guía de equipamiento</div>
+                        <div class="text-xs mt-0.5" style="color:rgba(255,255,255,0.45);">¿Qué ropa y equipo necesitás?
+                        </div>
+                    </div>
+                </div>
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="rgba(255,255,255,0.35)"
+                    stroke-width="2" stroke-linecap="round">
+                    <path d="M5 12h14M12 5l7 7-7 7" />
+                </svg>
+            </a>
+        </section>
+
+
+        <!-- ————————————————————————————
+       SPACER — para que el CTA bar no tape el contenido
+  ———————————————————————————————— -->
+        <div class="h-24"></div>
+
+    </div><!-- /mobile-frame -->
+
+
+    <!-- ════════════════════════════════════════════
+     CTA BAR FIJA — siempre visible
+     ELEMENTO MÁS IMPORTANTE DE TODA LA FICHA
+     WhatsApp con mensaje pre-cargado + alternativa formulario
+═══════════════════════════════════════════════ -->
+    <div class="cta-bar">
+        <!-- WhatsApp principal — mensaje pre-cargado con nombre del viaje -->
+        <a href="https://wa.me/54XXXXXXXXXX?text=Hola%20Pablo%2C%20me%20interesa%20el%20viaje%20Cerro%20Catedral.%20%C2%BFTen%C3%A9s%20lugares%20disponibles%3F"
+            class="flex items-center justify-center gap-2.5 w-full bg-green-500 text-white font-bold text-base py-4 rounded-xl shadow-lg shadow-green-900/40 active:opacity-80 transition-opacity mb-2">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="white">
+                <path
+                    d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.114.549 4.097 1.508 5.817L.057 23.886l6.219-1.427A11.944 11.944 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm.029 21.818a9.946 9.946 0 01-5.064-1.379l-.363-.215-3.763.863.943-3.653-.237-.375A9.932 9.932 0 012.09 12c0-5.478 4.461-9.939 9.939-9.939 5.478 0 9.939 4.461 9.939 9.939 0 5.478-4.461 9.818-9.939 9.818z" />
+            </svg>
+            Consultar por Cerro Catedral
+        </a>
+        <!-- Alternativa: formulario -->
+        <a href="#formulario" class="block text-center text-xs font-medium" style="color:rgba(255,255,255,0.4);">
+            Preferís un formulario → <span style="color:rgba(255,255,255,0.6);">Contacto por escrito</span>
+        </a>
+    </div>
+
+</body>
+
+</html>
