@@ -152,6 +152,7 @@ Ruta: Documentación existente (desde Product Brief + Market Research)
 | Escenario | Página ID | Página | Estado | Fecha |
 |-----------|-----------|--------|--------|-------|
 | 01-valentina-primera-cumbre | 01.1 | Home | prototyped | 2026-04-09 |
+| 01-valentina-primera-cumbre | 01.1 | Home (desktop) | prototyped | 2026-04-18 |
 | 01-valentina-primera-cumbre | 01.2 | Catálogo de Viajes | prototyped | 2026-04-10 |
 | 01-valentina-primera-cumbre | 01.3 | Ficha de Viaje | prototyped | 2026-04-10 |
 | 02-martin-validacion-tecnica | 02.1 | Próximas Salidas | prototyped | 2026-04-16 |
@@ -173,6 +174,8 @@ Ruta: Documentación existente (desde Product Brief + Market Research)
 | 2026-04-16 | Escenario 02 completo — 3/3 páginas aprobadas | Próximas Salidas · Sobre Nosotros · Cómo Trabajamos |
 | 2026-04-16 | Prototipo HTML — Grandes Expediciones (desktop) · Escenario 03 | `C-UX-Scenarios/03-diego-grandes-expediciones/03.1-grandes-expediciones/prototypes/grandes-expediciones-prototype.html` |
 | 2026-04-16 | **Fase 4 completa — 7/7 páginas prototipadas y aprobadas** | Escenarios 01 · 02 · 03 |
+| 2026-04-18 | Prototipo HTML — Home desktop aprobado | `C-UX-Scenarios/01-valentina-primera-cumbre/01.1-home/prototypes/home-desktop-prototype.html` |
+| 2026-04-18 | **Fase 4 definitivamente cerrada — prototipos mobile + desktop completos** | |
 
 ---
 

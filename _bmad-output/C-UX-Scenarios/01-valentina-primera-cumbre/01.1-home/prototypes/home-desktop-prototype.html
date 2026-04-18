@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Madness Expeditions — Home Desktop [Prototipo WDS 01.1]</title>
+
+    <!-- PROTOTIPO DE DISEÑO — NO ES CÓDIGO DE PRODUCCIÓN -->
+    <!-- Escenario: 01 — La Primera Cumbre de Valentina (adaptación desktop)  -->
+    <!-- Página: 01.1 — Home -->
+    <!-- Dispositivo: Desktop — mismo contenido que home-prototype.html (mobile) -->
+    <!-- Referencia mobile: home-prototype.html -->
+    <!-- Fecha: 2026-04-18 -->
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'mx-dark': '#0D1B2A',
+                        'mx-blue': '#1a3a5c',
+                        'mx-red': '#E63030',
+                        'mx-gray': '#1C1C1E',
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Inter', system-ui, sans-serif;
+        }
+
+        /* ─── HERO ─── */
+        .hero-bg {
+            min-height: 100vh;
+            background-image:
+                linear-gradient(to right,
+                    rgba(13, 27, 42, 1) 0%,
+                    rgba(13, 27, 42, 0.92) 42%,
+                    rgba(13, 27, 42, 0.45) 70%,
+                    rgba(13, 27, 42, 0.1) 100%),
+                url('https://picsum.photos/seed/mountain-andes-wide/1600/900');
+            background-size: cover;
+            background-position: center 35%;
+        }
+
+        /* ─── TESTIMONIOS ─── */
+        .testimonios-bg {
+            background-image:
+                linear-gradient(rgba(13, 27, 42, 0.94), rgba(13, 27, 42, 0.94)),
+                url('https://picsum.photos/seed/mountain-base/1400/600');
+            background-size: cover;
+            background-position: center;
+        }
+
+        /* ─── CARDS VIAJES ─── */
+        .card-catedral {
+            background-image:
+                linear-gradient(to top, rgba(13, 27, 42, 0.93) 0%, rgba(13, 27, 42, 0.3) 55%, transparent 100%),
+                url('https://picsum.photos/seed/cerro-catedral/600/400');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .card-lanin {
+            background-image:
+                linear-gradient(to top, rgba(13, 27, 42, 0.93) 0%, rgba(13, 27, 42, 0.3) 55%, transparent 100%),
+                url('https://picsum.photos/seed/volcan-lanin-wide/600/400');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .card-cordon {
+            background-image:
+                linear-gradient(to top, rgba(13, 27, 42, 0.93) 0%, rgba(13, 27, 42, 0.3) 55%, transparent 100%),
+                url('https://picsum.photos/seed/cordon-plata-andes/600/400');
+            background-size: cover;
+            background-position: center;
+        }
+
+        /* ─── DIFFICULTY DOTS ─── */
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        .dot-on {
+            background: #E63030;
+        }
+
+        .dot-off {
+            background: rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(230, 48, 48, 0.35);
+        }
+
+        /* ─── CARD HOVER ─── */
+        .trip-card {
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .trip-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.5);
+        }
+    </style>
+</head>
+
+<body class="bg-mx-dark text-white min-h-screen">
+
+    <!-- ════════════════════════════════════════
+       NAV — DESKTOP
+       Idéntico al patrón del Escenario 02 — consistencia
+  ═══════════════════════════════════════════ -->
+    <nav class="sticky top-0 z-50 border-b"
+        style="background:rgba(13,27,42,0.97); backdrop-filter:blur(8px); border-color:rgba(255,255,255,0.07);">
+        <div class="max-w-6xl mx-auto px-8 flex items-center justify-between h-16">
+
+            <!-- Logo -->
+            <a href="#" class="flex items-center gap-3 flex-shrink-0">
+                <div class="w-10 h-10 rounded-full bg-white flex items-center justify-center">
+                    <svg viewBox="0 0 40 40" width="32" height="32">
+                        <circle cx="20" cy="20" r="19" fill="#0D1B2A" />
+                        <ellipse cx="20" cy="13" rx="3" ry="3.2" fill="white" />
+                        <path d="M17 16 Q14 20 13 28 L20 26 L27 28 Q26 20 23 16 Z" fill="white" />
+                        <path d="M13 28 L10 34" stroke="white" stroke-width="1.5" stroke-linecap="round" />
+                        <path d="M27 28 L30 34" stroke="white" stroke-width="1.5" stroke-linecap="round" />
+                        <path d="M13 22 L9 20 M27 22 L31 20" stroke="white" stroke-width="1.5" stroke-linecap="round" />
+                    </svg>
+                </div>
+                <div class="leading-tight">
+                    <div class="font-black text-sm uppercase tracking-wider">The Madness Expeditions</div>
+                    <div class="text-xs uppercase tracking-widest opacity-50">Argentina</div>
+                </div>
+            </a>
+
+            <!-- Links -->
+            <div class="flex items-center gap-7">
+                <a href="#" class="text-sm font-bold text-white border-b-2 border-mx-red pb-0.5">Inicio</a>
+                <a href="#viajes" class="text-sm font-medium hover:text-white transition-colors"
+                    style="color:rgba(255,255,255,0.65);">Viajes</a>
+                <a href="#" class="text-sm font-medium hover:text-white transition-colors"
+                    style="color:rgba(255,255,255,0.65);">Próximas salidas</a>
+                <a href="#" class="text-sm font-medium hover:text-white transition-colors"
+                    style="color:rgba(255,255,255,0.65);">El equipo</a>
+                <a href="#" class="text-sm font-medium hover:text-white transition-colors"
+                    style="color:rgba(255,255,255,0.65);">Cómo trabajamos</a>
+                <a href="#" class="text-sm font-medium hover:text-white transition-colors"
+                    style="color:rgba(255,255,255,0.65);">Grandes Expediciones</a>
+            </div>
+
+            <!-- CTA nav -->
+            <a href="https://wa.me/54XXXXXXXXXX?text=Hola%20Pablo%2C%20me%20interesa%20conocer%20m%C3%A1s%20sobre%20sus%20expediciones"
+                class="flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white text-sm font-bold px-4 py-2.5 rounded-xl transition-colors flex-shrink-0">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="white">
+                    <path
+                        d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.114.549 4.097 1.508 5.817L.057 23.886l6.219-1.427A11.944 11.944 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm.029 21.818a9.946 9.946 0 01-5.064-1.379l-.363-.215-3.763.863.943-3.653-.237-.375A9.932 9.932 0 012.09 12c0-5.478 4.461-9.939 9.939-9.939 5.478 0 9.939 4.461 9.939 9.939 0 5.478-4.461 9.818-9.939 9.818z" />
+                </svg>
+                Consultar por WhatsApp
+            </a>
+        </div>
+    </nav>
+
+
+    <!-- ════════════════════════════════════════
+       HERO — FULLSCREEN DESKTOP
+       Texto izquierda · imagen ocupa el canvas completo
+       Badge arriba del título — decisión clave de Valentina
+  ═══════════════════════════════════════════ -->
+    <section class="hero-bg flex items-center">
+        <div class="max-w-6xl mx-auto px-8 w-full py-24">
+            <div class="max-w-xl">
+
+                <!-- Badge nivel entrada — responde el miedo de Valentina ANTES del título -->
+                <div class="mb-6">
+                    <span
+                        class="inline-flex items-center gap-1.5 bg-mx-red text-white text-xs font-bold px-4 py-2 rounded-full uppercase tracking-wider">
+                        <svg viewBox="0 0 16 16" width="11" height="11" fill="white">
+                            <path d="M8 1l1.5 3 3.5.5-2.5 2.5.5 3.5L8 9l-3 1.5.5-3.5L3 4.5 6.5 4z" />
+                        </svg>
+                        Para todos los niveles — incluso sin experiencia
+                    </span>
+                </div>
+
+                <!-- Titular -->
+                <h1 class="text-7xl font-black leading-none tracking-tight uppercase mb-5">
+                    No te quedes<br>
+                    <span class="text-white">en el Llano.</span>
+                </h1>
+
+                <!-- Subtítulo -->
+                <p class="text-xl leading-relaxed mb-10" style="color:rgba(255,255,255,0.82);">
+                    Expediciones y ascensos guiados en Argentina.<br>Desde tu primera cumbre hasta los 6.000 m.
+                </p>
+
+                <!-- CTAs en fila -->
+                <div class="flex items-center gap-4">
+                    <a href="#viajes"
+                        class="bg-mx-red hover:opacity-90 text-white font-bold text-base px-8 py-4 rounded-xl transition-opacity">
+                        Ver viajes
+                    </a>
+                    <a href="https://wa.me/54XXXXXXXXXX?text=Hola%20Pablo%2C%20no%20s%C3%A9%20por%20d%C3%B3nde%20empezar%2C%20%C2%BFme%20pod%C3%A9s%20orientar%3F"
+                        class="flex items-center gap-2 border text-white font-medium text-base px-8 py-4 rounded-xl transition-colors hover:bg-white/10"
+                        style="border-color:rgba(255,255,255,0.3); color:rgba(255,255,255,0.9);">
+                        ¿No sabés por dónde empezar? Hablemos
+                    </a>
+                </div>
+
+                <!-- Stats de confianza rápida bajo los CTAs -->
+                <div class="flex items-center gap-8 mt-12 pt-10 border-t" style="border-color:rgba(255,255,255,0.1);">
+                    <div>
+                        <div class="text-2xl font-black text-mx-red">+200</div>
+                        <div class="text-xs mt-0.5" style="color:rgba(255,255,255,0.5);">Expediciones guiadas</div>
+                    </div>
+                    <div style="width:1px; height:36px; background:rgba(255,255,255,0.1);"></div>
+                    <div>
+                        <div class="text-2xl font-black text-mx-red">15+</div>
+                        <div class="text-xs mt-0.5" style="color:rgba(255,255,255,0.5);">Años en alta montaña</div>
+                    </div>
+                    <div style="width:1px; height:36px; background:rgba(255,255,255,0.1);"></div>
+                    <div>
+                        <div class="text-2xl font-black text-mx-red">4.9 ★</div>
+                        <div class="text-xs mt-0.5" style="color:rgba(255,255,255,0.5);">Google Reviews</div>
+                    </div>
+                    <div style="width:1px; height:36px; background:rgba(255,255,255,0.1);"></div>
+                    <div>
+                        <div class="text-2xl font-black text-mx-red">100%</div>
+                        <div class="text-xs mt-0.5" style="color:rgba(255,255,255,0.5);">Con seguro incluido</div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ════════════════════════════════════════
+       ¿ES PARA MÍ? — 3 PILARES
+       Mobile: apilados · Desktop: 3 columnas en fila
+  ═══════════════════════════════════════════ -->
+    <section style="background:#1C1C1E;">
+        <div class="max-w-6xl mx-auto px-8 py-16">
+
+            <div class="mb-10">
+                <p class="text-mx-red text-xs font-bold uppercase tracking-widest mb-2">¿Es para alguien como yo?</p>
+                <h2 class="text-4xl font-black leading-tight">Sí. Trabajamos con personas de todos los niveles.</h2>
+            </div>
+
+            <!-- 3 columnas — en mobile estas van apiladas -->
+            <div class="grid grid-cols-3 gap-8">
+
+                <!-- Pillar 1 -->
+                <div class="flex flex-col gap-4 p-8 rounded-2xl"
+                    style="background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.07);">
+                    <div class="w-12 h-12 rounded-xl bg-mx-blue flex items-center justify-center flex-shrink-0">
+                        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="white" stroke-width="1.8"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M3 20l8-14 3 5 2-3 5 12H3z" />
+                        </svg>
+                    </div>
+                    <div>
+                        <div class="font-bold text-lg mb-2">Sin experiencia previa</div>
+                        <div class="text-sm leading-relaxed" style="color:rgba(255,255,255,0.65);">Tenemos viajes de
+                            iniciación diseñados para personas que nunca subieron una montaña. Comenzás donde estás.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pillar 2 -->
+                <div class="flex flex-col gap-4 p-8 rounded-2xl"
+                    style="background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.07);">
+                    <div class="w-12 h-12 rounded-xl bg-mx-blue flex items-center justify-center flex-shrink-0">
+                        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="white" stroke-width="1.8"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="7" r="3" />
+                            <path d="M5 20c0-3.866 3.134-7 7-7s7 3.134 7 7" />
+                            <path d="M16 11.5l3 3-3 3" />
+                        </svg>
+                    </div>
+                    <div>
+                        <div class="font-bold text-lg mb-2">Guía personal desde el día 1</div>
+                        <div class="text-sm leading-relaxed" style="color:rgba(255,255,255,0.65);">Pablo Fortunato te
+                            acompaña con un plan de preparación personalizado antes de la expedición. No llegás solo.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pillar 3 -->
+                <div class="flex flex-col gap-4 p-8 rounded-2xl"
+                    style="background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.07);">
+                    <div class="w-12 h-12 rounded-xl bg-mx-blue flex items-center justify-center flex-shrink-0">
+                        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="white" stroke-width="1.8"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 2l7 3v6c0 4.418-3.134 8.573-7 9.95C8.134 19.573 5 15.418 5 11V5l7-3z" />
+                            <path d="M9 12l2 2 4-4" />
+                        </svg>
+                    </div>
+                    <div>
+                        <div class="font-bold text-lg mb-2">Grupos reducidos y seguros</div>
+                        <div class="text-sm leading-relaxed" style="color:rgba(255,255,255,0.65);">Grupos pequeños con
+                            ratio guía-cliente. Seguro de montaña incluido. Nadie queda atrás y nadie frena al grupo.
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ════════════════════════════════════════
+       PABLO — EL HUMANO DETRÁS
+       Mobile: apilado · Desktop: 2 columnas (foto | bio+stats)
+  ═══════════════════════════════════════════ -->
+    <section class="bg-mx-dark border-t" style="border-color:rgba(26,58,92,0.3);">
+        <div class="max-w-6xl mx-auto px-8 py-16">
+
+            <div class="grid grid-cols-2 gap-16 items-center">
+
+                <!-- Columna izquierda — foto + credenciales -->
+                <div class="flex flex-col items-start gap-6">
+                    <img src="https://picsum.photos/seed/pablo-guide-portrait/600/500"
+                        alt="Pablo Fortunato — Guía de montaña" class="w-full rounded-2xl object-cover"
+                        style="height:380px; border:1px solid rgba(255,255,255,0.08);">
+
+                    <!-- Badges de credenciales -->
+                    <div class="flex flex-wrap gap-2">
+                        <span class="text-xs font-bold px-3 py-1.5 rounded-full border"
+                            style="border-color:rgba(26,58,92,0.8); background:rgba(26,58,92,0.3); color:rgba(255,255,255,0.8);">EPGAMT</span>
+                        <span class="text-xs font-bold px-3 py-1.5 rounded-full border"
+                            style="border-color:rgba(26,58,92,0.8); background:rgba(26,58,92,0.3); color:rgba(255,255,255,0.8);">ANSILTA</span>
+                        <span class="text-xs font-bold px-3 py-1.5 rounded-full border"
+                            style="border-color:rgba(26,58,92,0.8); background:rgba(26,58,92,0.3); color:rgba(255,255,255,0.8);">Primeros
+                            Auxilios en Montaña</span>
+                        <span class="text-xs font-bold px-3 py-1.5 rounded-full border"
+                            style="border-color:rgba(26,58,92,0.8); background:rgba(26,58,92,0.3); color:rgba(255,255,255,0.8);">PAX
+                            Assistance</span>
+                    </div>
+                </div>
+
+                <!-- Columna derecha — bio, cita, stats -->
+                <div>
+                    <p class="text-mx-red text-xs font-bold uppercase tracking-widest mb-4">Quién te guía</p>
+                    <h2 class="text-4xl font-black leading-tight mb-2">Pablo Fortunato</h2>
+                    <p class="text-lg font-semibold mb-6" style="color:rgba(255,255,255,0.5);">Guía de montaña
+                        certificado · +15 años en alta montaña</p>
+
+                    <!-- Cita -->
+                    <blockquote class="border-l-2 border-mx-red pl-6 mb-8">
+                        <p class="text-base leading-relaxed italic" style="color:rgba(255,255,255,0.82);">
+                            "No vendo paquetes turísticos. Diseño expediciones con cada persona según su nivel y sus
+                            ganas. Si soñás con subir una cumbre y no sabés si podés — ese es exactamente el lugar donde
+                            empiezo a trabajar con vos."
+                        </p>
+                    </blockquote>
+
+                    <!-- Stats -->
+                    <div class="grid grid-cols-3 gap-4 mb-8">
+                        <div class="p-4 rounded-2xl text-center"
+                            style="background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.07);">
+                            <div class="text-3xl font-black text-mx-red">+200</div>
+                            <div class="text-xs mt-1" style="color:rgba(255,255,255,0.55);">Expediciones guiadas</div>
+                        </div>
+                        <div class="p-4 rounded-2xl text-center"
+                            style="background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.07);">
+                            <div class="text-3xl font-black text-mx-red">15+</div>
+                            <div class="text-xs mt-1" style="color:rgba(255,255,255,0.55);">Años en alta montaña</div>
+                        </div>
+                        <div class="p-4 rounded-2xl text-center"
+                            style="background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.07);">
+                            <div class="text-3xl font-black text-mx-red">6.962m</div>
+                            <div class="text-xs mt-1" style="color:rgba(255,255,255,0.55);">Altura máxima alcanzada
+                            </div>
+                        </div>
+                    </div>
+
+                    <a href="#"
+                        class="inline-flex items-center gap-2 text-sm font-bold text-white bg-mx-blue hover:opacity-90 px-6 py-3 rounded-xl transition-opacity">
+                        Conocer más sobre el equipo →
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ════════════════════════════════════════
+       VIAJES DESTACADOS — 3 CARDS
+       Mobile: 1 columna · Desktop: 3 columnas visibles
+       3er card nuevo: Cordón del Plata (avanzado)
+       para mostrar rango completo de oferta
+  ═══════════════════════════════════════════ -->
+    <section id="viajes" style="background:#1C1C1E; border-top:1px solid rgba(255,255,255,0.05);">
+        <div class="max-w-6xl mx-auto px-8 py-16">
+
+            <div class="flex items-end justify-between mb-10">
+                <div>
+                    <p class="text-mx-red text-xs font-bold uppercase tracking-widest mb-2">Expediciones</p>
+                    <h2 class="text-4xl font-black leading-tight">Algunos de nuestros viajes</h2>
+                </div>
+                <div class="flex gap-3">
+                    <a href="#"
+                        class="text-sm font-bold text-white bg-mx-red hover:opacity-90 px-6 py-3 rounded-xl transition-opacity">
+                        Ver todos los viajes
+                    </a>
+                    <a href="#"
+                        class="text-sm font-medium hover:text-white px-6 py-3 rounded-xl border transition-colors"
+                        style="color:rgba(255,255,255,0.6); border-color:rgba(255,255,255,0.1);">
+                        Ver próximas fechas →
+                    </a>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-3 gap-6">
+
+                <!-- Card 1 — Cerro Catedral · Principiante -->
+                <a href="#" class="trip-card block rounded-2xl overflow-hidden"
+                    style="min-height:320px; position:relative;">
+                    <div class="card-catedral absolute inset-0"></div>
+                    <div class="relative p-6 flex flex-col justify-end h-full" style="min-height:320px;">
+                        <div class="flex items-center gap-2 mb-3">
+                            <span
+                                class="bg-green-500 text-white text-xs font-bold px-2.5 py-1 rounded-full">Principiante</span>
+                            <span class="flex gap-0.5">
+                                <span class="dot dot-on"></span><span class="dot dot-off"></span><span
+                                    class="dot dot-off"></span><span class="dot dot-off"></span><span
+                                    class="dot dot-off"></span>
+                            </span>
+                        </div>
+                        <div class="font-black text-2xl leading-tight">Cerro Catedral</div>
+                        <div class="text-sm mt-1 mb-3" style="color:rgba(255,255,255,0.7);">Bariloche · 2.405 msnm</div>
+                        <div class="flex items-center justify-between">
+                            <div class="text-xs" style="color:rgba(255,255,255,0.55);">2 días · Grupo reducido</div>
+                            <span class="text-mx-red text-sm font-bold">Ver viaje →</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Card 2 — Volcán Lanín · Intermedio -->
+                <a href="#" class="trip-card block rounded-2xl overflow-hidden"
+                    style="min-height:320px; position:relative;">
+                    <div class="card-lanin absolute inset-0"></div>
+                    <div class="relative p-6 flex flex-col justify-end h-full" style="min-height:320px;">
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="text-xs font-bold px-2.5 py-1 rounded-full"
+                                style="background:#ca8a04; color:white;">Intermedio</span>
+                            <span class="flex gap-0.5">
+                                <span class="dot dot-on"></span><span class="dot dot-on"></span><span
+                                    class="dot dot-on"></span><span class="dot dot-off"></span><span
+                                    class="dot dot-off"></span>
+                            </span>
+                        </div>
+                        <div class="font-black text-2xl leading-tight">Volcán Lanín</div>
+                        <div class="text-sm mt-1 mb-3" style="color:rgba(255,255,255,0.7);">Neuquén · 3.776 msnm</div>
+                        <div class="flex items-center justify-between">
+                            <div class="text-xs" style="color:rgba(255,255,255,0.55);">3 días · Con preparación previa
+                            </div>
+                            <span class="text-mx-red text-sm font-bold">Ver viaje →</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Card 3 — Cordón del Plata · Avanzado
+             Muestra el rango completo de la oferta
+             En mobile esta card no existe — se ve solo al llegar al catálogo -->
+                <a href="#" class="trip-card block rounded-2xl overflow-hidden"
+                    style="min-height:320px; position:relative;">
+                    <div class="card-cordon absolute inset-0"></div>
+                    <div class="relative p-6 flex flex-col justify-end h-full" style="min-height:320px;">
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="text-xs font-bold px-2.5 py-1 rounded-full"
+                                style="background:rgba(230,48,48,0.9); color:white;">Avanzado</span>
+                            <span class="flex gap-0.5">
+                                <span class="dot dot-on"></span><span class="dot dot-on"></span><span
+                                    class="dot dot-on"></span><span class="dot dot-on"></span><span
+                                    class="dot dot-off"></span>
+                            </span>
+                        </div>
+                        <div class="font-black text-2xl leading-tight">Cordón del Plata</div>
+                        <div class="text-sm mt-1 mb-3" style="color:rgba(255,255,255,0.7);">Mendoza · 5.000 msnm</div>
+                        <div class="flex items-center justify-between">
+                            <div class="text-xs" style="color:rgba(255,255,255,0.55);">5 días · Aclimatación de altura
+                            </div>
+                            <span class="text-mx-red text-sm font-bold">Ver viaje →</span>
+                        </div>
+                    </div>
+                </a>
+
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ════════════════════════════════════════
+       TESTIMONIOS — SOCIAL PROOF
+       Mobile: cards apiladas · Desktop: 3 columnas
+  ═══════════════════════════════════════════ -->
+    <section class="testimonios-bg border-t" style="border-color:rgba(255,255,255,0.05);">
+        <div class="max-w-6xl mx-auto px-8 py-16">
+
+            <div class="flex items-end justify-between mb-10">
+                <div>
+                    <p class="text-mx-red text-xs font-bold uppercase tracking-widest mb-2">Lo que dicen</p>
+                    <h2 class="text-4xl font-black leading-tight">Personas que también<br>empezaron de cero</h2>
+                </div>
+                <!-- Google Reviews badge -->
+                <div class="flex items-center gap-3 px-5 py-3 rounded-xl"
+                    style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.08);">
+                    <svg viewBox="0 0 24 24" width="22" height="22">
+                        <path fill="#4285F4"
+                            d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
+                        <path fill="#34A853"
+                            d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
+                        <path fill="#FBBC05"
+                            d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
+                        <path fill="#EA4335"
+                            d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
+                    </svg>
+                    <div>
+                        <div class="text-lg font-black">4.9 / 5</div>
+                        <div class="text-xs" style="color:rgba(255,255,255,0.5);">Google Reviews</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3 columnas -->
+            <div class="grid grid-cols-3 gap-6">
+
+                <!-- Testimonio 1 -->
+                <div class="rounded-2xl p-6 border"
+                    style="background:rgba(13,27,42,0.8); border-color:rgba(26,58,92,0.3);">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div
+                            class="w-10 h-10 rounded-full bg-mx-blue flex items-center justify-center font-bold flex-shrink-0">
+                            M</div>
+                        <div>
+                            <div class="font-semibold text-sm">María G.</div>
+                            <div class="text-yellow-400 text-sm">⭐⭐⭐⭐⭐</div>
+                        </div>
+                    </div>
+                    <p class="text-sm leading-relaxed mb-3" style="color:rgba(255,255,255,0.82);">
+                        "Nunca había hecho senderismo de verdad. Pablo fue súper paciente y nos preparó de a poco. La
+                        montaña me cambió. Ya estoy planeando el próximo viaje."
+                    </p>
+                    <div class="text-xs" style="color:rgba(255,255,255,0.35);">Cerro Catedral · febrero 2025</div>
+                </div>
+
+                <!-- Testimonio 2 -->
+                <div class="rounded-2xl p-6 border"
+                    style="background:rgba(13,27,42,0.8); border-color:rgba(26,58,92,0.3);">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div
+                            class="w-10 h-10 rounded-full bg-mx-red flex items-center justify-center font-bold flex-shrink-0">
+                            L</div>
+                        <div>
+                            <div class="font-semibold text-sm">Luciana P.</div>
+                            <div class="text-yellow-400 text-sm">⭐⭐⭐⭐⭐</div>
+                        </div>
+                    </div>
+                    <p class="text-sm leading-relaxed mb-3" style="color:rgba(255,255,255,0.82);">
+                        "Tenía mucho miedo de no dar el nivel. Pablo me dijo 'preparate bien y listo'. Cumbre del Lanín
+                        a los 41 años. Lloré arriba. No me lo olvido más."
+                    </p>
+                    <div class="text-xs" style="color:rgba(255,255,255,0.35);">Volcán Lanín · enero 2025</div>
+                </div>
+
+                <!-- Testimonio 3 -->
+                <div class="rounded-2xl p-6 border"
+                    style="background:rgba(13,27,42,0.8); border-color:rgba(26,58,92,0.3);">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div
+                            class="w-10 h-10 rounded-full bg-mx-blue flex items-center justify-center font-bold flex-shrink-0">
+                            R</div>
+                        <div>
+                            <div class="font-semibold text-sm">Rodrigo A.</div>
+                            <div class="text-yellow-400 text-sm">⭐⭐⭐⭐⭐</div>
+                        </div>
+                    </div>
+                    <p class="text-sm leading-relaxed mb-3" style="color:rgba(255,255,255,0.82);">
+                        "La organización es impecable. Equipamiento revisado, seguros en orden, y Pablo respondía todos
+                        los mensajes. Saben lo que hacen."
+                    </p>
+                    <div class="text-xs" style="color:rgba(255,255,255,0.35);">Aconcagua · diciembre 2024</div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ════════════════════════════════════════
+       CTA FINAL
+       Mobile: CTA sticky bar al fondo
+       Desktop: sección centrada inline — sin sticky bar
+  ═══════════════════════════════════════════ -->
+    <section class="bg-mx-dark border-t" style="border-color:rgba(26,58,92,0.3);">
+        <div class="max-w-3xl mx-auto px-8 py-20 text-center">
+            <p class="text-mx-red text-xs font-bold uppercase tracking-widest mb-4">¿Lista para empezar?</p>
+            <h2 class="text-5xl font-black leading-tight mb-4">
+                Tu primera cumbre<br>empieza con una pregunta.
+            </h2>
+            <p class="text-lg leading-relaxed mb-10" style="color:rgba(255,255,255,0.65);">
+                Escribile a Pablo. Te responde él mismo, el mismo día.<br>Sin formularios, sin esperas, sin compromiso.
+            </p>
+            <div class="flex items-center justify-center gap-4">
+                <a href="https://wa.me/54XXXXXXXXXX?text=Hola%20Pablo%2C%20me%20gustar%C3%ADa%20saber%20m%C3%A1s%20sobre%20expediciones%20para%20principiantes"
+                    class="flex items-center gap-2.5 bg-green-500 hover:bg-green-600 text-white font-bold text-base px-8 py-4 rounded-xl transition-colors">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="white">
+                        <path
+                            d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.114.549 4.097 1.508 5.817L.057 23.886l6.219-1.427A11.944 11.944 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm.029 21.818a9.946 9.946 0 01-5.064-1.379l-.363-.215-3.763.863.943-3.653-.237-.375A9.932 9.932 0 012.09 12c0-5.478 4.461-9.939 9.939-9.939 5.478 0 9.939 4.461 9.939 9.939 0 5.478-4.461 9.818-9.939 9.818z" />
+                    </svg>
+                    Escribile a Pablo por WhatsApp
+                </a>
+                <a href="#contacto" class="text-sm font-medium hover:text-white transition-colors"
+                    style="color:rgba(255,255,255,0.4);">
+                    O usá el formulario de contacto →
+                </a>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ════════════════════════════════════════
+       FOOTER — DESKTOP
+       Mobile: columna única · Desktop: 4 columnas
+  ═══════════════════════════════════════════ -->
+    <footer style="background:#1C1C1E; border-top:1px solid rgba(255,255,255,0.06);">
+        <div class="max-w-6xl mx-auto px-8 py-12">
+
+            <div class="grid grid-cols-4 gap-10 mb-10">
+
+                <!-- Col 1: Logo + descripción -->
+                <div>
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-9 h-9 rounded-full bg-white flex items-center justify-center">
+                            <svg viewBox="0 0 40 40" width="30" height="30">
+                                <circle cx="20" cy="20" r="19" fill="#0D1B2A" />
+                                <ellipse cx="20" cy="13" rx="3" ry="3.2" fill="white" />
+                                <path d="M17 16 Q14 20 13 28 L20 26 L27 28 Q26 20 23 16 Z" fill="white" />
+                                <path d="M13 28 L10 34" stroke="white" stroke-width="1.5" stroke-linecap="round" />
+                                <path d="M27 28 L30 34" stroke="white" stroke-width="1.5" stroke-linecap="round" />
+                                <path d="M13 22 L9 20 M27 22 L31 20" stroke="white" stroke-width="1.5"
+                                    stroke-linecap="round" />
+                            </svg>
+                        </div>
+                        <div>
+                            <div class="font-black uppercase tracking-wider text-xs">The Madness Expeditions</div>
+                            <div class="font-light tracking-widest text-xs uppercase opacity-50">Argentina</div>
+                        </div>
+                    </div>
+                    <p class="text-xs leading-relaxed" style="color:rgba(255,255,255,0.4);">
+                        Responsabilidad, Seguridad, Servicio, Compromiso y Garantía en todas nuestras Expediciones &
+                        Ascensos.
+                    </p>
+                    <div class="flex gap-2 mt-4">
+                        <span class="text-xs px-2.5 py-1 rounded-full border"
+                            style="border-color:rgba(26,58,92,0.6); color:rgba(255,255,255,0.35);">ANSILTA</span>
+                        <span class="text-xs px-2.5 py-1 rounded-full border"
+                            style="border-color:rgba(26,58,92,0.6); color:rgba(255,255,255,0.35);">PAX Assistance</span>
+                    </div>
+                </div>
+
+                <!-- Col 2: Expediciones -->
+                <div>
+                    <p class="text-xs font-bold uppercase tracking-widest mb-4" style="color:rgba(255,255,255,0.35);">
+                        Expediciones</p>
+                    <nav class="flex flex-col gap-2.5">
+                        <a href="#" class="text-sm hover:text-white transition-colors"
+                            style="color:rgba(255,255,255,0.6);">Catálogo de viajes</a>
+                        <a href="#" class="text-sm hover:text-white transition-colors"
+                            style="color:rgba(255,255,255,0.6);">Próximas salidas</a>
+                        <a href="#" class="text-sm hover:text-white transition-colors"
+                            style="color:rgba(255,255,255,0.6);">Grandes Expediciones</a>
+                        <a href="#" class="text-sm hover:text-white transition-colors"
+                            style="color:rgba(255,255,255,0.6);">Guía de equipamiento</a>
+                    </nav>
+                </div>
+
+                <!-- Col 3: Nosotros -->
+                <div>
+                    <p class="text-xs font-bold uppercase tracking-widest mb-4" style="color:rgba(255,255,255,0.35);">
+                        Nosotros</p>
+                    <nav class="flex flex-col gap-2.5">
+                        <a href="#" class="text-sm hover:text-white transition-colors"
+                            style="color:rgba(255,255,255,0.6);">El equipo</a>
+                        <a href="#" class="text-sm hover:text-white transition-colors"
+                            style="color:rgba(255,255,255,0.6);">Cómo trabajamos</a>
+                        <a href="#" class="text-sm hover:text-white transition-colors"
+                            style="color:rgba(255,255,255,0.6);">Contacto</a>
+                    </nav>
+                </div>
+
+                <!-- Col 4: Contacto -->
+                <div>
+                    <p class="text-xs font-bold uppercase tracking-widest mb-4" style="color:rgba(255,255,255,0.35);">
+                        Contacto</p>
+                    <a href="https://wa.me/54XXXXXXXXXX"
+                        class="flex items-center gap-2 text-sm font-semibold text-green-400 mb-3 hover:text-green-300 transition-colors">
+                        <svg viewBox="0 0 24 24" width="16" height="16" fill="#4ade80">
+                            <path
+                                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.114.549 4.097 1.508 5.817L.057 23.886l6.219-1.427A11.944 11.944 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm.029 21.818a9.946 9.946 0 01-5.064-1.379l-.363-.215-3.763.863.943-3.653-.237-.375A9.932 9.932 0 012.09 12c0-5.478 4.461-9.939 9.939-9.939 5.478 0 9.939 4.461 9.939 9.939 0 5.478-4.461 9.818-9.939 9.818z" />
+                        </svg>
+                        WhatsApp
+                    </a>
+                    <a href="https://instagram.com/madnessexpeditions"
+                        class="flex items-center gap-2 text-sm hover:text-white transition-colors"
+                        style="color:rgba(255,255,255,0.6);">
+                        <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                            <path
+                                d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
+                        </svg>
+                        @madnessexpeditions
+                    </a>
+                </div>
+
+            </div>
+
+            <div class="border-t pt-6 flex items-center justify-between" style="border-color:rgba(255,255,255,0.06);">
+                <p class="text-xs" style="color:rgba(255,255,255,0.25);">© 2025 Madness Expeditions · Argentina</p>
+                <a href="https://www.madnessexpeditions.com" class="text-xs hover:text-white transition-colors"
+                    style="color:rgba(255,255,255,0.25);">www.madnessexpeditions.com</a>
+            </div>
+
+        </div>
+    </footer>
+
+
+    <!-- FLOATING WHATSAPP -->
+    <a href="https://wa.me/54XXXXXXXXXX?text=Hola%20Pablo%2C%20me%20interesa%20una%20expedici%C3%B3n"
+        class="fixed bottom-6 right-6 z-50 w-14 h-14 bg-green-500 rounded-full flex items-center justify-center shadow-xl shadow-green-900/50 hover:scale-105 transition-transform"
+        aria-label="WhatsApp">
+        <svg viewBox="0 0 24 24" width="28" height="28" fill="white">
+            <path
+                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.114.549 4.097 1.508 5.817L.057 23.886l6.219-1.427A11.944 11.944 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm.029 21.818a9.946 9.946 0 01-5.064-1.379l-.363-.215-3.763.863.943-3.653-.237-.375A9.932 9.932 0 012.09 12c0-5.478 4.461-9.939 9.939-9.939 5.478 0 9.939 4.461 9.939 9.939 0 5.478-4.461 9.818-9.939 9.818z" />
+        </svg>
+        <span
+            class="absolute top-0.5 right-0.5 w-3.5 h-3.5 bg-green-300 rounded-full border-2 border-white animate-ping"></span>
+        <span class="absolute top-0.5 right-0.5 w-3.5 h-3.5 bg-green-400 rounded-full border-2 border-white"></span>
+    </a>
+
+</body>
+
+</html>
