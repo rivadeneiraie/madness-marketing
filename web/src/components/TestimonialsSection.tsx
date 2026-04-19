@@ -34,7 +34,7 @@ export default function TestimonialsSection() {
             style={{
                 borderColor: "rgba(255,255,255,0.05)",
                 backgroundImage:
-                    "linear-gradient(rgba(13,27,42,0.94), rgba(13,27,42,0.94)), url('https://picsum.photos/seed/mountain-base/1400/600')",
+                    "linear-gradient(rgba(13,27,42,0.94), rgba(13,27,42,0.94)), url('/photos/28.jpg')",
                 backgroundSize: "cover",
                 backgroundPosition: "center",
             }}

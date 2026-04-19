@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-const credentials = ["EPGAMT", "ANSILTA", "Primeros Auxilios en Montaña", "PAX Assistance"];
+const credentials = ["Operadora habilitada", "Seguros incluidos", "PAX Assistance", "ANSILTA"];
 
 export default function PabloSection() {
     return (
@@ -23,7 +23,7 @@ export default function PabloSection() {
                             style={{ borderColor: "#E63030" }}
                         >
                             <Image
-                                src="https://picsum.photos/seed/pablo-guide/200/200"
+                                src="/photos/pablo2.jpeg"
                                 alt="Pablo Fortunato — Guía de montaña"
                                 width={64}
                                 height={64}
@@ -33,10 +33,10 @@ export default function PabloSection() {
                         <div>
                             <div className="font-black text-lg leading-tight text-white">Pablo Fortunato</div>
                             <div className="text-sm font-semibold mt-0.5" style={{ color: "#E63030" }}>
-                                Guía de montaña certificado
+                                Fundador y líder de Madness Expeditions
                             </div>
                             <div className="text-xs mt-1" style={{ color: "rgba(255,255,255,0.55)" }}>
-                                ANSILTA · +15 años en alta montaña
+                                +15 años liderando expediciones en la Cordillera
                             </div>
                         </div>
                     </div>
@@ -65,7 +65,7 @@ export default function PabloSection() {
                             style={{ height: "380px", border: "1px solid rgba(255,255,255,0.08)" }}
                         >
                             <Image
-                                src="https://picsum.photos/seed/pablo-guide-portrait/600/500"
+                                src="/photos/pablo2.jpeg"
                                 alt="Pablo Fortunato — Guía de montaña"
                                 width={600}
                                 height={380}
@@ -97,7 +97,7 @@ export default function PabloSection() {
                         </p>
                         <h2 className="text-4xl font-black leading-tight mb-2 text-white">Pablo Fortunato</h2>
                         <p className="text-lg font-semibold mb-6" style={{ color: "rgba(255,255,255,0.5)" }}>
-                            Guía de montaña certificado · +15 años en alta montaña
+                            Fundador y líder de Madness Expeditions · +15 años liderando expediciones en la Cordillera
                         </p>
 
                         {/* Cita */}

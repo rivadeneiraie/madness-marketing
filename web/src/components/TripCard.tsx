@@ -24,7 +24,7 @@ export interface TripCardProps {
     note: string;
     level: TripLevel;
     difficulty: DifficultyLevel;
-    imageSeed: string;
+    imageSrc: string;
     href: string;
 }
 
@@ -36,7 +36,7 @@ export default function TripCard({
     note,
     level,
     difficulty,
-    imageSeed,
+    imageSrc,
     href,
 }: TripCardProps) {
     return (
@@ -48,7 +48,7 @@ export default function TripCard({
             {/* Imagen de fondo */}
             <div className="absolute inset-0">
                 <Image
-                    src={`https://picsum.photos/seed/${imageSeed}/600/400`}
+                    src={imageSrc}
                     alt={name}
                     fill
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"

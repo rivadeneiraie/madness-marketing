@@ -95,7 +95,6 @@ export default function Navbar() {
                             width={48}
                             height={48}
                             className="object-cover"
-                            priority
                         />
                     </div>
                     <div className="leading-tight">

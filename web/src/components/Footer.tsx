@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 const WA_BASE = "https://wa.me/54XXXXXXXXXX";
@@ -13,8 +14,8 @@ export default function Footer() {
                     {/* Col 1: Logo + descripción */}
                     <div>
                         <div className="flex items-center gap-3 mb-4">
-                            <div className="w-9 h-9 rounded-full bg-white flex items-center justify-center flex-shrink-0">
-                                <LogoIcon />
+                            <div className="w-9 h-9 rounded-full overflow-hidden flex-shrink-0">
+                                <Image src="/logo-v4.png" alt="Madness Expeditions" width={36} height={36} className="object-cover" />
                             </div>
                             <div>
                                 <div className="font-black uppercase tracking-wider text-xs text-white">
@@ -92,8 +93,8 @@ export default function Footer() {
                     {/* Logo */}
                     <div className="flex flex-col items-center text-center mb-6">
                         <div className="flex items-center gap-2 mb-3">
-                            <div className="w-9 h-9 rounded-full bg-white flex items-center justify-center">
-                                <LogoIcon />
+                            <div className="w-9 h-9 rounded-full overflow-hidden">
+                                <Image src="/logo-v4.png" alt="Madness Expeditions" width={36} height={36} className="object-cover" />
                             </div>
                             <div className="text-left leading-tight">
                                 <div className="font-black uppercase tracking-wider text-xs text-white">
@@ -159,6 +160,16 @@ export default function Footer() {
                 >
                     <p className="text-xs" style={{ color: "rgba(255,255,255,0.25)" }}>
                         © 2025 Madness Expeditions · Argentina
+                    </p>
+                    <p className="text-xs mt-1" style={{ color: "rgba(255,255,255,0.15)" }}>
+                        Diseño y desarrollo:{" "}
+                        <a
+                            href="mailto:rivadeneiraie@gmail.com"
+                            className="hover:opacity-60 transition-opacity"
+                            style={{ color: "rgba(255,255,255,0.25)" }}
+                        >
+                            rivadeneiraie@gmail.com
+                        </a>
                     </p>
                 </div>
             </div>
