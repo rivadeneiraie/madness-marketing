@@ -12,9 +12,10 @@ export default function HeroSection() {
             {/* ── Imagen de fondo ── */}
             <div className="absolute inset-0 -z-10">
                 <Image
-                    src="https://picsum.photos/seed/mountain-andes-wide/1600/900"
+                    src="/photos/05.jpg"
                     alt="Expedición en alta montaña argentina"
                     fill
+                    sizes="100vw"
                     className="object-cover object-[center_30%]"
                     priority
                 />

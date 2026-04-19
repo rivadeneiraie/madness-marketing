@@ -7,12 +7,12 @@ const pillars = [
     {
         icon: <GuideIcon />,
         title: "Guía personal desde el día 1",
-        body: "Pablo Fortunato te acompaña con un plan de preparación personalizado antes de la expedición. No llegás solo.",
+        body: "Pablo te acompaña desde el principio: te explica el recorrido, el equipamiento y resuelve todas tus dudas antes de partir.",
     },
     {
         icon: <ShieldIcon />,
-        title: "Grupos reducidos y seguros",
-        body: "Grupos pequeños con ratio guía-cliente. Seguro de montaña incluido. Nadie queda atrás y nadie frena al grupo.",
+        title: "Guía dedicado, ritmo de cada uno",
+        body: "El ratio de guía por cliente garantiza que cada expedición sea segura y se adapte al ritmo de todos.",
     },
 ];
 

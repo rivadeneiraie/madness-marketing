@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 
@@ -30,27 +31,38 @@ export default function Navbar() {
             }}
         >
             {/* ── Desktop layout ── */}
-            <div className="max-w-6xl mx-auto px-8 hidden lg:flex items-center justify-between h-16">
-                {/* Logo */}
-                <Link href="/" className="flex items-center gap-3 flex-shrink-0">
-                    <LogoIcon />
-                    <div className="leading-tight">
-                        <div className="font-black text-sm uppercase tracking-wider text-white">
-                            The Madness Expeditions
+            <div className="max-w-7xl mx-auto px-8 hidden lg:flex items-center h-16">
+                {/* Logo — flex-1 ancla a la izquierda */}
+                <div className="flex-1 min-w-0">
+                    <Link href="/" className="flex items-center gap-3 w-fit">
+                        <div className="w-14 h-14 rounded-full overflow-hidden flex-shrink-0">
+                            <Image
+                                src="/logo-v4.png"
+                                alt="Madness Expeditions"
+                                width={80}
+                                height={80}
+                                className="object-cover"
+                                priority
+                            />
                         </div>
-                        <div className="text-xs uppercase tracking-widest opacity-50 text-white">
-                            Argentina
+                        <div className="leading-tight">
+                            <div className="font-black text-sm uppercase tracking-wider text-white">
+                                The Madness Expeditions
+                            </div>
+                            <div className="text-xs uppercase tracking-widest opacity-50 text-white">
+                                Argentina
+                            </div>
                         </div>
-                    </div>
-                </Link>
+                    </Link>
+                </div>
 
-                {/* Links */}
-                <div className="flex items-center gap-7">
+                {/* Links — flex-1 centrados */}
+                <div className="flex-1 min-w-0 flex items-center justify-center gap-5">
                     {navLinks.map((link) => (
                         <Link
                             key={link.href}
                             href={link.href}
-                            className="text-sm font-medium transition-colors hover:text-white"
+                            className="relative text-sm font-medium transition-colors hover:text-white whitespace-nowrap after:absolute after:bottom-[-2px] after:left-0 after:h-[2px] after:w-0 after:bg-mx-red after:transition-all after:duration-300 hover:after:w-full"
                             style={{ color: "rgba(255,255,255,0.65)" }}
                         >
                             {link.label}
@@ -58,24 +70,33 @@ export default function Navbar() {
                     ))}
                 </div>
 
-                {/* CTA WhatsApp */}
-                <a
-                    href={`${WA_BASE}?text=${WA_MSG_NAV}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white text-sm font-bold px-4 py-2.5 rounded-xl transition-colors flex-shrink-0"
-                >
-                    <WhatsAppIcon size={16} />
-                    Consultar por WhatsApp
-                </a>
+                {/* CTA WhatsApp — flex-1 ancla a la derecha */}
+                <div className="flex-1 min-w-0 flex justify-end">
+                    <a
+                        href={`${WA_BASE}?text=${WA_MSG_NAV}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white text-sm font-bold px-4 py-2.5 rounded-xl transition-colors whitespace-nowrap"
+                    >
+                        <WhatsAppIcon size={16} />
+                        Consultar por WhatsApp
+                    </a>
+                </div>
             </div>
 
             {/* ── Mobile layout ── */}
             <div className="flex lg:hidden items-center justify-between px-4 py-3">
                 {/* Logo */}
                 <Link href="/" className="flex items-center gap-2">
-                    <div className="w-9 h-9 rounded-full bg-white flex items-center justify-center flex-shrink-0">
-                        <LogoIconSmall />
+                    <div className="w-9 h-9 rounded-full overflow-hidden flex-shrink-0">
+                        <Image
+                            src="/logo-v4.png"
+                            alt="Madness Expeditions"
+                            width={48}
+                            height={48}
+                            className="object-cover"
+                            priority
+                        />
                     </div>
                     <div className="leading-tight">
                         <div className="text-white font-black tracking-wider text-xs uppercase">
