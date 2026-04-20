@@ -23,9 +23,9 @@ El proceso sigue el framework **WDS (Web Design System)** de BMad, que recorre l
 | 2 | Trigger Mapping | ✅ Completado |
 | 3 | UX Scenarios | ✅ Completado |
 | 4 | UX Design (prototipos HTML) | ✅ Completado — 7/7 páginas prototipadas |
-| 5 | Agentic Development | 🔄 En progreso — Home completada, resto pendiente |
+| 5 | Agentic Development | 🔄 En progreso — Home + Ficha de Viaje completadas |
 
-**Branch activo:** `feature/home-page` → mergeado a `master`
+**Último merge:** `feature/ficha-viaje` → `master` (Abril 2026)
 
 ---
 
@@ -36,18 +36,26 @@ madness-marketing/
 ├── web/                       # Proyecto Next.js (código de producción)
 │   ├── src/
 │   │   ├── app/               — App Router (layout, page, globals.css)
-│   │   └── components/        — Componentes React de la Home
-│   │       ├── Navbar.tsx
-│   │       ├── HeroSection.tsx
-│   │       ├── TrustBlock.tsx
-│   │       ├── PabloSection.tsx
-│   │       ├── TripCard.tsx
-│   │       ├── FeaturedTrips.tsx
-│   │       ├── TestimonialCard.tsx
-│   │       ├── TestimonialsSection.tsx
-│   │       ├── FinalCTA.tsx
-│   │       ├── Footer.tsx
-│   │       └── FloatingWhatsAppButton.tsx
+│   │   │   └── viajes/[slug]/ — Rutas dinámicas de fichas de viaje
+│   │   ├── components/        — Componentes React
+│   │   │   ├── Navbar.tsx
+│   │   │   ├── HeroSection.tsx
+│   │   │   ├── TrustBlock.tsx
+│   │   │   ├── PabloSection.tsx
+│   │   │   ├── TripCard.tsx
+│   │   │   ├── FeaturedTrips.tsx
+│   │   │   ├── TestimonialCard.tsx
+│   │   │   ├── TestimonialsSection.tsx
+│   │   │   ├── FinalCTA.tsx
+│   │   │   ├── Footer.tsx
+│   │   │   ├── FloatingWhatsAppButton.tsx
+│   │   │   ├── FichaViaje.tsx         — Página detalle de viaje (mobile + desktop)
+│   │   │   ├── GalleryModal.tsx       — Modal de galería con framer-motion
+│   │   │   └── GallerySharedModal.tsx — Visor de imágenes con swipe y thumbnails
+│   │   └── lib/
+│   │       ├── trips-data.ts          — Datos estáticos de los 3 viajes
+│   │       └── gallery-utils.ts       — Tipos y helpers compartidos de galería
+│   ├── public/photos/         — Fotos reales de las expediciones
 │   ├── next.config.ts
 │   └── package.json
 │
@@ -87,9 +95,11 @@ madness-marketing/
 
 | Capa | Tecnología |
 |------|------------|
-| Framework | Next.js 16 (App Router, Turbopack) |
+| Framework | Next.js 16.2.4 (App Router, Turbopack) |
 | Styling | Tailwind CSS v4 |
 | Lenguaje | TypeScript |
+| Animaciones | framer-motion v12 |
+| Gestos | react-swipeable v7 |
 | Hosting | Vercel (planificado) |
 
 ---
@@ -98,9 +108,9 @@ madness-marketing/
 
 | # | Página | Prototipo | Código |
 |---|--------|-----------|--------|
-| 1 | Home | ✅ Mobile + Desktop | ✅ Completada — en revisión |
+| 1 | Home | ✅ Mobile + Desktop | ✅ Completada |
 | 2 | Catálogo de Viajes | ✅ Mobile | ⏳ Pendiente |
-| 3 | Ficha de Viaje | ✅ Mobile | ⏳ Pendiente |
+| 3 | Ficha de Viaje (`/viajes/[slug]`) | ✅ Mobile | ✅ Completada — galería con modal framer-motion |
 | 4 | Próximas Salidas | ✅ Desktop | ⏳ Pendiente |
 | 5 | Sobre Nosotros / El Equipo | ✅ Desktop | ⏳ Pendiente |
 | 6 | Cómo Trabajamos | ✅ Desktop | ⏳ Pendiente |
