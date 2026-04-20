@@ -15,6 +15,11 @@
   box-sizing: border-box;
 }
 
+/* Gallery shadow-highlight */
+.after\:shadow-highlight::after {
+  box-shadow: inset 0 0 0 1px rgba(255 255 255 / 0.1);
+}
+
 body {
   background: #0D1B2A;
   color: #ffffff;

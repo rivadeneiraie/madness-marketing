@@ -26,7 +26,7 @@ export default function TestimonialCard({
             <div className="flex items-center gap-3 mb-3 lg:mb-4">
                 {/* Avatar inicial */}
                 <div
-                    className="w-9 h-9 lg:w-10 lg:h-10 rounded-full flex items-center justify-center font-bold text-sm text-white flex-shrink-0"
+                    className="w-9 h-9 lg:w-10 lg:h-10 rounded-full flex items-center justify-center font-bold text-sm text-white shrink-0"
                     style={{ background: avatarColor }}
                 >
                     {initials}

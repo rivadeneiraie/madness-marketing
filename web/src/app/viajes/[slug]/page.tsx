@@ -1,0 +1,42 @@
+import { notFound } from "next/navigation";
+import { getTripBySlug, TRIPS } from "@/lib/trips-data";
+import FichaViaje from "@/components/FichaViaje";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
+import type { Metadata } from "next";
+
+interface Props {
+    params: Promise<{ slug: string }>;
+}
+
+export async function generateStaticParams() {
+    return TRIPS.map((trip) => ({ slug: trip.slug }));
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+    const { slug } = await params;
+    const trip = getTripBySlug(slug);
+    if (!trip) return { title: "Viaje no encontrado" };
+
+    return {
+        title: `${trip.name} — Madness Expeditions`,
+        description: trip.description[0],
+    };
+}
+
+export default async function FichaViajePage({ params }: Props) {
+    const { slug } = await params;
+    const trip = getTripBySlug(slug);
+
+    if (!trip) notFound();
+
+    return (
+        <>
+            <Navbar />
+            <main>
+                <FichaViaje trip={trip} />
+            </main>
+            <Footer />
+        </>
+    );
+}

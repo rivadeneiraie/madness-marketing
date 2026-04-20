@@ -19,7 +19,7 @@ export default function PabloSection() {
                     <div className="flex items-start gap-4 mb-5">
                         {/* Foto circular */}
                         <div
-                            className="w-16 h-16 rounded-full flex-shrink-0 overflow-hidden border-2"
+                            className="w-16 h-16 rounded-full shrink-0 overflow-hidden border-2"
                             style={{ borderColor: "#E63030" }}
                         >
                             <Image
