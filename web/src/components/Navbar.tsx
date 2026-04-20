@@ -31,7 +31,7 @@ export default function Navbar() {
             }}
         >
             {/* ── Desktop layout ── */}
-            <div className="max-w-7xl mx-auto px-8 hidden lg:flex items-center h-16">
+            <div className="max-w-7xl mx-auto px-8 hidden xl:flex items-center h-16">
                 {/* Logo — flex-1 ancla a la izquierda */}
                 <div className="flex-1 min-w-0">
                     <Link href="/" className="flex items-center gap-3 w-fit">
@@ -85,7 +85,7 @@ export default function Navbar() {
             </div>
 
             {/* ── Mobile layout ── */}
-            <div className="flex lg:hidden items-center justify-between px-4 py-3">
+            <div className="flex xl:hidden items-center justify-between px-4 py-3">
                 {/* Logo */}
                 <Link href="/" className="flex items-center gap-2">
                     <div className="w-9 h-9 rounded-full overflow-hidden flex-shrink-0">
@@ -133,7 +133,7 @@ export default function Navbar() {
             {/* ── Mobile menu desplegable ── */}
             {menuOpen && (
                 <div
-                    className="lg:hidden px-4 pb-4 flex flex-col gap-1 border-t"
+                    className="xl:hidden px-4 pb-4 flex flex-col gap-1 border-t"
                     style={{ borderColor: "rgba(255,255,255,0.07)" }}
                 >
                     {navLinks.map((link) => (
