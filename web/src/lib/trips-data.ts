@@ -30,7 +30,8 @@ export interface Trip {
     maxPersons: number;
     level: TripLevel;
     difficulty: DifficultyLevel;
-    imageSrc: string;
+    imageSrc: string;       // hero / card image (first of images[])
+    images: string[];        // gallery photos
     description: string[];
     includes: string[];
     notIncludes: string[];
@@ -52,6 +53,12 @@ export const TRIPS: Trip[] = [
         level: "Principiante",
         difficulty: 2,
         imageSrc: "/photos/cordondelplata.jpg",
+        images: [
+            "/photos/cordondelplata01.jpg",
+            "/photos/cordondelplata02.jpg",
+            "/photos/cordondelplata03.jpg",
+            "/photos/cordondelplata.jpg",
+        ],
         description: [
             "Una expedición diseñada para personas que quieren hacer su primera experiencia en alta montaña. Subimos el Cordón del Plata con ritmo accesible, preparación previa con Pablo y grupos de máximo 6 personas — para que nadie quede atrás y nadie sienta que frena al grupo.",
             "No necesitás experiencia técnica. Sí necesitás ganas y una condición física básica que trabajamos juntos antes de salir.",
@@ -114,6 +121,12 @@ export const TRIPS: Trip[] = [
         level: "Intermedio",
         difficulty: 3,
         imageSrc: "/photos/puntanegra.jpeg",
+        images: [
+            "/photos/puntanegra.jpeg",
+            "/photos/cordondelplata02.jpg",
+            "/photos/cordondelplata03.jpg",
+            "/photos/05.jpg",
+        ],
         description: [
             "Un ascenso técnico de nivel intermedio en el Cordón del Portillo, ideal para quienes ya tienen alguna experiencia en montaña y quieren dar un paso más en altura y exigencia.",
             "Se requiere condición física sólida y haber hecho alguna experiencia previa en montaña. El equipo evalúa cada caso antes de confirmar la inscripción.",
@@ -175,6 +188,12 @@ export const TRIPS: Trip[] = [
         level: "Avanzado",
         difficulty: 5,
         imageSrc: "/photos/bolivia.jpg",
+        images: [
+            "/photos/bolivia.jpg",
+            "/photos/28.jpg",
+            "/photos/03.jpg",
+            "/photos/05.jpg",
+        ],
         description: [
             "Una expedición de alta montaña por la Cordillera Real boliviana, con 4 cumbres en 13 días. La zona de La Paz ofrece algunas de las montañas más accesibles por sobre los 5.000 metros del continente.",
             "Se requiere experiencia previa en alta montaña y excelente condición física. El equipo evalúa cada candidato antes de confirmar la inscripción.",

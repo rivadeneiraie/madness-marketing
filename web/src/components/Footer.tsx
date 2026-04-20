@@ -14,7 +14,7 @@ export default function Footer() {
                     {/* Col 1: Logo + descripción */}
                     <div>
                         <div className="flex items-center gap-3 mb-4">
-                            <div className="w-9 h-9 rounded-full overflow-hidden flex-shrink-0">
+                            <div className="w-9 h-9 rounded-full overflow-hidden shrink-0">
                                 <Image src="/logo-v4.png" alt="Madness Expeditions" width={36} height={36} className="object-cover" />
                             </div>
                             <div>

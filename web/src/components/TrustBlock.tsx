@@ -65,7 +65,7 @@ function PillarCard({
             {/* Mobile layout: ícono + texto en fila */}
             <div className="flex items-start gap-4 lg:hidden">
                 <div
-                    className="w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0"
+                    className="w-11 h-11 rounded-xl flex items-center justify-center shrink-0"
                     style={{ background: "#1a3a5c" }}
                 >
                     {icon}
@@ -87,7 +87,7 @@ function PillarCard({
                 }}
             >
                 <div
-                    className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0"
+                    className="w-12 h-12 rounded-xl flex items-center justify-center shrink-0"
                     style={{ background: "#1a3a5c" }}
                 >
                     {icon}

@@ -2,9 +2,10 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState, useRef, useEffect, useCallback } from "react";
-import { createPortal } from "react-dom";
+import { useState, useRef } from "react";
 import { type Trip } from "@/lib/trips-data";
+import GalleryModal from "@/components/GalleryModal";
+import { tripImagesToGallery } from "@/lib/gallery-utils";
 
 const LEVEL_BADGE: Record<string, string> = {
     Principiante: "bg-green-500 text-white",
@@ -37,7 +38,7 @@ function AccordionDay({ day }: { day: Trip["itinerary"][number] }) {
         >
             <button
                 onClick={() => setOpen(!open)}
-                className="w-full flex items-center justify-between px-4 py-4 text-left"
+                className="w-full flex items-center justify-between px-4 py-4 text-left cursor-pointer touch-manipulation"
                 aria-expanded={open}
             >
                 <div className="flex items-center gap-3">
@@ -185,7 +186,8 @@ function SidebarCard({ trip, waUrl }: { trip: Trip; waUrl: string }) {
                     href={waUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center justify-center gap-3 w-full py-4 rounded-2xl text-white font-black text-base bg-mx-red transition-opacity hover:opacity-90"
+                    className="flex items-center justify-center gap-3 w-full py-4 rounded-2xl font-black text-base transition-opacity hover:opacity-90"
+                    style={{ background: "#25D366", color: "#fff" }}
                 >
                     <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
                         <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
@@ -198,116 +200,25 @@ function SidebarCard({ trip, waUrl }: { trip: Trip; waUrl: string }) {
     );
 }
 
-/* ── Fullscreen lightbox (desktop) ── */
-function Lightbox({
-    images,
-    startIndex,
-    onClose,
-}: {
-    images: { src: string; alt: string }[];
-    startIndex: number;
-    onClose: () => void;
-}) {
-    const [current, setCurrent] = useState(startIndex);
-
-    const total = images.length;
-    const prev = useCallback(() => setCurrent((c) => (c - 1 + total) % total), [total]);
-    const next = useCallback(() => setCurrent((c) => (c + 1) % total), [total]);
-
-    useEffect(() => {
-        const onKey = (e: KeyboardEvent) => {
-            if (e.key === "Escape") onClose();
-            if (e.key === "ArrowLeft") prev();
-            if (e.key === "ArrowRight") next();
-        };
-        window.addEventListener("keydown", onKey);
-        document.body.style.overflow = "hidden";
-        return () => {
-            window.removeEventListener("keydown", onKey);
-            document.body.style.overflow = "";
-        };
-    }, [onClose, prev, next]);
-
-    const touchStartX = useRef<number | null>(null);
-    const onTouchStart = (e: React.TouchEvent) => { touchStartX.current = e.touches[0].clientX; };
-    const onTouchEnd = (e: React.TouchEvent) => {
-        if (touchStartX.current === null) return;
-        const dx = e.changedTouches[0].clientX - touchStartX.current;
-        if (Math.abs(dx) > 40) { if (dx < 0) next(); else prev(); }
-        touchStartX.current = null;
-    };
-
-    if (typeof document === "undefined") return null;
-    return createPortal(
-        <div
-            className="fixed inset-0 z-9999 flex flex-col"
-            style={{ background: "rgba(0,0,0,0.97)" }}
-            onTouchStart={onTouchStart}
-            onTouchEnd={onTouchEnd}
-        >
-            <div className="flex items-center justify-between px-4 py-3 shrink-0">
-                <span className="text-sm font-semibold" style={{ color: "rgba(255,255,255,0.45)" }}>
-                    {current + 1} / {total}
-                </span>
-                <button
-                    onClick={onClose}
-                    className="w-10 h-10 rounded-full flex items-center justify-center hover:opacity-70 active:opacity-50"
-                    style={{ background: "rgba(255,255,255,0.1)", border: "1px solid rgba(255,255,255,0.15)" }}
-                    aria-label="Cerrar"
-                >
-                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="white" strokeWidth="2.2" strokeLinecap="round">
-                        <path d="M18 6L6 18M6 6l12 12" />
-                    </svg>
-                </button>
-            </div>
-            <div className="flex-1 flex items-center justify-center min-h-0 px-16">
-                <div className="relative w-full h-full" style={{ maxWidth: 1200 }}>
-                    <Image
-                        key={current}
-                        src={images[current].src}
-                        alt={images[current].alt}
-                        fill
-                        className="object-contain"
-                        sizes="100vw"
-                        priority
-                    />
-                </div>
-            </div>
-            {total > 1 && (
-                <>
-                    <button onClick={prev} className="absolute left-3 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full flex items-center justify-center active:opacity-50" style={{ background: "rgba(255,255,255,0.1)", border: "1px solid rgba(255,255,255,0.15)" }} aria-label="Anterior">
-                        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="white" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 18l-6-6 6-6" /></svg>
-                    </button>
-                    <button onClick={next} className="absolute right-3 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full flex items-center justify-center active:opacity-50" style={{ background: "rgba(255,255,255,0.1)", border: "1px solid rgba(255,255,255,0.15)" }} aria-label="Siguiente">
-                        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="white" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 18l6-6-6-6" /></svg>
-                    </button>
-                </>
-            )}
-            <div className="shrink-0 flex justify-center gap-2 pb-6 pt-3">
-                {images.map((_, i) => (
-                    <button
-                        key={i}
-                        onClick={() => setCurrent(i)}
-                        className="rounded-full transition-all duration-200"
-                        style={{ width: i === current ? 20 : 8, height: 8, background: i === current ? "white" : "rgba(255,255,255,0.3)" }}
-                        aria-label={`Foto ${i + 1}`}
-                    />
-                ))}
-            </div>
-        </div>,
-        document.body
-    );
-}
 
 /* ── Photo gallery ── */
 const POSITIONS = ["center top", "center", "center bottom", "40% center"];
 
-function Gallery({ trip, desktopHeight = 260 }: { trip: Trip; desktopHeight?: number }) {
+function Gallery({ trip, desktopHeight = 260, onMobileGalleryChange }: { trip: Trip; desktopHeight?: number; onMobileGalleryChange?: (open: boolean) => void }) {
     const scrollRef = useRef<HTMLDivElement>(null);
-    const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+    const [galleryIndex, setGalleryIndex] = useState<number | null>(null);
 
-    const images = [0, 1, 2, 3].map((i) => ({
-        src: trip.imageSrc,
+    const openGallery = (index: number) => {
+        setGalleryIndex(index);
+        onMobileGalleryChange?.(true);
+    };
+    const closeGallery = () => {
+        setGalleryIndex(null);
+        onMobileGalleryChange?.(false);
+    };
+
+    const images = trip.images.map((src, i) => ({
+        src,
         alt: `${trip.name} foto ${i + 1}`,
     }));
 
@@ -319,11 +230,11 @@ function Gallery({ trip, desktopHeight = 260 }: { trip: Trip; desktopHeight?: nu
 
     return (
         <>
-            {lightboxIndex !== null && (
-                <Lightbox
-                    images={images}
-                    startIndex={lightboxIndex}
-                    onClose={() => setLightboxIndex(null)}
+            {galleryIndex !== null && (
+                <GalleryModal
+                    images={tripImagesToGallery(trip.images)}
+                    initialIndex={galleryIndex}
+                    onClose={closeGallery}
                 />
             )}
 
@@ -362,9 +273,28 @@ function Gallery({ trip, desktopHeight = 260 }: { trip: Trip; desktopHeight?: nu
                             </div>
                         ))}
                     </div>
+                    {/* Button to open gallery modal */}
+                    <div className="px-5 pt-2">
+                        <button
+                            onClick={() => openGallery(0)}
+                            className="flex items-center justify-center gap-2 w-full py-2.5 px-4 rounded-xl text-sm font-semibold"
+                            style={{
+                                background: "rgba(255,255,255,0.06)",
+                                border: "1px solid rgba(255,255,255,0.1)",
+                                color: "rgba(255,255,255,0.85)",
+                                cursor: "pointer",
+                                touchAction: "manipulation",
+                            }}
+                        >
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
+                            </svg>
+                            Ver todas las fotos ({images.length})
+                        </button>
+                    </div>
                 </div>
 
-                {/* Desktop: big scrollable strip — click opens lightbox */}
+                {/* Desktop: scrollable strip — click opens GalleryModal */}
                 <div className="hidden lg:block relative group/gallery">
                     <button
                         onClick={() => scroll("left")}
@@ -383,7 +313,7 @@ function Gallery({ trip, desktopHeight = 260 }: { trip: Trip; desktopHeight?: nu
                         {images.map((img, i) => (
                             <button
                                 key={i}
-                                onClick={() => setLightboxIndex(i)}
+                                onClick={() => openGallery(i)}
                                 className="group/thumb relative shrink-0 rounded-2xl overflow-hidden focus:outline-none focus-visible:ring-2 focus-visible:ring-white/50"
                                 style={{ width: 440, height: desktopHeight }}
                                 aria-label={`Ver foto ${i + 1} en pantalla completa`}
@@ -425,7 +355,7 @@ function Gallery({ trip, desktopHeight = 260 }: { trip: Trip; desktopHeight?: nu
 }
 
 /* ── Content sections ── */
-function TripContent({ trip }: { trip: Trip }) {
+function TripContent({ trip, onMobileGalleryChange }: { trip: Trip; onMobileGalleryChange?: (open: boolean) => void }) {
     return (
         <>
             {/* Description — mobile only; desktop renders it full-width above gallery */}
@@ -446,7 +376,7 @@ function TripContent({ trip }: { trip: Trip }) {
 
             {/* Gallery — mobile only (desktop renders it full-width outside this component) */}
             <div className="lg:hidden">
-                <Gallery trip={trip} />
+                <Gallery trip={trip} onMobileGalleryChange={onMobileGalleryChange} />
             </div>
 
             {/* Includes */}
@@ -588,6 +518,7 @@ function TripContent({ trip }: { trip: Trip }) {
    MAIN COMPONENT
 ══════════════════════════════════════════ */
 export default function FichaViaje({ trip }: { trip: Trip }) {
+    const [mobileGalleryOpen, setMobileGalleryOpen] = useState(false);
     const waMessage = encodeURIComponent(
         `Hola Pablo! Me interesa el viaje "${trip.name}". ¿Podés darme más información?`
     );
@@ -673,7 +604,7 @@ export default function FichaViaje({ trip }: { trip: Trip }) {
                     </div>
                 </div>
 
-                <TripContent trip={trip} />
+                <TripContent trip={trip} onMobileGalleryChange={setMobileGalleryOpen} />
 
                 {/* Sticky CTA */}
                 <div
@@ -681,13 +612,15 @@ export default function FichaViaje({ trip }: { trip: Trip }) {
                     style={{
                         background: "rgba(13,27,42,0.97)",
                         borderTop: "1px solid rgba(255,255,255,0.08)",
+                        display: mobileGalleryOpen ? "none" : undefined,
                     }}
                 >
                     <a
                         href={waUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center justify-center gap-3 w-full py-4 rounded-2xl text-white font-black text-base bg-mx-red"
+                        className="flex items-center justify-center gap-3 w-full py-4 rounded-2xl font-black text-base transition-opacity hover:opacity-90"
+                        style={{ background: "#25D366", color: "#fff" }}
                     >
                         <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
                             <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
