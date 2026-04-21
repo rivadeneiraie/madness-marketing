@@ -132,8 +132,8 @@ web/src/app/
 
 ### Equipo (`/equipo`)
 
-| Componente      | Descripción                                                                          |
-| --------------- | ------------------------------------------------------------------------------------ |
+| Componente       | Descripción                                                                                                                                                                                               |
+| ---------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `EquipoPage.tsx` | Server Component. Hero con imagen de fondo, perfil Pablo (2col en lg), grid de guías (3col en lg), CTA. Datos ficticios en `GUIDES[]` — pendiente datos reales de guías. Pablo usa `/photos/pablo2.jpeg`. |
 
 ---
