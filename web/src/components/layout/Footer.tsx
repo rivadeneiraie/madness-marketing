@@ -1,7 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-
-const WA_BASE = "https://wa.me/54XXXXXXXXXX";
+import { waLink, instagramUrl, siteConfig } from "@/lib/config";
 
 export default function Footer() {
     return (
@@ -67,7 +66,7 @@ export default function Footer() {
                             Contacto
                         </p>
                         <a
-                            href={`${WA_BASE}?text=${encodeURIComponent("Hola Pablo, me interesa una expedición")}`}
+                            href={waLink("default")}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="flex items-center gap-2 text-sm font-semibold text-green-400 hover:text-green-300 transition-colors mb-3"
@@ -76,7 +75,7 @@ export default function Footer() {
                             WhatsApp
                         </a>
                         <a
-                            href="https://instagram.com/madnessexpeditions"
+                            href={instagramUrl}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="flex items-center gap-2 text-sm hover:text-white transition-colors"
@@ -135,7 +134,7 @@ export default function Footer() {
                     {/* Social */}
                     <div className="flex justify-center gap-4 mb-6">
                         <a
-                            href="https://instagram.com/madnessexpeditions"
+                            href={instagramUrl}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="flex items-center gap-1.5 text-sm font-medium"
@@ -159,7 +158,7 @@ export default function Footer() {
                     style={{ borderColor: "rgba(255,255,255,0.06)" }}
                 >
                     <p className="text-xs" style={{ color: "rgba(255,255,255,0.25)" }}>
-                        © 2025 Madness Expeditions · Argentina
+                        © {siteConfig.foundedYear} Madness Expeditions · {siteConfig.country}
                     </p>
                     <p className="text-xs mt-1" style={{ color: "rgba(255,255,255,0.15)" }}>
                         Diseño y desarrollo:{" "}
@@ -199,19 +198,6 @@ function Badge({ label }: { label: string }) {
         >
             {label}
         </span>
-    );
-}
-
-function LogoIcon() {
-    return (
-        <svg viewBox="0 0 40 40" width="30" height="30">
-            <circle cx="20" cy="20" r="19" fill="#0D1B2A" />
-            <ellipse cx="20" cy="13" rx="3" ry="3.2" fill="white" />
-            <path d="M17 16 Q14 20 13 28 L20 26 L27 28 Q26 20 23 16 Z" fill="white" />
-            <path d="M13 28 L10 34" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
-            <path d="M27 28 L30 34" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
-            <path d="M13 22 L9 20 M27 22 L31 20" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
-        </svg>
     );
 }
 

@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState, useRef } from "react";
 import { type Trip } from "@/lib/trips-data";
-import GalleryModal from "@/components/GalleryModal";
+import GalleryModal from "@/components/gallery/GalleryModal";
 import { tripImagesToGallery } from "@/lib/gallery-utils";
 
 const LEVEL_BADGE: Record<string, string> = {

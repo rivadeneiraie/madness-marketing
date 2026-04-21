@@ -1,7 +1,7 @@
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
-import FloatingWhatsAppButton from "@/components/FloatingWhatsAppButton";
-import EquipoPage from "@/components/EquipoPage";
+import Navbar from "@/components/layout/Navbar";
+import Footer from "@/components/layout/Footer";
+import FloatingWhatsAppButton from "@/components/layout/FloatingWhatsAppButton";
+import EquipoPage from "@/components/views/EquipoPage";
 
 export const metadata = {
     title: "El Equipo — Madness Expeditions",

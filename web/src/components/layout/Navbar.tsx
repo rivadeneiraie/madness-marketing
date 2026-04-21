@@ -4,10 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 
-const WA_BASE = "https://wa.me/54XXXXXXXXXX";
-const WA_MSG_NAV = encodeURIComponent(
-    "Hola Pablo, me interesa conocer más sobre sus expediciones"
-);
+import { waLink } from "@/lib/config";
 
 const navLinks = [
     { label: "Inicio", href: "/" },
@@ -73,7 +70,7 @@ export default function Navbar() {
                 {/* CTA WhatsApp — flex-1 ancla a la derecha */}
                 <div className="flex-1 min-w-0 flex justify-end">
                     <a
-                        href={`${WA_BASE}?text=${WA_MSG_NAV}`}
+                        href={waLink("navbar")}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white text-sm font-bold px-4 py-2.5 rounded-xl transition-colors whitespace-nowrap"
@@ -110,7 +107,7 @@ export default function Navbar() {
                 {/* Acciones derecha */}
                 <div className="flex items-center gap-3">
                     <a
-                        href={`${WA_BASE}?text=${WA_MSG_NAV}`}
+                        href={waLink("navbar")}
                         target="_blank"
                         rel="noopener noreferrer"
                         aria-label="Consultar por WhatsApp"
@@ -150,46 +147,6 @@ export default function Navbar() {
                 </div>
             )}
         </nav>
-    );
-}
-
-/* ── Íconos SVG inline ── */
-
-function LogoIcon() {
-    return (
-        <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center">
-            <svg viewBox="0 0 40 40" width="32" height="32">
-                <circle cx="20" cy="20" r="19" fill="#0D1B2A" />
-                <ellipse cx="20" cy="13" rx="3" ry="3.2" fill="white" />
-                <path d="M17 16 Q14 20 13 28 L20 26 L27 28 Q26 20 23 16 Z" fill="white" />
-                <path d="M13 28 L10 34" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
-                <path d="M27 28 L30 34" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
-                <path
-                    d="M13 22 L9 20 M27 22 L31 20"
-                    stroke="white"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                />
-            </svg>
-        </div>
-    );
-}
-
-function LogoIconSmall() {
-    return (
-        <svg viewBox="0 0 40 40" width="30" height="30">
-            <circle cx="20" cy="20" r="19" fill="#0D1B2A" />
-            <ellipse cx="20" cy="13" rx="3" ry="3.2" fill="white" />
-            <path d="M17 16 Q14 20 13 28 L20 26 L27 28 Q26 20 23 16 Z" fill="white" />
-            <path d="M13 28 L10 34" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
-            <path d="M27 28 L30 34" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
-            <path
-                d="M13 22 L9 20 M27 22 L31 20"
-                stroke="white"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-            />
-        </svg>
     );
 }
 

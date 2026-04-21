@@ -1,9 +1,5 @@
 import Image from "next/image";
-
-const WA_BASE = "https://wa.me/54XXXXXXXXXX";
-const WA_MSG_BEGINNER = encodeURIComponent(
-    "Hola Pablo, no sé por dónde empezar, ¿me podés orientar?"
-);
+import { waLink } from "@/lib/config";
 
 export default function HeroSection() {
     return (
@@ -73,7 +69,7 @@ export default function HeroSection() {
 
                 {/* CTA secundario WhatsApp */}
                 <a
-                    href={`${WA_BASE}?text=${WA_MSG_BEGINNER}`}
+                    href={waLink("beginners")}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="mt-3 block w-full text-center font-medium text-sm py-3.5 rounded-xl tracking-wide transition-colors active:bg-white/10"
@@ -127,7 +123,7 @@ export default function HeroSection() {
                             Ver viajes
                         </a>
                         <a
-                            href={`${WA_BASE}?text=${WA_MSG_BEGINNER}`}
+                            href={waLink("beginners")}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="font-medium text-base px-8 py-4 rounded-xl transition-colors hover:bg-white/10"

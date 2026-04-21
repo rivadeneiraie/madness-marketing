@@ -1,7 +1,4 @@
-const WA_BASE = "https://wa.me/54XXXXXXXXXX";
-const WA_MSG_BEGINNERS = encodeURIComponent(
-    "Hola Pablo, me gustaría saber más sobre expediciones para principiantes"
-);
+import { waLink } from "@/lib/config";
 
 export default function FinalCTA() {
     return (
@@ -28,7 +25,7 @@ export default function FinalCTA() {
                 <div className="flex flex-col lg:flex-row items-center justify-center gap-3 lg:gap-4">
                     {/* WhatsApp CTA principal */}
                     <a
-                        href={`${WA_BASE}?text=${WA_MSG_BEGINNERS}`}
+                        href={waLink("finalCta")}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="flex items-center justify-center gap-2.5 w-full lg:w-auto bg-green-500 hover:bg-green-600 text-white font-bold text-base px-8 py-4 rounded-xl transition-colors active:opacity-80"

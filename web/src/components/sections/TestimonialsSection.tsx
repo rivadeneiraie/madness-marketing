@@ -1,4 +1,4 @@
-import TestimonialCard, { type TestimonialProps } from "./TestimonialCard";
+import TestimonialCard, { type TestimonialProps } from "../ui/TestimonialCard";
 
 const TESTIMONIALS: TestimonialProps[] = [
     {

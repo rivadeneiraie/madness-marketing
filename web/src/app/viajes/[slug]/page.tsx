@@ -1,8 +1,8 @@
 import { notFound } from "next/navigation";
 import { getTripBySlug, TRIPS } from "@/lib/trips-data";
-import FichaViaje from "@/components/FichaViaje";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
+import FichaViaje from "@/components/views/FichaViaje";
+import Navbar from "@/components/layout/Navbar";
+import Footer from "@/components/layout/Footer";
 import type { Metadata } from "next";
 
 interface Props {

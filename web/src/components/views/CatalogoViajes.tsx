@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { type TripCardProps, type TripLevel } from "./TripCard";
-import TripCardHorizontal from "./TripCardHorizontal";
+import { type TripCardProps, type TripLevel } from "../ui/TripCard";
+import TripCardHorizontal from "../ui/TripCardHorizontal";
 
 /* ── Datos de viajes ── */
 const ALL_TRIPS: (TripCardProps & { zone: string })[] = [

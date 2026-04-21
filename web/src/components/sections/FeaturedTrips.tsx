@@ -1,5 +1,5 @@
 import Link from "next/link";
-import TripCard, { type TripCardProps } from "./TripCard";
+import TripCard, { type TripCardProps } from "../ui/TripCard";
 
 const FEATURED_TRIPS: TripCardProps[] = [
     {

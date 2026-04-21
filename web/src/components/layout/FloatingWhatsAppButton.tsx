@@ -1,14 +1,10 @@
-import Link from "next/link";
 
-const WA_BASE = "https://wa.me/54XXXXXXXXXX";
-const WA_MSG = encodeURIComponent(
-    "Hola Pablo, me interesa una expedición"
-);
+import { waLink } from "@/lib/config";
 
 export default function FloatingWhatsAppButton() {
     return (
         <a
-            href={`${WA_BASE}?text=${WA_MSG}`}
+            href={waLink("default")}
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Consultar por WhatsApp"

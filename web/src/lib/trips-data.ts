@@ -1,4 +1,4 @@
-import { type TripLevel, type DifficultyLevel } from "@/components/TripCard";
+import { type TripLevel, type DifficultyLevel } from "@/components/ui/TripCard";
 
 export interface TripDate {
     date: string;
