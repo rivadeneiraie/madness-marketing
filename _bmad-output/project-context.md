@@ -1,8 +1,17 @@
 ---
-project_name: 'madness-marketing'
-user_name: 'Irivadeneira'
-date: '2026-04-20'
-sections_completed: ['technology_stack', 'design_tokens', 'component_patterns', 'routing', 'styling_rules', 'data_layer', 'conventions']
+project_name: "madness-marketing"
+user_name: "Irivadeneira"
+date: "2026-04-20"
+sections_completed:
+  [
+    "technology_stack",
+    "design_tokens",
+    "component_patterns",
+    "routing",
+    "styling_rules",
+    "data_layer",
+    "conventions",
+  ]
 ---
 
 # Project Context para Agentes AI
@@ -13,16 +22,16 @@ sections_completed: ['technology_stack', 'design_tokens', 'component_patterns', 
 
 ## Stack Tecnológico (versiones exactas)
 
-| Capa | Tecnología | Versión |
-|------|-----------|---------|
-| Framework | Next.js (App Router, Turbopack) | 16.2.4 |
-| Runtime | React | 19.2.4 |
-| Lenguaje | TypeScript | ^5 |
-| Styling | Tailwind CSS | ^4 |
-| Animaciones | framer-motion | ^12.38.0 |
-| Gestos | react-swipeable | ^7.0.2 |
-| Fuente | Inter (Google Fonts) | — |
-| Node | — | v20.20.0 |
+| Capa        | Tecnología                      | Versión  |
+| ----------- | ------------------------------- | -------- |
+| Framework   | Next.js (App Router, Turbopack) | 16.2.4   |
+| Runtime     | React                           | 19.2.4   |
+| Lenguaje    | TypeScript                      | ^5       |
+| Styling     | Tailwind CSS                    | ^4       |
+| Animaciones | framer-motion                   | ^12.38.0 |
+| Gestos      | react-swipeable                 | ^7.0.2   |
+| Fuente      | Inter (Google Fonts)            | —        |
+| Node        | —                               | v20.20.0 |
 
 ---
 
@@ -32,16 +41,17 @@ Los colores de marca están definidos como custom tokens de Tailwind v4 en `web/
 
 ```css
 @theme inline {
-  --color-mx-dark: #0D1B2A;   /* Fondo principal */
-  --color-mx-blue: #1a3a5c;   /* Azul secundario */
-  --color-mx-red:  #E63030;   /* Rojo acento */
-  --color-mx-gray: #1C1C1E;   /* Gris oscuro (cards) */
+  --color-mx-dark: #0d1b2a; /* Fondo principal */
+  --color-mx-blue: #1a3a5c; /* Azul secundario */
+  --color-mx-red: #e63030; /* Rojo acento */
+  --color-mx-gray: #1c1c1e; /* Gris oscuro (cards) */
 }
 ```
 
 **Uso en clases Tailwind:** `bg-mx-dark`, `text-mx-red`, `border-mx-blue`, etc.
 
 **Colores especiales (inline styles, no en tokens):**
+
 - WhatsApp CTA: `style={{ background: "#25D366", color: "#fff" }}`
 - Textos con opacidad: `style={{ color: "rgba(255,255,255,0.6)" }}`
 - Transparencias de fondo: `style={{ background: "rgba(13,27,42,0.97)" }}`
@@ -73,6 +83,7 @@ web/src/app/
 ```
 
 **Páginas pendientes de implementar:**
+
 - `/proximas-salidas`
 - `/equipo` (Sobre Nosotros)
 - `/como-trabajamos`
@@ -83,48 +94,54 @@ web/src/app/
 ## Componentes — Inventario Completo
 
 ### Globales (usados en múltiples páginas)
-| Componente | Descripción |
-|-----------|-------------|
-| `Navbar.tsx` | Navegación. Hamburger en mobile/tablet (breakpoint xl). |
-| `Footer.tsx` | Footer con links y datos de contacto. |
+
+| Componente                   | Descripción                                                               |
+| ---------------------------- | ------------------------------------------------------------------------- |
+| `Navbar.tsx`                 | Navegación. Hamburger en mobile/tablet (breakpoint xl).                   |
+| `Footer.tsx`                 | Footer con links y datos de contacto.                                     |
 | `FloatingWhatsAppButton.tsx` | Botón flotante WhatsApp — NO incluir en FichaViaje (tiene su propio CTA). |
 
 ### Home (`/`)
-| Componente | Descripción |
-|-----------|-------------|
-| `HeroSection.tsx` | Hero con imagen de fondo y CTA principal. |
-| `TrustBlock.tsx` | Bloque de confianza con íconos y métricas. |
-| `FeaturedTrips.tsx` | Sección de viajes destacados usando `TripCard`. |
-| `TripCard.tsx` | Card vertical de viaje (usada en Home). |
-| `PabloSection.tsx` | Sección sobre Pablo Fortunato (guía/fundador). |
-| `TestimonialsSection.tsx` | Carrusel de testimonios. |
-| `TestimonialCard.tsx` | Card individual de testimonio. |
-| `FinalCTA.tsx` | CTA final de la página. |
+
+| Componente                | Descripción                                     |
+| ------------------------- | ----------------------------------------------- |
+| `HeroSection.tsx`         | Hero con imagen de fondo y CTA principal.       |
+| `TrustBlock.tsx`          | Bloque de confianza con íconos y métricas.      |
+| `FeaturedTrips.tsx`       | Sección de viajes destacados usando `TripCard`. |
+| `TripCard.tsx`            | Card vertical de viaje (usada en Home).         |
+| `PabloSection.tsx`        | Sección sobre Pablo Fortunato (guía/fundador).  |
+| `TestimonialsSection.tsx` | Carrusel de testimonios.                        |
+| `TestimonialCard.tsx`     | Card individual de testimonio.                  |
+| `FinalCTA.tsx`            | CTA final de la página.                         |
 
 ### Catálogo (`/viajes`)
-| Componente | Descripción |
-|-----------|-------------|
-| `CatalogoViajes.tsx` | Lista de viajes con filtros por nivel/zona. `"use client"`. |
-| `TripCardHorizontal.tsx` | Card horizontal de viaje (usada en Catálogo). |
+
+| Componente               | Descripción                                                 |
+| ------------------------ | ----------------------------------------------------------- |
+| `CatalogoViajes.tsx`     | Lista de viajes con filtros por nivel/zona. `"use client"`. |
+| `TripCardHorizontal.tsx` | Card horizontal de viaje (usada en Catálogo).               |
 
 ### Ficha de Viaje (`/viajes/[slug]`)
-| Componente | Descripción |
-|-----------|-------------|
-| `FichaViaje.tsx` | Layout completo mobile + desktop. No incluye `FloatingWhatsAppButton`. |
-| `GalleryModal.tsx` | Modal fullscreen con framer-motion backdrop (blur-2xl). Keyboard nav. |
-| `GallerySharedModal.tsx` | Visor core: AnimatePresence, swipe (react-swipeable), thumbnails. |
+
+| Componente               | Descripción                                                            |
+| ------------------------ | ---------------------------------------------------------------------- |
+| `FichaViaje.tsx`         | Layout completo mobile + desktop. No incluye `FloatingWhatsAppButton`. |
+| `GalleryModal.tsx`       | Modal fullscreen con framer-motion backdrop (blur-2xl). Keyboard nav.  |
+| `GallerySharedModal.tsx` | Visor core: AnimatePresence, swipe (react-swipeable), thumbnails.      |
 
 ---
 
 ## Capa de Datos — `web/src/lib/`
 
 ### `trips-data.ts`
+
 - Fuente única de verdad para los 3 viajes.
 - **Slugs:** `cordon-del-plata-iniciacion`, `cerro-punta-negra`, `bolivia-cordillera-real`
 - Exports: `TRIPS` (array), `getTripBySlug(slug)`, interfaces `Trip`, `TripDate`, `ItineraryDay`, `TripTestimonial`
 - El campo `imageSrc` es la imagen hero; el campo `images: string[]` son las fotos de la galería.
 
 ### `gallery-utils.ts`
+
 - Tipos compartidos: `GalleryImage`, `SharedModalProps`
 - Helpers: `animationVariants` (framer-motion), `range(start, end)`, `tripImagesToGallery(images)`
 
@@ -133,6 +150,7 @@ web/src/app/
 ## Patrones de Componentes
 
 ### Páginas (Server Components por defecto)
+
 ```tsx
 // web/src/app/ruta/page.tsx
 import Navbar from "@/components/Navbar";
@@ -145,7 +163,9 @@ export default function MiPage() {
   return (
     <>
       <Navbar />
-      <main><MiComponente /></main>
+      <main>
+        <MiComponente />
+      </main>
       <Footer />
     </>
   );
@@ -153,10 +173,12 @@ export default function MiPage() {
 ```
 
 ### Componentes con estado (Client Components)
+
 - Agregar `"use client"` como primera línea.
 - Preferir `useState` + props drilling sobre context para estado local de página.
 
 ### Importaciones
+
 - Alias `@/*` apunta a `web/src/`
 - Componentes: `import X from "@/components/X"`
 - Lib: `import { fn } from "@/lib/archivo"`
@@ -194,6 +216,7 @@ export default function MiPage() {
 ## Prototipado de Referencia
 
 Todos los prototipos HTML aprobados están en:
+
 ```
 _bmad-output/C-UX-Scenarios/
 ├── 01-valentina-primera-cumbre/
@@ -209,6 +232,7 @@ _bmad-output/C-UX-Scenarios/
 ```
 
 **Flujo al implementar una nueva página:**
+
 1. Leer el prototipo HTML de referencia.
 2. Leer la guía de contenido: `design-artifacts/A-Product-Brief/02-content-language.md`
 3. Leer la dirección visual: `design-artifacts/A-Product-Brief/03-visual-direction.md`
