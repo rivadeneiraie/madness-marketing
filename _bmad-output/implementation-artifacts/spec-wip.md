@@ -1,12 +1,12 @@
 ---
-title: 'Página /equipo — El Equipo (Sobre Nosotros)'
-type: 'feature'
-created: '2026-04-20'
-status: 'in-progress'
+title: "Página /equipo — El Equipo (Sobre Nosotros)"
+type: "feature"
+created: "2026-04-20"
+status: "in-progress"
 context:
-  - '_bmad-output/project-context.md'
-  - 'design-artifacts/A-Product-Brief/03-visual-direction.md'
-baseline_commit: '29c3a18fca2663e526be30c70f7befd8b6c66d8d'
+  - "_bmad-output/project-context.md"
+  - "design-artifacts/A-Product-Brief/03-visual-direction.md"
+baseline_commit: "29c3a18fca2663e526be30c70f7befd8b6c66d8d"
 ---
 
 <frozen-after-approval reason="human-owned intent — do not modify unless human renegotiates">
@@ -20,6 +20,7 @@ baseline_commit: '29c3a18fca2663e526be30c70f7befd8b6c66d8d'
 ## Boundaries & Constraints
 
 **Always:**
+
 - Fondo base `#0D1B2A`, colores de marca via clases Tailwind (`bg-mx-dark`, `text-mx-red`, `bg-mx-blue`, `bg-mx-gray`)
 - `next/image` para todas las imágenes; usar `picsum.photos` como placeholder (ya está en `remotePatterns`)
 - Incluir `FloatingWhatsAppButton` (esta página no tiene CTA propio de WhatsApp embebido)
@@ -29,10 +30,12 @@ baseline_commit: '29c3a18fca2663e526be30c70f7befd8b6c66d8d'
 - `shrink-0` nunca `flex-shrink-0`
 
 **Ask First:**
+
 - Si se necesitan fotos reales del equipo (Carlos, Lucía, Marcos) en vez de placeholders
 - Si los nombres/datos de los guías secundarios son ficticios o reales
 
 **Never:**
+
 - `"use client"` — esta página no tiene estado interactivo
 - `FloatingWhatsAppButton` duplicado (viene del layout de la página)
 - Inline styles para colores de tokens de marca — usar clases Tailwind
@@ -51,6 +54,7 @@ baseline_commit: '29c3a18fca2663e526be30c70f7befd8b6c66d8d'
 ## Tasks & Acceptance
 
 **Execution:**
+
 - [ ] `web/src/app/equipo/page.tsx` -- crear ruta con metadata, Navbar, EquipoPage, Footer, FloatingWhatsAppButton
 - [ ] `web/src/components/EquipoPage.tsx` -- implementar layout completo con las siguientes secciones:
   - **Hero**: gradient overlay sobre imagen de fondo, label rojo, h1, subtítulo
@@ -59,6 +63,7 @@ baseline_commit: '29c3a18fca2663e526be30c70f7befd8b6c66d8d'
   - **CTA "Cómo trabajamos"**: fila con texto + botón. Mobile: apilado. Desktop: `flex justify-between`
 
 **Acceptance Criteria:**
+
 - Dado que el usuario visita `/equipo` en mobile, ve las secciones apiladas en columna única sin overflow horizontal
 - Dado que el usuario visita `/equipo` en desktop (≥1024px), ve el perfil de Pablo en 2 columnas y el grid de guías en 3 columnas
 - La página tiene metadata (title, description) correcta

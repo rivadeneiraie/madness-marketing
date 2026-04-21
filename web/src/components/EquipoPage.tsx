@@ -5,20 +5,20 @@ import Link from "next/link";
    Datos
 ───────────────────────────────────────── */
 
-const CERTS = [
+const PABLO_BADGES = [
     {
-        label: "EPGAMT",
-        description: "Escuela de guías de montaña y alta montaña — Argentina",
+        label: "15+ años en la montaña",
+        description: "Forjado en el Aconcagua — el oficio aprendido viviéndolo, no en un aula",
         color: "#60a5fa",
     },
     {
-        label: "ANSILTA",
-        description: "Asociación Argentina de Guías de Montaña — miembro activo",
+        label: "200+ expediciones",
+        description: "Desde iniciación hasta 6.900 m — grupos chicos, atención personalizada",
         color: "#60a5fa",
     },
     {
-        label: "Primeros Auxilios en Montaña",
-        description: "Certificación vigente — rescate y emergencias en alta montaña",
+        label: "Equipo EPGAMT",
+        description: "Guías formados en una de las dos mejores escuelas del país",
         color: "#4ade80",
     },
     {
@@ -54,21 +54,21 @@ const GUIDES = [
         role: "Guía de Montaña · EPGAMT",
         bio: "Especialista en Patagonia y volcanes del sur. 10 años de experiencia en terreno técnico con hielo y roca.",
         tags: ["Patagonia", "Escalada en hielo", "EPGAMT"],
-        seed: "guide-carlos",
+        photo: "/photos/guia01.png",
     },
     {
         name: "Lucía Romero",
         role: "Guía de Trekking · Instructora",
         bio: "Especialista en grupos de iniciación. Formación en montañismo progresivo y preparación física para expediciones.",
         tags: ["Principiantes", "Preparación física", "Andes Centrales"],
-        seed: "guide-lucia",
+        photo: "/photos/guia02.png",
     },
     {
         name: "Marcos Peralta",
         role: "Guía de Alta Montaña · EPGAMT",
         bio: "Expediciones en 6000m+ y rutas técnicas de Aconcagua. Especialización en logística de campamentos de alta montaña.",
         tags: ["6000m+", "Aconcagua", "EPGAMT"],
-        seed: "guide-marcos",
+        photo: "/photos/guia03.png",
     },
 ];
 
@@ -144,27 +144,27 @@ function TimelineItem({ name, detail }: (typeof EXPEDICIONES)[number]) {
     );
 }
 
-function GuideCard({ name, role, bio, tags, seed }: (typeof GUIDES)[number]) {
+function GuideCard({ name, role, bio, tags, photo }: (typeof GUIDES)[number]) {
     return (
         <div
-            className="rounded-2xl overflow-hidden"
+            className="rounded-2xl overflow-hidden flex flex-col h-full"
             style={{ border: "1px solid rgba(255,255,255,0.07)" }}
         >
-            <div className="relative h-56">
+            <div className="relative h-56 shrink-0">
                 <Image
-                    src={`https://picsum.photos/seed/${seed}/400/300`}
+                    src={photo}
                     alt={name}
                     fill
                     className="object-cover"
                 />
             </div>
-            <div className="p-5" style={{ background: "rgba(255,255,255,0.03)" }}>
+            <div className="p-5 flex flex-col flex-1" style={{ background: "rgba(255,255,255,0.03)" }}>
                 <div className="font-black text-lg mb-0.5">{name}</div>
                 <div className="text-mx-red text-sm font-semibold mb-3">{role}</div>
                 <p className="text-sm leading-relaxed mb-4" style={{ color: "rgba(255,255,255,0.65)" }}>
                     {bio}
                 </p>
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap gap-2 mt-auto">
                     {tags.map((tag) => (
                         <span
                             key={tag}
@@ -196,20 +196,21 @@ export default function EquipoPage() {
                 {/* Imagen de fondo */}
                 <div className="absolute inset-0">
                     <Image
-                        src="https://picsum.photos/seed/pablo-team-mountain/1400/600"
+                        src="/photos/28.jpg"
                         alt="Equipo Madness Expeditions en la montaña"
                         fill
                         className="object-cover object-[center_30%]"
                         priority
                     />
-                    {/* Gradient overlay — más oscuro en mobile, gradiente en desktop */}
+                    {/* Overlay mobile: gradient vertical, imagen visible */}
                     <div
-                        className="absolute inset-0"
+                        className="absolute inset-0 lg:hidden"
                         style={{
                             background:
-                                "linear-gradient(to right, rgba(13,27,42,0.97) 0%, rgba(13,27,42,0.97) 100%)",
+                                "linear-gradient(to bottom, rgba(13,27,42,0.85) 0%, rgba(13,27,42,0.75) 100%)",
                         }}
                     />
+                    {/* Overlay desktop: gradient horizontal como en el prototipo */}
                     <div
                         className="absolute inset-0 hidden lg:block"
                         style={{
@@ -242,15 +243,15 @@ export default function EquipoPage() {
                     <div>
                         <div className="relative rounded-2xl overflow-hidden mb-6" style={{ height: 380 }}>
                             <Image
-                                src="https://picsum.photos/seed/pablo-guide-portrait/500/600"
-                                alt="Pablo Fortunato — Guía de montaña"
+                                src="/photos/pablo2.jpeg"
+                                alt="Pablo Fortunato — Fundador Madness Expeditions"
                                 fill
                                 className="object-cover"
                             />
                         </div>
                         <div className="grid grid-cols-2 gap-3">
-                            {CERTS.map((cert) => (
-                                <CertBadge key={cert.label} {...cert} />
+                            {PABLO_BADGES.map((badge) => (
+                                <CertBadge key={badge.label} {...badge} />
                             ))}
                         </div>
                     </div>
@@ -259,16 +260,17 @@ export default function EquipoPage() {
                     <div>
                         <h2 className="text-3xl lg:text-4xl font-black mb-1">Pablo Fortunato</h2>
                         <p className="text-mx-red font-bold text-lg mb-6">
-                            Guía de montaña y alta montaña certificado · Director
+                            Fundador · Director
                         </p>
 
                         <p
                             className="text-base leading-relaxed mb-5"
                             style={{ color: "rgba(255,255,255,0.8)" }}
                         >
-                            Guía certificado por EPGAMT con más de 15 años de experiencia en alta montaña
-                            argentina e internacional. Ha guiado más de 200 expediciones en los Andes, desde
-                            cumbres de iniciación hasta el Aconcagua. Miembro activo de ANSILTA.
+                            Montañista de toda la vida, forjado en el Aconcagua. Pablo construyó su experiencia
+                            viviéndola — años de trabajo en ascensos a la cima más alta de América hasta fundar
+                            Madness Expeditions con un equipo de guías de élite formados en las mejores escuelas
+                            del país.
                         </p>
                         <blockquote
                             className="text-base leading-relaxed mb-8 pl-4 border-l-2 border-mx-red italic"
