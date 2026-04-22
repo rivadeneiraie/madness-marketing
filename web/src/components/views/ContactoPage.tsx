@@ -90,7 +90,7 @@ export default function ContactoPage() {
                         Contacto
                     </p>
                     <h1 className="text-4xl lg:text-5xl font-black leading-none mb-4">
-                        Hablá con Pablo
+                        Consultanos
                     </h1>
                     <p
                         className="text-base lg:text-lg max-w-xl leading-relaxed"
@@ -154,7 +154,7 @@ export default function ContactoPage() {
                             <svg viewBox="0 0 24 24" width="22" height="22" fill="white">
                                 <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.114.549 4.097 1.508 5.817L.057 23.886l6.219-1.427A11.944 11.944 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm.029 21.818a9.946 9.946 0 01-5.064-1.379l-.363-.215-3.763.863.943-3.653-.237-.375A9.932 9.932 0 012.09 12c0-5.478 4.461-9.939 9.939-9.939 5.478 0 9.939 4.461 9.939 9.939 0 5.478-4.461 9.818-9.939 9.818z" />
                             </svg>
-                            Escribirle a Pablo por WhatsApp
+                            Escribinos por WhatsApp
                         </Link>
                         <p className="text-sm text-center" style={{ color: "rgba(255,255,255,0.3)" }}>
                             Responde el mismo día, en horario de Argentina
@@ -296,7 +296,7 @@ export default function ContactoPage() {
                                 <textarea
                                     id="consulta"
                                     rows={5}
-                                    placeholder="Contale a Pablo tu experiencia previa, qué estás buscando y cualquier pregunta que tengas…"
+                                    placeholder="Contános tu experiencia previa, qué estás buscando y cualquier pregunta que tengas…"
                                     className="w-full rounded-[10px] px-3.5 py-3 text-sm text-white placeholder:text-white/30 focus:outline-none transition-colors resize-none"
                                     style={{
                                         background: "rgba(255,255,255,0.05)",
@@ -312,7 +312,7 @@ export default function ContactoPage() {
                                 Enviar consulta
                             </button>
                             <p className="text-xs text-center" style={{ color: "rgba(255,255,255,0.3)" }}>
-                                Pablo responde en menos de 24 hs
+                                Respondemos en menos de 24 hs
                             </p>
                         </form>
                     </div>

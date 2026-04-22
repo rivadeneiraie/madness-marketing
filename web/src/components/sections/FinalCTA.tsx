@@ -17,7 +17,7 @@ export default function FinalCTA() {
                     className="text-sm lg:text-lg leading-relaxed mb-7 lg:mb-10"
                     style={{ color: "rgba(255,255,255,0.7)" }}
                 >
-                    Escribile a Pablo. Te responde él mismo, el mismo día.{" "}
+                    Consultanos directamente. Te respondemos el mismo día.{" "}
                     <br className="hidden lg:block" />
                     Sin formularios, sin esperas, sin compromiso
                 </p>
@@ -31,7 +31,7 @@ export default function FinalCTA() {
                         className="flex items-center justify-center gap-2.5 w-full lg:w-auto bg-green-500 hover:bg-green-600 text-white font-bold text-base px-8 py-4 rounded-xl transition-colors active:opacity-80"
                     >
                         <WhatsAppIcon />
-                        Escribile a Pablo por WhatsApp
+                        Escribinos por WhatsApp
                     </a>
 
                     {/* Alternativa formulario */}

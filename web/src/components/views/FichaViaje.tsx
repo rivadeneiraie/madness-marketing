@@ -520,7 +520,7 @@ function TripContent({ trip, onMobileGalleryChange }: { trip: Trip; onMobileGall
 export default function FichaViaje({ trip }: { trip: Trip }) {
     const [mobileGalleryOpen, setMobileGalleryOpen] = useState(false);
     const waMessage = encodeURIComponent(
-        `Hola Pablo! Me interesa el viaje "${trip.name}". ¿Podés darme más información?`
+        `Hola! Me interesa el viaje "${trip.name}". ¿Podés darme más información?`
     );
     const waUrl = `https://wa.me/5491112345678?text=${waMessage}`;
 

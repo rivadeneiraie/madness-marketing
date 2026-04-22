@@ -6,7 +6,7 @@ import ComoTrabajamos from "@/components/views/ComoTrabajamos";
 export const metadata = {
     title: "Cómo Trabajamos — Madness Expeditions",
     description:
-        "El modelo de progresión personalizada de Pablo Fortunato: evaluación inicial, plan de preparación y grupos por nivel. Así funciona Madness Expeditions.",
+        "El modelo de progresión personalizada de Madness Expeditions: evaluación inicial, plan de preparación y grupos por nivel. Así funcionamos.",
 };
 
 export default function ComoTrabajamosRoute() {

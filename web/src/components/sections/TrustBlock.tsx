@@ -7,7 +7,7 @@ const pillars = [
     {
         icon: <GuideIcon />,
         title: "Guía personal desde el día 1",
-        body: "Pablo te acompaña desde el principio: te explica el recorrido, el equipamiento y resuelve todas tus dudas antes de partir.",
+        body: "Nuestro guía te acompaña desde el principio: te explica el recorrido, el equipamiento y resuelve todas tus dudas antes de partir.",
     },
     {
         icon: <ShieldIcon />,

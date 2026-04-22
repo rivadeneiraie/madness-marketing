@@ -6,7 +6,7 @@ import ContactoPage from "@/components/views/ContactoPage";
 export const metadata = {
     title: "Contacto — Madness Expeditions",
     description:
-        "Consultá directamente con Pablo Fortunato. WhatsApp o formulario — sin intermediarios, sin equipo de ventas. Una conversación directa sobre tu próxima expedición.",
+        "Consultá directamente con Madness Expeditions. WhatsApp o formulario — sin intermediarios, sin equipo de ventas. Una conversación directa sobre tu próxima expedición.",
 };
 
 export default function ContactoRoute() {

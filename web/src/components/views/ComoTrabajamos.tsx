@@ -10,25 +10,25 @@ const PROCESS_STEPS = [
         number: 1,
         title: "Consulta inicial",
         description:
-            "Hablás directamente con Pablo por WhatsApp o formulario. Te hace las preguntas que necesita para entender tu nivel real, tu experiencia previa y qué objetivos tenés.",
+            "Hablás directamente con nuestro equipo por WhatsApp o formulario. Te hacemos las preguntas que necesitamos para entender tu nivel real, tu experiencia previa y qué objetivos tenés.",
     },
     {
         number: 2,
         title: "Evaluación y recomendación",
         description:
-            "Con base en tu perfil, Pablo te dice cuál expedición es la correcta para donde estás hoy — y cuáles son los pasos para llegar a donde querés estar. No hay venta de lo que no te corresponde.",
+            "Con base en tu perfil, te decimos cuál expedición es la correcta para donde estás hoy — y cuáles son los pasos para llegar a donde querés estar. No hay venta de lo que no te corresponde.",
     },
     {
         number: 3,
         title: "Plan de preparación",
         description:
-            "Recibís un plan de entrenamiento y preparación específico para la expedición elegida. Pablo sigue tu progreso y responde todas tus preguntas en el camino.",
+            "Recibís un plan de entrenamiento y preparación específico para la expedición elegida. Seguimos tu progreso y respondemos todas tus preguntas en el camino.",
     },
     {
         number: 4,
         title: "La expedición",
         description:
-            "Grupo reducido (máx. 6 personas) en el mismo nivel. Seguro incluido. Equipamiento técnico verificado. Pablo guía cada paso.",
+            "Grupo en el mismo nivel, con una proporción de guías que garantiza atención real a cada participante. Seguro incluido. Equipamiento técnico verificado.",
     },
 ];
 
@@ -36,7 +36,7 @@ const SERVICE_PILLARS = [
     {
         title: "Grupos por nivel",
         description:
-            "Máximo 6 personas con experiencia similar. Nunca se mezclan niveles. El ritmo es el del grupo — sin que nadie tenga que esperar ni apurarse.",
+            "Grupos con experiencia similar y suficientes guías para que nadie quede sin atención. Nunca se mezclan niveles. El ritmo es el del grupo — sin que nadie tenga que esperar ni apurarse.",
         icon: (
             <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="white" strokeWidth="1.8" strokeLinecap="round">
                 <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
@@ -48,7 +48,7 @@ const SERVICE_PILLARS = [
     {
         title: "Guía EPGAMT certificado",
         description:
-            "Pablo o uno de sus guías certificados acompaña cada expedición. Formación en primeros auxilios, rescate en montaña y meteorología de alta montaña.",
+            "Nuestros guías certificados acompañan cada expedición. Formación en primeros auxilios, rescate en montaña y meteorología de alta montaña.",
         icon: (
             <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="white" strokeWidth="1.8" strokeLinecap="round">
                 <path d="M12 2l2.09 6.26H21l-5.47 3.97 2.09 6.26L12 14.52l-5.62 3.97 2.09-6.26L3 8.26h6.91z" />
@@ -87,9 +87,9 @@ const SERVICE_PILLARS = [
         ),
     },
     {
-        title: "Contacto directo con Pablo",
+        title: "Atención directa sin intermediarios",
         description:
-            "No hay intermediarios. Consultás y te responde Pablo. Antes, durante y después de la expedición. El mismo número, la misma persona.",
+            "Sin intermediarios. Consultás y te respondemos. Antes, durante y después de la expedición. El mismo número, la misma empresa.",
         icon: (
             <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="white" strokeWidth="1.8" strokeLinecap="round">
                 <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.5 10.1 19.79 19.79 0 01.43 1.4 2 2 0 012.42 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006.16 6.16l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" />
@@ -167,7 +167,7 @@ export default function ComoTrabajamos() {
                 <div className="absolute inset-0">
                     <Image
                         src="/photos/01.jpg"
-                        alt="Pablo Fortunato — briefing antes de la expedición"
+                        alt="Madness Expeditions — briefing antes de la expedición"
                         fill
                         className="object-cover object-center"
                         priority
@@ -201,8 +201,8 @@ export default function ComoTrabajamos() {
                         className="text-base lg:text-lg max-w-xl leading-relaxed"
                         style={{ color: "rgba(255,255,255,0.7)" }}
                     >
-                        Cada expedición empieza mucho antes del primer paso en la montaña. Así es cómo Pablo
-                        trabaja con cada persona.
+                        Cada expedición empieza mucho antes del primer paso en la montaña. Así
+                        trabajamos con cada persona.
                     </p>
                 </div>
             </header>
@@ -223,7 +223,7 @@ export default function ComoTrabajamos() {
                             className="text-base leading-relaxed mb-5"
                             style={{ color: "rgba(255,255,255,0.75)" }}
                         >
-                            Pablo no arma grupos al azar. Cada persona tiene una evaluación inicial, un plan de
+                            No armamos grupos al azar. Cada persona tiene una evaluación inicial, un plan de
                             preparación acorde a su nivel, y un seguimiento real antes de la expedición.
                         </p>
                         <p
@@ -296,25 +296,25 @@ export default function ComoTrabajamos() {
                                 ¿Listo para consultar?
                             </p>
                             <h2 className="text-2xl lg:text-3xl font-black leading-tight mb-5">
-                                Escribile a Pablo.<br />Él te responde.
+                                Consultános.<br />Te respondemos.
                             </h2>
                             <p
                                 className="text-base leading-relaxed mb-8"
                                 style={{ color: "rgba(255,255,255,0.7)" }}
                             >
-                                Con toda la información que tenés, Pablo puede orientarte en minutos. Sin
+                                Con toda la información que tenés, podemos orientarte en minutos. Sin
                                 formularios genéricos, sin esperar respuesta de un equipo de ventas. Una
                                 conversación directa.
                             </p>
 
                             <Link
-                                href="https://wa.me/54XXXXXXXXXX?text=Hola%20Pablo%2C%20vi%20cómo%20trabajás%20y%20quiero%20consultar%20sobre%20una%20expedición%20técnica"
-                                className="flex items-center gap-3 w-full bg-green-500 hover:bg-green-600 text-white font-bold text-base py-4 px-6 rounded-xl transition-colors mb-3"
+                                href="https://wa.me/54XXXXXXXXXX?text=Hola%21%20Vi%20c%C3%B3mo%20trabaja%20Madness%20Expeditions%20y%20quiero%20consultar%20sobre%20una%20expedici%C3%B3n"
+                                className="flex items-center justify-center gap-3 w-full bg-green-500 hover:bg-green-600 text-white font-bold text-base py-4 px-6 rounded-xl transition-colors mb-3"
                             >
                                 <svg viewBox="0 0 24 24" width="22" height="22" fill="white">
                                     <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.114.549 4.097 1.508 5.817L.057 23.886l6.219-1.427A11.944 11.944 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm.029 21.818a9.946 9.946 0 01-5.064-1.379l-.363-.215-3.763.863.943-3.653-.237-.375A9.932 9.932 0 012.09 12c0-5.478 4.461-9.939 9.939-9.939 5.478 0 9.939 4.461 9.939 9.939 0 5.478-4.461 9.818-9.939 9.818z" />
                                 </svg>
-                                Escribirle a Pablo por WhatsApp
+                                Escribinos por WhatsApp
                             </Link>
 
                             <p className="text-sm text-center" style={{ color: "rgba(255,255,255,0.35)" }}>
@@ -411,7 +411,7 @@ export default function ComoTrabajamos() {
                                     <textarea
                                         id="consulta"
                                         rows={4}
-                                        placeholder="Contale a Pablo tu experiencia previa y lo que querés consultar…"
+                                        placeholder="Contános tu experiencia previa y lo que querés consultar…"
                                         className="w-full rounded-[10px] px-3.5 py-3 text-sm text-white placeholder:text-white/30 focus:outline-none transition-colors resize-none"
                                         style={{
                                             background: "rgba(255,255,255,0.05)",
@@ -427,7 +427,7 @@ export default function ComoTrabajamos() {
                                     Enviar consulta
                                 </button>
                                 <p className="text-xs text-center" style={{ color: "rgba(255,255,255,0.3)" }}>
-                                    Pablo responde en menos de 24 hs
+                                    Respondemos en menos de 24 hs
                                 </p>
                             </form>
                         </div>
