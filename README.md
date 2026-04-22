@@ -14,18 +14,18 @@ El proceso sigue el framework **WDS (Web Design System)** de BMad, que recorre l
 
 ## Estado del Proyecto
 
-| Fase | Nombre                      | Estado                                                                  |
-| ---- | --------------------------- | ----------------------------------------------------------------------- |
-| 1A   | Product Brief               | ✅ Completado                                                           |
-| 1B   | Contenido & Lenguaje        | ✅ Completado                                                           |
-| 1C   | Dirección Visual            | ✅ Completado                                                           |
-| 1D   | Plataforma & Tecnología     | ✅ Completado                                                           |
-| 2    | Trigger Mapping             | ✅ Completado                                                           |
-| 3    | UX Scenarios                | ✅ Completado                                                           |
-| 4    | UX Design (prototipos HTML) | ✅ Completado — 7/7 páginas prototipadas                                |
-| 5    | Agentic Development         | 🔄 En progreso — Home, Catálogo, Ficha de Viaje y El Equipo completadas |
+| Fase | Nombre                      | Estado                                                                |
+| ---- | --------------------------- | --------------------------------------------------------------------- |
+| 1A   | Product Brief               | ✅ Completado                                                         |
+| 1B   | Contenido & Lenguaje        | ✅ Completado                                                         |
+| 1C   | Dirección Visual            | ✅ Completado                                                         |
+| 1D   | Plataforma & Tecnología     | ✅ Completado                                                         |
+| 2    | Trigger Mapping             | ✅ Completado                                                         |
+| 3    | UX Scenarios                | ✅ Completado                                                         |
+| 4    | UX Design (prototipos HTML) | ✅ Completado — 7/7 páginas prototipadas                              |
+| 5    | Agentic Development         | 🔄 En progreso — 6/7 páginas completadas (falta Grandes Expediciones) |
 
-**Último merge:** `feature/equipo` → `master` (Abril 2026)
+**Última sesión:** 2026-04-21 — Cómo Trabajamos + Contacto implementadas · Próximas Salidas quitada de navegación
 
 ---
 
@@ -38,22 +38,27 @@ madness-marketing/
 │   │   ├── app/               — App Router (layout, page, globals.css)
 │   │   │   └── viajes/        — Catálogo (/viajes) y ficha dinámica (/viajes/[slug])
 │   │   ├── components/        — Componentes React
-│   │   │   ├── Navbar.tsx                — Navegación global
-│   │   │   ├── Footer.tsx                — Footer global
-│   │   │   ├── FloatingWhatsAppButton.tsx
-│   │   │   ├── HeroSection.tsx           — Hero de la Home
-│   │   │   ├── TrustBlock.tsx
-│   │   │   ├── FeaturedTrips.tsx
-│   │   │   ├── TripCard.tsx              — Card vertical (Home)
-│   │   │   ├── PabloSection.tsx
-│   │   │   ├── TestimonialsSection.tsx
-│   │   │   ├── TestimonialCard.tsx
-│   │   │   ├── FinalCTA.tsx
-│   │   │   ├── CatalogoViajes.tsx        — Catálogo con filtros por nivel/zona
-│   │   │   ├── TripCardHorizontal.tsx    — Card horizontal (Catálogo)
-│   │   │   ├── FichaViaje.tsx            — Detalle de viaje (mobile + desktop)
-│   │   │   ├── GalleryModal.tsx          — Modal fullscreen framer-motion
-│   │   │   └── GallerySharedModal.tsx    — Visor con swipe y thumbnails
+│   │   │   ├── layout/
+│   │   │   │   ├── Navbar.tsx                — Navegación global
+│   │   │   │   ├── Footer.tsx                — Footer global
+│   │   │   │   └── FloatingWhatsAppButton.tsx
+│   │   │   ├── sections/                     — Secciones de la Home
+│   │   │   │   ├── HeroSection.tsx
+│   │   │   │   ├── TrustBlock.tsx
+│   │   │   │   ├── FeaturedTrips.tsx
+│   │   │   │   ├── PabloSection.tsx
+│   │   │   │   ├── TestimonialsSection.tsx
+│   │   │   │   └── FinalCTA.tsx
+│   │   │   ├── views/                        — Páginas completas
+│   │   │   │   ├── CatalogoViajes.tsx        — Catálogo con filtros
+│   │   │   │   ├── FichaViaje.tsx            — Detalle de viaje + galería
+│   │   │   │   ├── EquipoPage.tsx            — El equipo / Sobre nosotros
+│   │   │   │   ├── ComoTrabajamos.tsx        — Metodología de trabajo
+│   │   │   │   └── ContactoPage.tsx          — Contacto (WA + formulario)
+│   │   │   ├── gallery/
+│   │   │   │   ├── GalleryModal.tsx          — Modal fullscreen framer-motion
+│   │   │   │   └── GallerySharedModal.tsx    — Visor con swipe y thumbnails
+│   │   │   └── ui/                           — Componentes UI reutilizables
 │   │   └── lib/
 │   │       ├── trips-data.ts          — Datos estáticos de los 3 viajes
 │   │       └── gallery-utils.ts       — Tipos y helpers compartidos de galería
@@ -106,17 +111,17 @@ madness-marketing/
 
 ---
 
-## Páginas del Sitio (7 páginas planificadas)
+## Páginas del Sitio
 
-| #   | Página                                 | Prototipo           | Código                                          |
-| --- | -------------------------------------- | ------------------- | ----------------------------------------------- |
-| 1   | Home                                   | ✅ Mobile + Desktop | ✅ Completada                                   |
-| 2   | Catálogo de Viajes (`/viajes`)         | ✅ Mobile           | ✅ Completada — filtros por nivel y zona        |
-| 3   | Ficha de Viaje (`/viajes/[slug]`)      | ✅ Mobile           | ✅ Completada — galería con modal framer-motion |
-| 4   | Próximas Salidas                       | ✅ Desktop          | ⏳ Pendiente                                    |
-| 5   | Sobre Nosotros / El Equipo (`/equipo`) | ✅ Desktop          | ✅ Completada — perfil Pablo, guías, CTA        |
-| 6   | Cómo Trabajamos                        | ✅ Desktop          | ⏳ Pendiente                                    |
-| 7   | Grandes Expediciones                   | ✅ Desktop          | ⏳ Pendiente                                    |
+| #   | Página                               | Prototipo           | Código                                                   |
+| --- | ------------------------------------ | ------------------- | -------------------------------------------------------- |
+| 1   | Home (`/`)                           | ✅ Mobile + Desktop | ✅ Completada                                            |
+| 2   | Catálogo de Viajes (`/viajes`)       | ✅ Mobile           | ✅ Completada — filtros por nivel y zona                 |
+| 3   | Ficha de Viaje (`/viajes/[slug]`)    | ✅ Mobile           | ✅ Completada — galería con modal framer-motion          |
+| 4   | El Equipo (`/equipo`)                | ✅ Desktop          | ✅ Completada — perfil Pablo, guías, CTA                 |
+| 5   | Cómo Trabajamos (`/como-trabajamos`) | ✅ Desktop          | ✅ Completada — proceso 4 pasos, 6 pilares, CTA contacto |
+| 6   | Contacto (`/contacto`)               | —                   | ✅ Completada — WhatsApp principal + formulario          |
+| 7   | Grandes Expediciones                 | ✅ Desktop          | ⏳ Pendiente                                             |
 
 ---
 

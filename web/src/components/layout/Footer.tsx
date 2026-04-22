@@ -42,7 +42,6 @@ export default function Footer() {
                         </p>
                         <nav className="flex flex-col gap-2.5">
                             <FooterLink href="/viajes" label="Catálogo de viajes" />
-                            <FooterLink href="/proximas-salidas" label="Próximas salidas" />
                             <FooterLink href="/grandes-expediciones" label="Grandes Expediciones" />
                             <FooterLink href="/equipamiento" label="Guía de equipamiento" />
                         </nav>
@@ -116,7 +115,6 @@ export default function Footer() {
                             { href: "/", label: "Inicio" },
                             { href: "/viajes", label: "Viajes" },
                             { href: "/equipo", label: "El equipo" },
-                            { href: "/proximas-salidas", label: "Próximas salidas" },
                             { href: "/como-trabajamos", label: "Cómo trabajamos" },
                             { href: "/contacto", label: "Contacto" },
                         ].map((l) => (

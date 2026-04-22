@@ -7,10 +7,10 @@ import { useState } from "react";
 const navLinks = [
     { label: "Inicio", href: "/" },
     { label: "Viajes", href: "/viajes" },
-    { label: "Próximas salidas", href: "/proximas-salidas" },
     { label: "El equipo", href: "/equipo" },
     { label: "Cómo trabajamos", href: "/como-trabajamos" },
     { label: "Grandes Expediciones", href: "/grandes-expediciones" },
+    { label: "Contacto", href: "/contacto" },
 ];
 
 export default function Navbar() {
