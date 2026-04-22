@@ -23,7 +23,7 @@ export default function PabloSection() {
                             style={{ borderColor: "#E63030" }}
                         >
                             <Image
-                                src="/photos/fotoLogo.jpg"
+                                src="/photos/company.png"
                                 alt="Pablo Fortunato — Guía de montaña"
                                 width={64}
                                 height={64}
@@ -65,7 +65,7 @@ export default function PabloSection() {
                             style={{ height: "380px", border: "1px solid rgba(255,255,255,0.08)" }}
                         >
                             <Image
-                                src="/photos/fotoLogo.jpg"
+                                src="/photos/company.png"
                                 alt="Pablo Fortunato — Guía de montaña"
                                 width={600}
                                 height={380}
