@@ -65,6 +65,13 @@ export default function FeaturedTrips() {
                         >
                             Ver todos los viajes
                         </Link>
+                        <Link
+                            href="/proximas-salidas"
+                            className="text-sm font-medium px-6 py-3 rounded-xl border transition-colors hover:text-white"
+                            style={{ color: "rgba(255,255,255,0.6)", borderColor: "rgba(255,255,255,0.1)" }}
+                        >
+                            Ver próximas fechas →
+                        </Link>
                     </div>
                 </div>
 
@@ -91,6 +98,13 @@ export default function FeaturedTrips() {
                         style={{ background: "#E63030" }}
                     >
                         Ver todos los viajes
+                    </Link>
+                    <Link
+                        href="/proximas-salidas"
+                        className="mt-3 block text-center text-sm font-medium"
+                        style={{ color: "rgba(255,255,255,0.55)" }}
+                    >
+                        Ver próximas fechas disponibles →
                     </Link>
                 </div>
 
