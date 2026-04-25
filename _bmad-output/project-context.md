@@ -90,7 +90,7 @@ web/src/app/
 
 **Páginas pendientes de implementar:**
 
-- `/grandes-expediciones`
+- `/grandes-expediciones` — **DIFERIDA** (decisión post-presentación: los viajes internacionales se mantienen unificados en `/viajes` por ahora. Retomar cuando el volumen lo justifique)
 
 ---
 

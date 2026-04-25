@@ -25,7 +25,7 @@ El proceso sigue el framework **WDS (Web Design System)** de BMad, que recorre l
 | 4    | UX Design (prototipos HTML) | ✅ Completado — 7/7 páginas prototipadas                              |
 | 5    | Agentic Development         | 🔄 En progreso — 6/7 páginas completadas (falta Grandes Expediciones) |
 
-**Última sesión:** 2026-04-25 — Cómo Trabajamos + Contacto implementadas · solo queda Grandes Expediciones
+**Última sesión:** 2026-04-25 — sitio presentado al cliente · Grandes Expediciones diferida · todas las páginas restantes completadas
 
 ---
 
@@ -121,7 +121,9 @@ madness-marketing/
 | 4   | El Equipo (`/equipo`)                | ✅ Desktop          | ✅ Completada — perfil Pablo, guías, CTA                 |
 | 5   | Cómo Trabajamos (`/como-trabajamos`) | ✅ Desktop          | ✅ Completada — proceso 4 pasos, 6 pilares, CTA contacto |
 | 6   | Contacto (`/contacto`)               | —                   | ✅ Completada — WhatsApp principal + formulario          |
-| 7   | Grandes Expediciones                 | ✅ Desktop          | ⏳ Pendiente                                             |
+| 7   | Grandes Expediciones                 | ✅ Desktop          | 🔁 Diferida — los viajes se muestran unificados en el catálogo por ahora |
+
+> **Nota:** La sección Grandes Expediciones fue diferida tras la primera presentación del sitio. La decisión fue mantener todos los viajes juntos en `/viajes` para simplificar la navegación. Puede retomarse en una fase futura cuando el volumen de expediciones internacionales lo justifique.
 
 ---
 
