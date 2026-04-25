@@ -25,7 +25,7 @@ El proceso sigue el framework **WDS (Web Design System)** de BMad, que recorre l
 | 4    | UX Design (prototipos HTML) | ✅ Completado — 7/7 páginas prototipadas                              |
 | 5    | Agentic Development         | 🔄 En progreso — 6/7 páginas completadas (falta Grandes Expediciones) |
 
-**Última sesión:** 2026-04-21 — Cómo Trabajamos + Contacto implementadas · Próximas Salidas quitada de navegación
+**Última sesión:** 2026-04-25 — Cómo Trabajamos + Contacto implementadas · solo queda Grandes Expediciones
 
 ---
 

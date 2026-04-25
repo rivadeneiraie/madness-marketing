@@ -1,7 +1,7 @@
 ---
 project_name: "madness-marketing"
 user_name: "Irivadeneira"
-date: "2026-04-20"
+date: "2026-04-25"
 sections_completed:
   [
     "technology_stack",
@@ -73,82 +73,92 @@ Los colores de marca están definidos como custom tokens de Tailwind v4 en `web/
 
 ```
 web/src/app/
-├── layout.tsx              — RootLayout con Inter font, lang="es", body min-h-full flex flex-col
-├── page.tsx                — Home (/)
-├── globals.css             — @import tailwindcss + @theme inline + tokens
+├── layout.tsx                  — RootLayout con Inter font, lang="es", body min-h-full flex flex-col
+├── page.tsx                    — Home (/)
+├── globals.css                 — @import tailwindcss + @theme inline + tokens
 ├── equipo/
-│   └── page.tsx            — El equipo (/equipo) — Server Component
+│   └── page.tsx                — El equipo (/equipo) — Server Component
+├── como-trabajamos/
+│   └── page.tsx                — Cómo trabajamos (/como-trabajamos) — Server Component
+├── contacto/
+│   └── page.tsx                — Contacto (/contacto) — Server Component
 └── viajes/
-    ├── page.tsx            — Catálogo de viajes (/viajes)
+    ├── page.tsx                — Catálogo de viajes (/viajes)
     └── [slug]/
-        └── page.tsx        — Ficha de viaje (/viajes/[slug]) — generateStaticParams
+        └── page.tsx            — Ficha de viaje (/viajes/[slug]) — generateStaticParams
 ```
 
 **Páginas pendientes de implementar:**
 
-- `/proximas-salidas`
-- `/como-trabajamos`
 - `/grandes-expediciones`
 
 ---
 
 ## Componentes — Inventario Completo
 
-### Globales (usados en múltiples páginas)
+⚠️ **Los componentes están organizados en subdirectorios.** Los imports deben reflejar esta estructura.
 
-| Componente                   | Descripción                                                               |
-| ---------------------------- | ------------------------------------------------------------------------- |
-| `Navbar.tsx`                 | Navegación. Hamburger en mobile/tablet (breakpoint xl).                   |
-| `Footer.tsx`                 | Footer con links y datos de contacto.                                     |
-| `FloatingWhatsAppButton.tsx` | Botón flotante WhatsApp — NO incluir en FichaViaje (tiene su propio CTA). |
+### `components/layout/` — Globales
 
-### Home (`/`)
+| Componente                   | Importación                                  | Descripción |
+| ---------------------------- | -------------------------------------------- | ----------- |
+| `Navbar.tsx`                 | `@/components/layout/Navbar`                 | Navegación. Hamburger en mobile/tablet (breakpoint `xl`). |
+| `Footer.tsx`                 | `@/components/layout/Footer`                 | Footer global. |
+| `FloatingWhatsAppButton.tsx` | `@/components/layout/FloatingWhatsAppButton` | Botón flotante WA — NO incluir en `FichaViaje` (tiene CTA propio). |
 
-| Componente                | Descripción                                     |
-| ------------------------- | ----------------------------------------------- |
-| `HeroSection.tsx`         | Hero con imagen de fondo y CTA principal.       |
-| `TrustBlock.tsx`          | Bloque de confianza con íconos y métricas.      |
-| `FeaturedTrips.tsx`       | Sección de viajes destacados usando `TripCard`. |
-| `TripCard.tsx`            | Card vertical de viaje (usada en Home).         |
-| `PabloSection.tsx`        | Sección sobre Pablo Fortunato (guía/fundador).  |
-| `TestimonialsSection.tsx` | Carrusel de testimonios.                        |
-| `TestimonialCard.tsx`     | Card individual de testimonio.                  |
-| `FinalCTA.tsx`            | CTA final de la página.                         |
+### `components/sections/` — Secciones de la Home
 
-### Catálogo (`/viajes`)
+| Componente              | Descripción |
+| ----------------------- | ----------- |
+| `HeroSection.tsx`       | Hero con imagen de fondo y CTA principal. |
+| `TrustBlock.tsx`        | Bloque de confianza con íconos y métricas. |
+| `FeaturedTrips.tsx`     | Sección de viajes destacados. |
+| `PabloSection.tsx`      | Sección sobre Pablo Fortunato. |
+| `TestimonialsSection.tsx` | Carrusel de testimonios. |
+| `FinalCTA.tsx`          | CTA final de la Home. |
 
-| Componente               | Descripción                                                 |
-| ------------------------ | ----------------------------------------------------------- |
-| `CatalogoViajes.tsx`     | Lista de viajes con filtros por nivel/zona. `"use client"`. |
-| `TripCardHorizontal.tsx` | Card horizontal de viaje (usada en Catálogo).               |
+### `components/views/` — Páginas completas
 
-### Ficha de Viaje (`/viajes/[slug]`)
+| Componente          | Descripción |
+| ------------------- | ----------- |
+| `CatalogoViajes.tsx` | Catálogo con filtros por nivel/zona. `"use client"`. |
+| `FichaViaje.tsx`    | Layout completo mobile + desktop. No incluye `FloatingWhatsAppButton`. |
+| `EquipoPage.tsx`    | Server Component. Hero + perfil Pablo (2col lg) + grid guías (3col lg) + CTA. Datos ficticios en `GUIDES[]`. Pablo usa `/photos/pablo2.jpeg`. |
+| `ComoTrabajamos.tsx` | Metodología de trabajo — proceso 4 pasos, 6 pilares, CTA contacto. |
+| `ContactoPage.tsx`  | WhatsApp como canal principal + formulario secundario. |
 
-| Componente               | Descripción                                                            |
-| ------------------------ | ---------------------------------------------------------------------- |
-| `FichaViaje.tsx`         | Layout completo mobile + desktop. No incluye `FloatingWhatsAppButton`. |
-| `GalleryModal.tsx`       | Modal fullscreen con framer-motion backdrop (blur-2xl). Keyboard nav.  |
-| `GallerySharedModal.tsx` | Visor core: AnimatePresence, swipe (react-swipeable), thumbnails.      |
+### `components/gallery/` — Galería
 
-### Equipo (`/equipo`)
+| Componente             | Descripción |
+| ---------------------- | ----------- |
+| `GalleryModal.tsx`     | Modal fullscreen con framer-motion backdrop (blur-2xl). Keyboard nav. |
+| `GallerySharedModal.tsx` | Visor core: AnimatePresence, swipe (react-swipeable), thumbnails. |
 
-| Componente       | Descripción                                                                                                                                                                                               |
-| ---------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `EquipoPage.tsx` | Server Component. Hero con imagen de fondo, perfil Pablo (2col en lg), grid de guías (3col en lg), CTA. Datos ficticios en `GUIDES[]` — pendiente datos reales de guías. Pablo usa `/photos/pablo2.jpeg`. |
+### `components/ui/` — UI reutilizable
+
+| Componente           | Descripción |
+| -------------------- | ----------- |
+| `TripCard.tsx`       | Card vertical de viaje (usada en Home). |
+| `TripCardHorizontal.tsx` | Card horizontal de viaje (usada en Catálogo). |
+| `TestimonialCard.tsx` | Card individual de testimonio. |
 
 ---
 
 ## Capa de Datos — `web/src/lib/`
 
-### `trips-data.ts`
+### `config.ts`
+- Configuración centralizada del sitio: nombre, WhatsApp, Instagram, mensajes contextuales de WA.
+- **Usar siempre `siteConfig`** para el número de WhatsApp y mensajes — nunca hardcodear.
+- `siteConfig.whatsappPhone` = número sin espacios ni guiones (formato: código país + número).
+- `siteConfig.whatsappMessages` = objeto con mensajes por contexto (`default`, `navbar`, `beginners`, `finalCta`).
 
+### `trips-data.ts`
 - Fuente única de verdad para los 3 viajes.
 - **Slugs:** `cordon-del-plata-iniciacion`, `cerro-punta-negra`, `bolivia-cordillera-real`
 - Exports: `TRIPS` (array), `getTripBySlug(slug)`, interfaces `Trip`, `TripDate`, `ItineraryDay`, `TripTestimonial`
 - El campo `imageSrc` es la imagen hero; el campo `images: string[]` son las fotos de la galería.
 
 ### `gallery-utils.ts`
-
 - Tipos compartidos: `GalleryImage`, `SharedModalProps`
 - Helpers: `animationVariants` (framer-motion), `range(start, end)`, `tripImagesToGallery(images)`
 
@@ -160,9 +170,10 @@ web/src/app/
 
 ```tsx
 // web/src/app/ruta/page.tsx
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
-import MiComponente from "@/components/MiComponente";
+import Navbar from "@/components/layout/Navbar";
+import Footer from "@/components/layout/Footer";
+import FloatingWhatsAppButton from "@/components/layout/FloatingWhatsAppButton";
+import MiVista from "@/components/views/MiVista";
 
 export const metadata = { title: "...", description: "..." };
 
@@ -170,25 +181,22 @@ export default function MiPage() {
   return (
     <>
       <Navbar />
-      <main>
-        <MiComponente />
-      </main>
+      <main><MiVista /></main>
       <Footer />
+      <FloatingWhatsAppButton />
     </>
   );
 }
 ```
 
-### Componentes con estado (Client Components)
+### Importaciones — nueva estructura de subdirectorios
 
-- Agregar `"use client"` como primera línea.
-- Preferir `useState` + props drilling sobre context para estado local de página.
-
-### Importaciones
-
-- Alias `@/*` apunta a `web/src/`
-- Componentes: `import X from "@/components/X"`
-- Lib: `import { fn } from "@/lib/archivo"`
+- Layout global: `@/components/layout/X`
+- Secciones de Home: `@/components/sections/X`
+- Páginas completas: `@/components/views/X`
+- Galería: `@/components/gallery/X`
+- UI reutilizable: `@/components/ui/X`
+- Config: `import { siteConfig } from "@/lib/config"`
 
 ---
 
