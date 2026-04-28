@@ -3,46 +3,25 @@
 import { useState } from "react";
 import { type TripCardProps, type TripLevel } from "../ui/TripCard";
 import TripCardHorizontal from "../ui/TripCardHorizontal";
+import { type Trip } from "@/lib/trips-data";
 
-/* ── Datos de viajes ── */
-const ALL_TRIPS: (TripCardProps & { zone: string })[] = [
-    {
-        name: "Cordón del Plata",
-        location: "Mendoza",
-        altitude: "4.000 msnm",
-        duration: "3 días",
-        note: "Salida: 23 mayo",
-        level: "Principiante",
-        difficulty: 2,
-        imageSrc: "/photos/cordondelplata.jpg",
-        href: "/viajes/cordon-del-plata-iniciacion",
-        zone: "Andes Centrales",
-    },
-    {
-        name: "Cerro Punta Negra",
-        location: "Cordón del Portillo",
-        altitude: "4.350 msnm",
-        duration: "3 días",
-        note: "Feriado 25 de mayo",
-        level: "Intermedio",
-        difficulty: 3,
-        imageSrc: "/photos/puntanegra.jpeg",
-        href: "/viajes/cerro-punta-negra",
-        zone: "Andes Centrales",
-    },
-    {
-        name: "Bolivia — Cordillera Real",
-        location: "La Paz, Bolivia",
-        altitude: "5.000+ msnm",
-        duration: "13 días",
-        note: "4 cumbres · Vacaciones invierno",
-        level: "Avanzado",
-        difficulty: 5,
-        imageSrc: "/photos/bolivia.jpg",
-        href: "/viajes/bolivia-cordillera-real",
-        zone: "Internacionales",
-    },
-];
+type TripWithZone = TripCardProps & { zone: string };
+
+function tripToCard(trip: Trip): TripWithZone {
+    const firstAvailable = trip.dates?.find((d) => d.spots !== "completo");
+    return {
+        name: trip.name,
+        location: trip.location,
+        altitude: trip.altitude,
+        duration: `${trip.days} días`,
+        note: trip.cardNote ?? firstAvailable?.date ?? "Próximamente",
+        level: trip.level,
+        difficulty: trip.difficulty,
+        imageSrc: trip.imageSrc,
+        href: `/viajes/${trip.slug}`,
+        zone: trip.region,
+    };
+}
 
 type FilterLevel = "Todos" | TripLevel | "Patagonia" | "Andes Centrales" | "Internacionales";
 
@@ -62,10 +41,12 @@ const LEVEL_DIFFICULTIES: Record<string, number> = {
     Avanzado: 5,
 };
 
-export default function CatalogoViajes() {
+export default function CatalogoViajes({ trips }: { trips: Trip[] }) {
     const [activeFilter, setActiveFilter] = useState<FilterLevel>("Todos");
 
-    const filtered = ALL_TRIPS.filter((t) => {
+    const allTrips = trips.map(tripToCard);
+
+    const filtered = allTrips.filter((t) => {
         if (activeFilter === "Todos") return true;
         if (activeFilter === t.level) return true;
         if (activeFilter === t.zone) return true;

@@ -1,12 +1,10 @@
 ---
-title: "Página /equipo — El Equipo (Sobre Nosotros)"
+title: "Integración Sanity CMS para datos de viajes"
 type: "feature"
-created: "2026-04-20"
-status: "in-progress"
+created: "2026-04-27"
+status: "draft"
 context:
   - "_bmad-output/project-context.md"
-  - "design-artifacts/A-Product-Brief/03-visual-direction.md"
-baseline_commit: "29c3a18fca2663e526be30c70f7befd8b6c66d8d"
 ---
 
 <frozen-after-approval reason="human-owned intent — do not modify unless human renegotiates">

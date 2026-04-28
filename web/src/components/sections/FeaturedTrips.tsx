@@ -1,43 +1,23 @@
 import Link from "next/link";
 import TripCard, { type TripCardProps } from "../ui/TripCard";
+import { getAllTrips } from "@/lib/trips-data";
 
-const FEATURED_TRIPS: TripCardProps[] = [
-    {
-        name: "Cordón del Plata",
-        location: "Mendoza",
-        altitude: "4.000 msnm",
-        duration: "3 días",
-        note: "Salida: 23 mayo",
-        level: "Principiante",
-        difficulty: 2,
-        imageSrc: "/photos/cordondelplata.jpg",
-        href: "/viajes/cordon-del-plata-iniciacion",
-    },
-    {
-        name: "Cerro Punta Negra",
-        location: "Cordón del Portillo",
-        altitude: "4.350 msnm",
-        duration: "3 días",
-        note: "Feriado 25 de mayo",
-        level: "Intermedio",
-        difficulty: 3,
-        imageSrc: "/photos/puntanegra.jpeg",
-        href: "/viajes/cerro-punta-negra",
-    },
-    {
-        name: "Bolivia — Cordillera Real",
-        location: "La Paz, Bolivia",
-        altitude: "5.000+ msnm",
-        duration: "13 días",
-        note: "4 cumbres · Vacaciones invierno",
-        level: "Avanzado",
-        difficulty: 5,
-        imageSrc: "/photos/bolivia.jpg",
-        href: "/viajes/bolivia-cordillera-real",
-    },
-];
-
-export default function FeaturedTrips() {
+export default async function FeaturedTrips() {
+    const allTrips = await getAllTrips();
+    const FEATURED_TRIPS: TripCardProps[] = allTrips.slice(0, 3).map((trip) => {
+        const firstAvailable = trip.dates?.find((d) => d.spots !== "completo");
+        return {
+            name: trip.name,
+            location: trip.location,
+            altitude: trip.altitude,
+            duration: `${trip.days} días`,
+            note: trip.cardNote ?? firstAvailable?.date ?? "Próximamente",
+            level: trip.level,
+            difficulty: trip.difficulty,
+            imageSrc: trip.imageSrc,
+            href: `/viajes/${trip.slug}`,
+        };
+    });
     return (
         <section
             id="viajes"
