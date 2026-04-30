@@ -77,6 +77,7 @@ Los colores de marca están definidos como custom tokens de Tailwind v4 en `web/
 El proyecto usa **Sanity** como CMS headless para gestionar los datos de viajes.
 
 ### Configuración
+
 - `web/sanity.config.ts` — config principal: `projectId: "6zqw6gnm"`, `dataset: "production"`, `basePath: "/studio"`
 - `web/src/sanity/lib/client.ts` — Sanity client usando env vars `NEXT_PUBLIC_SANITY_PROJECT_ID` y `NEXT_PUBLIC_SANITY_DATASET`
 - `web/src/sanity/lib/queries.ts` — Queries GROQ: `ALL_TRIPS_QUERY`, `TRIP_BY_SLUG_QUERY`
@@ -84,6 +85,7 @@ El proyecto usa **Sanity** como CMS headless para gestionar los datos de viajes.
 - Studio embebido en Next.js en la ruta `/studio` (`web/src/app/studio/[[...tool]]/`)
 
 ### Reglas críticas de Sanity
+
 - Las imágenes en Sanity son **referencias** (`image` type) — usar `@sanity/image-url` para construir la URL final.
 - `useCdn: true` en producción, `perspective: "published"` — los drafts no son visibles desde el frontend.
 - Las queries usan `defineQuery` de `next-sanity` — siempre importar desde ahí, no escribir GROQ crudo.
@@ -145,28 +147,28 @@ Los componentes están organizados en subcarpetas dentro de `web/src/components/
 
 ### `ui/` — Componentes UI reutilizables
 
-| Componente               | Descripción                                                 |
-| ------------------------ | ----------------------------------------------------------- |
-| `TripCard.tsx`           | Card vertical de viaje (usada en Home/FeaturedTrips).       |
-| `TripCardHorizontal.tsx` | Card horizontal de viaje (usada en Catálogo).               |
-| `TestimonialCard.tsx`    | Card individual de testimonio.                              |
+| Componente               | Descripción                                           |
+| ------------------------ | ----------------------------------------------------- |
+| `TripCard.tsx`           | Card vertical de viaje (usada en Home/FeaturedTrips). |
+| `TripCardHorizontal.tsx` | Card horizontal de viaje (usada en Catálogo).         |
+| `TestimonialCard.tsx`    | Card individual de testimonio.                        |
 
 ### `views/` — Vistas completas de página (Client o Server)
 
-| Componente               | Descripción                                                                                                                                                                                               |
-| ------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `CatalogoViajes.tsx`     | Lista de viajes con filtros por nivel/zona. `"use client"`. Recibe `trips` como prop (fetched en el server).                                                                                              |
-| `FichaViaje.tsx`         | Layout completo mobile + desktop. No incluye `FloatingWhatsAppButton`.                                                                                                                                    |
-| `EquipoPage.tsx`         | Server Component. Hero, perfil Pablo (2col en lg), grid de guías (3col en lg), CTA. Datos ficticios en `GUIDES[]` — pendiente datos reales. Pablo usa `/photos/pablo2.jpeg`.                             |
-| `ComoTrabajamos.tsx`     | Página Cómo Trabajamos implementada.                                                                                                                                                                      |
-| `ContactoPage.tsx`       | Página de Contacto. Muestra WhatsApp + formulario. **El formulario hoy no envía nada** — solo frontend, sin backend conectado.                                                                            |
+| Componente           | Descripción                                                                                                                                                                  |
+| -------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `CatalogoViajes.tsx` | Lista de viajes con filtros por nivel/zona. `"use client"`. Recibe `trips` como prop (fetched en el server).                                                                 |
+| `FichaViaje.tsx`     | Layout completo mobile + desktop. No incluye `FloatingWhatsAppButton`.                                                                                                       |
+| `EquipoPage.tsx`     | Server Component. Hero, perfil Pablo (2col en lg), grid de guías (3col en lg), CTA. Datos ficticios en `GUIDES[]` — pendiente datos reales. Pablo usa `/photos/pablo2.jpeg`. |
+| `ComoTrabajamos.tsx` | Página Cómo Trabajamos implementada.                                                                                                                                         |
+| `ContactoPage.tsx`   | Página de Contacto. Muestra WhatsApp + formulario. **El formulario hoy no envía nada** — solo frontend, sin backend conectado.                                               |
 
 ### `gallery/` — Galería de fotos
 
-| Componente               | Descripción                                                            |
-| ------------------------ | ---------------------------------------------------------------------- |
-| `GalleryModal.tsx`       | Modal fullscreen con framer-motion backdrop (blur-2xl). Keyboard nav.  |
-| `GallerySharedModal.tsx` | Visor core: AnimatePresence, swipe (react-swipeable), thumbnails.      |
+| Componente               | Descripción                                                           |
+| ------------------------ | --------------------------------------------------------------------- |
+| `GalleryModal.tsx`       | Modal fullscreen con framer-motion backdrop (blur-2xl). Keyboard nav. |
+| `GallerySharedModal.tsx` | Visor core: AnimatePresence, swipe (react-swipeable), thumbnails.     |
 
 ---
 
@@ -238,11 +240,13 @@ export default function MiPage() {
 import { getAllTrips } from "@/lib/trips-data";
 
 export default async function MiPage() {
-  const trips = await getAllTrips();  // fetch en servidor
+  const trips = await getAllTrips(); // fetch en servidor
   return (
     <>
       <Navbar />
-      <main><CatalogoViajes trips={trips} /></main>
+      <main>
+        <CatalogoViajes trips={trips} />
+      </main>
       <Footer />
       <FloatingWhatsAppButton />
     </>
@@ -298,12 +302,13 @@ export default async function MiPage() {
 
 ## Estado de Deploy
 
-| Entorno     | Estado       | URL                                     |
-| ----------- | ------------ | --------------------------------------- |
-| Producción  | ✅ Deployado | Vercel (URL definitiva pendiente)       |
-| Dominio     | ⏳ Pendiente | `madnessexpeditions.com` — configurar   |
+| Entorno    | Estado       | URL                                   |
+| ---------- | ------------ | ------------------------------------- |
+| Producción | ✅ Deployado | Vercel (URL definitiva pendiente)     |
+| Dominio    | ⏳ Pendiente | `madnessexpeditions.com` — configurar |
 
 **Variables de entorno requeridas en Vercel:**
+
 - `NEXT_PUBLIC_SANITY_PROJECT_ID` = `6zqw6gnm`
 - `NEXT_PUBLIC_SANITY_DATASET` = `production`
 
@@ -315,48 +320,48 @@ Estado actual: **En pausa — esperando feedback de Pablo** antes de continuar d
 
 ### 🔧 Funcionalidad
 
-| Tarea | Estado | Notas |
-| ----- | ------ | ----- |
-| Formulario de contacto — backend real | ⏳ Pendiente | Conectar a Resend u otro servicio de email. Hoy solo es UI, no envía nada. |
-| WhatsApp CTAs — mensajes por viaje | ⏳ Pendiente | Verificar que los mensajes pre-cargados por slug estén bien configurados. Actualmente los mensajes están en `siteConfig.whatsappMessages` (genéricos). |
-| Floating WhatsApp button — mobile vs desktop | ⏳ Pendiente | Revisar comportamiento y posicionamiento diferencial. |
+| Tarea                                        | Estado       | Notas                                                                                                                                                  |
+| -------------------------------------------- | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Formulario de contacto — backend real        | ⏳ Pendiente | Conectar a Resend u otro servicio de email. Hoy solo es UI, no envía nada.                                                                             |
+| WhatsApp CTAs — mensajes por viaje           | ⏳ Pendiente | Verificar que los mensajes pre-cargados por slug estén bien configurados. Actualmente los mensajes están en `siteConfig.whatsappMessages` (genéricos). |
+| Floating WhatsApp button — mobile vs desktop | ⏳ Pendiente | Revisar comportamiento y posicionamiento diferencial.                                                                                                  |
 
 ### 📈 SEO & Metadata
 
-| Tarea | Estado | Notas |
-| ----- | ------ | ----- |
-| Meta tags completos por página | ⏳ Pendiente | `title` y `description` ya están en algunas páginas — completar todas. |
-| Open Graph para redes sociales | ⏳ Pendiente | Imágenes OG por página. |
-| Sitemap + robots.txt | ⏳ Pendiente | `next-sitemap` o generación manual en App Router. |
-| Structured data Schema.org (tours) | ⏳ Pendiente | JSON-LD para páginas de viajes. |
+| Tarea                              | Estado       | Notas                                                                  |
+| ---------------------------------- | ------------ | ---------------------------------------------------------------------- |
+| Meta tags completos por página     | ⏳ Pendiente | `title` y `description` ya están en algunas páginas — completar todas. |
+| Open Graph para redes sociales     | ⏳ Pendiente | Imágenes OG por página.                                                |
+| Sitemap + robots.txt               | ⏳ Pendiente | `next-sitemap` o generación manual en App Router.                      |
+| Structured data Schema.org (tours) | ⏳ Pendiente | JSON-LD para páginas de viajes.                                        |
 
 ### ⚡ Performance
 
-| Tarea | Estado | Notas |
-| ----- | ------ | ----- |
-| Optimización de imágenes | ⏳ Pendiente | Auditar uso de `next/image`, formatos WebP, lazy loading. |
-| Core Web Vitals (LCP, CLS) | ⏳ Pendiente | Medir y optimizar en páginas clave. |
+| Tarea                      | Estado       | Notas                                                     |
+| -------------------------- | ------------ | --------------------------------------------------------- |
+| Optimización de imágenes   | ⏳ Pendiente | Auditar uso de `next/image`, formatos WebP, lazy loading. |
+| Core Web Vitals (LCP, CLS) | ⏳ Pendiente | Medir y optimizar en páginas clave.                       |
 
 ### 🧪 Testing
 
-| Tarea | Estado | Notas |
-| ----- | ------ | ----- |
+| Tarea                                  | Estado       | Notas                                                                                                          |
+| -------------------------------------- | ------------ | -------------------------------------------------------------------------------------------------------------- |
 | Acceptance testing contra UX Scenarios | ⏳ Pendiente | Correr tests sobre las páginas ya buildeadas contra los criterios definidos en `_bmad-output/C-UX-Scenarios/`. |
 
 ### 📄 Páginas Pendientes
 
-| Página | Estado | Notas |
-| ------ | ------ | ----- |
-| `/proximas-salidas` | ⏳ Pendiente | Prototipo disponible en `_bmad-output/C-UX-Scenarios/02-martin-validacion-tecnica/02.1-proximas-salidas/`. |
-| `/grandes-expediciones` | ⏳ Pendiente | Prototipo disponible en `_bmad-output/C-UX-Scenarios/03-diego-grandes-expediciones/`. |
-| Datos reales de guías en `/equipo` | ⏳ Pendiente | `GUIDES[]` en `EquipoPage.tsx` tiene datos ficticios. |
+| Página                             | Estado       | Notas                                                                                                      |
+| ---------------------------------- | ------------ | ---------------------------------------------------------------------------------------------------------- |
+| `/proximas-salidas`                | ⏳ Pendiente | Prototipo disponible en `_bmad-output/C-UX-Scenarios/02-martin-validacion-tecnica/02.1-proximas-salidas/`. |
+| `/grandes-expediciones`            | ⏳ Pendiente | Prototipo disponible en `_bmad-output/C-UX-Scenarios/03-diego-grandes-expediciones/`.                      |
+| Datos reales de guías en `/equipo` | ⏳ Pendiente | `GUIDES[]` en `EquipoPage.tsx` tiene datos ficticios.                                                      |
 
 ### 🚀 Deploy & Infraestructura
 
-| Tarea | Estado | Notas |
-| ----- | ------ | ----- |
-| Configurar dominio `madnessexpeditions.com` | ⏳ Pendiente | Apuntar DNS a Vercel. |
-| Variables de entorno Vercel | ⏳ Pendiente | Verificar que estén seteadas en producción. |
+| Tarea                                       | Estado       | Notas                                       |
+| ------------------------------------------- | ------------ | ------------------------------------------- |
+| Configurar dominio `madnessexpeditions.com` | ⏳ Pendiente | Apuntar DNS a Vercel.                       |
+| Variables de entorno Vercel                 | ⏳ Pendiente | Verificar que estén seteadas en producción. |
 
 ---
 
