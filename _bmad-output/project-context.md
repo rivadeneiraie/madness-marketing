@@ -1,7 +1,7 @@
 ---
 project_name: "madness-marketing"
 user_name: "Irivadeneira"
-date: "2026-04-20"
+date: "2026-04-30"
 sections_completed:
   [
     "technology_stack",
@@ -11,6 +11,8 @@ sections_completed:
     "styling_rules",
     "data_layer",
     "conventions",
+    "deploy_status",
+    "roadmap",
   ]
 ---
 
@@ -30,6 +32,7 @@ sections_completed:
 | Styling     | Tailwind CSS                    | ^4       |
 | Animaciones | framer-motion                   | ^12.38.0 |
 | Gestos      | react-swipeable                 | ^7.0.2   |
+| CMS         | Sanity (next-sanity)            | ^5.22.0  |
 | Fuente      | Inter (Google Fonts)            | —        |
 | Node        | —                               | v20.20.0 |
 
@@ -69,6 +72,26 @@ Los colores de marca están definidos como custom tokens de Tailwind v4 en `web/
 
 ---
 
+## Sanity CMS
+
+El proyecto usa **Sanity** como CMS headless para gestionar los datos de viajes.
+
+### Configuración
+- `web/sanity.config.ts` — config principal: `projectId: "6zqw6gnm"`, `dataset: "production"`, `basePath: "/studio"`
+- `web/src/sanity/lib/client.ts` — Sanity client usando env vars `NEXT_PUBLIC_SANITY_PROJECT_ID` y `NEXT_PUBLIC_SANITY_DATASET`
+- `web/src/sanity/lib/queries.ts` — Queries GROQ: `ALL_TRIPS_QUERY`, `TRIP_BY_SLUG_QUERY`
+- `web/src/sanity/schemas/trip.ts` — Schema del tipo `trip`
+- Studio embebido en Next.js en la ruta `/studio` (`web/src/app/studio/[[...tool]]/`)
+
+### Reglas críticas de Sanity
+- Las imágenes en Sanity son **referencias** (`image` type) — usar `@sanity/image-url` para construir la URL final.
+- `useCdn: true` en producción, `perspective: "published"` — los drafts no son visibles desde el frontend.
+- Las queries usan `defineQuery` de `next-sanity` — siempre importar desde ahí, no escribir GROQ crudo.
+- Los datos de viajes **ya no son estáticos** — `getAllTrips()` y `getTripBySlug()` hacen fetch a Sanity (async).
+- `normalizeTrip()` en `trips-data.ts` normaliza el campo `spots` (puede llegar como string `"completo"` o número desde Sanity).
+
+---
+
 ## Estructura de Rutas (App Router)
 
 ```
@@ -76,10 +99,16 @@ web/src/app/
 ├── layout.tsx              — RootLayout con Inter font, lang="es", body min-h-full flex flex-col
 ├── page.tsx                — Home (/)
 ├── globals.css             — @import tailwindcss + @theme inline + tokens
+├── contacto/
+│   └── page.tsx            — Contacto (/contacto) — Server Component
+├── como-trabajamos/
+│   └── page.tsx            — Cómo trabajamos (/como-trabajamos) — Server Component
 ├── equipo/
 │   └── page.tsx            — El equipo (/equipo) — Server Component
+├── studio/
+│   └── [[...tool]]/        — Sanity Studio embebido (/studio)
 └── viajes/
-    ├── page.tsx            — Catálogo de viajes (/viajes)
+    ├── page.tsx            — Catálogo de viajes (/viajes) — async Server Component
     └── [slug]/
         └── page.tsx        — Ficha de viaje (/viajes/[slug]) — generateStaticParams
 ```
@@ -87,14 +116,15 @@ web/src/app/
 **Páginas pendientes de implementar:**
 
 - `/proximas-salidas`
-- `/como-trabajamos`
 - `/grandes-expediciones`
 
 ---
 
 ## Componentes — Inventario Completo
 
-### Globales (usados en múltiples páginas)
+Los componentes están organizados en subcarpetas dentro de `web/src/components/`:
+
+### `layout/` — Globales (usados en todas las páginas)
 
 | Componente                   | Descripción                                                               |
 | ---------------------------- | ------------------------------------------------------------------------- |
@@ -102,39 +132,41 @@ web/src/app/
 | `Footer.tsx`                 | Footer con links y datos de contacto.                                     |
 | `FloatingWhatsAppButton.tsx` | Botón flotante WhatsApp — NO incluir en FichaViaje (tiene su propio CTA). |
 
-### Home (`/`)
+### `sections/` — Secciones de Home (`/`)
 
 | Componente                | Descripción                                     |
 | ------------------------- | ----------------------------------------------- |
 | `HeroSection.tsx`         | Hero con imagen de fondo y CTA principal.       |
 | `TrustBlock.tsx`          | Bloque de confianza con íconos y métricas.      |
 | `FeaturedTrips.tsx`       | Sección de viajes destacados usando `TripCard`. |
-| `TripCard.tsx`            | Card vertical de viaje (usada en Home).         |
 | `PabloSection.tsx`        | Sección sobre Pablo Fortunato (guía/fundador).  |
 | `TestimonialsSection.tsx` | Carrusel de testimonios.                        |
-| `TestimonialCard.tsx`     | Card individual de testimonio.                  |
 | `FinalCTA.tsx`            | CTA final de la página.                         |
 
-### Catálogo (`/viajes`)
+### `ui/` — Componentes UI reutilizables
 
 | Componente               | Descripción                                                 |
 | ------------------------ | ----------------------------------------------------------- |
-| `CatalogoViajes.tsx`     | Lista de viajes con filtros por nivel/zona. `"use client"`. |
+| `TripCard.tsx`           | Card vertical de viaje (usada en Home/FeaturedTrips).       |
 | `TripCardHorizontal.tsx` | Card horizontal de viaje (usada en Catálogo).               |
+| `TestimonialCard.tsx`    | Card individual de testimonio.                              |
 
-### Ficha de Viaje (`/viajes/[slug]`)
+### `views/` — Vistas completas de página (Client o Server)
+
+| Componente               | Descripción                                                                                                                                                                                               |
+| ------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `CatalogoViajes.tsx`     | Lista de viajes con filtros por nivel/zona. `"use client"`. Recibe `trips` como prop (fetched en el server).                                                                                              |
+| `FichaViaje.tsx`         | Layout completo mobile + desktop. No incluye `FloatingWhatsAppButton`.                                                                                                                                    |
+| `EquipoPage.tsx`         | Server Component. Hero, perfil Pablo (2col en lg), grid de guías (3col en lg), CTA. Datos ficticios en `GUIDES[]` — pendiente datos reales. Pablo usa `/photos/pablo2.jpeg`.                             |
+| `ComoTrabajamos.tsx`     | Página Cómo Trabajamos implementada.                                                                                                                                                                      |
+| `ContactoPage.tsx`       | Página de Contacto. Muestra WhatsApp + formulario. **El formulario hoy no envía nada** — solo frontend, sin backend conectado.                                                                            |
+
+### `gallery/` — Galería de fotos
 
 | Componente               | Descripción                                                            |
 | ------------------------ | ---------------------------------------------------------------------- |
-| `FichaViaje.tsx`         | Layout completo mobile + desktop. No incluye `FloatingWhatsAppButton`. |
 | `GalleryModal.tsx`       | Modal fullscreen con framer-motion backdrop (blur-2xl). Keyboard nav.  |
 | `GallerySharedModal.tsx` | Visor core: AnimatePresence, swipe (react-swipeable), thumbnails.      |
-
-### Equipo (`/equipo`)
-
-| Componente       | Descripción                                                                                                                                                                                               |
-| ---------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `EquipoPage.tsx` | Server Component. Hero con imagen de fondo, perfil Pablo (2col en lg), grid de guías (3col en lg), CTA. Datos ficticios en `GUIDES[]` — pendiente datos reales de guías. Pablo usa `/photos/pablo2.jpeg`. |
 
 ---
 
@@ -142,15 +174,34 @@ web/src/app/
 
 ### `trips-data.ts`
 
-- Fuente única de verdad para los 3 viajes.
-- **Slugs:** `cordon-del-plata-iniciacion`, `cerro-punta-negra`, `bolivia-cordillera-real`
-- Exports: `TRIPS` (array), `getTripBySlug(slug)`, interfaces `Trip`, `TripDate`, `ItineraryDay`, `TripTestimonial`
+- Fuente única de verdad para los viajes — **ahora backed por Sanity CMS**, no es data estática.
+- `getAllTrips(): Promise<Trip[]>` — ejecuta `ALL_TRIPS_QUERY` contra Sanity.
+- `getTripBySlug(slug): Promise<Trip | undefined>` — ejecuta `TRIP_BY_SLUG_QUERY` contra Sanity.
+- `normalizeTrip()` — normaliza el campo `spots` que puede llegar como string o number desde Sanity.
+- Interfaces exportadas: `Trip`, `TripDate`, `ItineraryDay`, `TripTestimonial`
 - El campo `imageSrc` es la imagen hero; el campo `images: string[]` son las fotos de la galería.
 
 ### `gallery-utils.ts`
 
 - Tipos compartidos: `GalleryImage`, `SharedModalProps`
 - Helpers: `animationVariants` (framer-motion), `range(start, end)`, `tripImagesToGallery(images)`
+
+### `config.ts` — Configuración global del sitio
+
+```ts
+export const siteConfig = {
+  name: "The Madness Expeditions",
+  whatsappPhone: "541132693505",     // código país + número sin espacios
+  instagramHandle: "madnessexpeditions",
+  whatsappMessages: {
+    default, navbar, beginners, finalCta  // claves tipadas
+  },
+}
+export function waLink(message: keyof typeof siteConfig.whatsappMessages): string
+export const instagramUrl: string
+```
+
+**Regla:** Todos los links de WhatsApp deben usar `waLink()` de `@/lib/config`. No hardcodear URLs ni números de teléfono en componentes.
 
 ---
 
@@ -160,9 +211,10 @@ web/src/app/
 
 ```tsx
 // web/src/app/ruta/page.tsx
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
-import MiComponente from "@/components/MiComponente";
+import Navbar from "@/components/layout/Navbar";
+import Footer from "@/components/layout/Footer";
+import FloatingWhatsAppButton from "@/components/layout/FloatingWhatsAppButton";
+import MiComponente from "@/components/views/MiComponente";
 
 export const metadata = { title: "...", description: "..." };
 
@@ -174,6 +226,25 @@ export default function MiPage() {
         <MiComponente />
       </main>
       <Footer />
+      <FloatingWhatsAppButton />
+    </>
+  );
+}
+```
+
+### Páginas con data de Sanity (async Server Component)
+
+```tsx
+import { getAllTrips } from "@/lib/trips-data";
+
+export default async function MiPage() {
+  const trips = await getAllTrips();  // fetch en servidor
+  return (
+    <>
+      <Navbar />
+      <main><CatalogoViajes trips={trips} /></main>
+      <Footer />
+      <FloatingWhatsAppButton />
     </>
   );
 }
@@ -183,11 +254,16 @@ export default function MiPage() {
 
 - Agregar `"use client"` como primera línea.
 - Preferir `useState` + props drilling sobre context para estado local de página.
+- El data fetching siempre ocurre en el Server Component padre — los client components reciben props.
 
 ### Importaciones
 
 - Alias `@/*` apunta a `web/src/`
-- Componentes: `import X from "@/components/X"`
+- Layout: `import X from "@/components/layout/X"`
+- Sections: `import X from "@/components/sections/X"`
+- Views: `import X from "@/components/views/X"`
+- UI: `import X from "@/components/ui/X"`
+- Gallery: `import X from "@/components/gallery/X"`
 - Lib: `import { fn } from "@/lib/archivo"`
 
 ---
@@ -207,7 +283,7 @@ export default function MiPage() {
 - **Lib/utils:** kebab-case (`trips-data.ts`, `gallery-utils.ts`)
 - **Páginas:** `page.tsx` (fijo por App Router)
 - **Sub-componentes locales:** definir dentro del mismo archivo si son exclusivos de ese componente (no crear archivo separado).
-- **No usar** `yet-another-react-lightbox` — fue reemplazado por `GalleryModal` + `GallerySharedModal` con framer-motion.
+- **`yet-another-react-lightbox`** está instalado en el proyecto como dependencia, pero la galería usa implementación propia con `GalleryModal` + `GallerySharedModal` + framer-motion. No mezclar las dos implementaciones.
 
 ---
 
@@ -217,6 +293,70 @@ export default function MiPage() {
 - **Commits:** `tipo: descripción en minúsculas` (ej: `feat:`, `fix:`, `docs:`, `refactor:`)
 - **Merge:** `--no-ff` con mensaje `merge: feature/x → master`
 - **Branch por defecto:** `master`
+
+---
+
+## Estado de Deploy
+
+| Entorno     | Estado       | URL                                     |
+| ----------- | ------------ | --------------------------------------- |
+| Producción  | ✅ Deployado | Vercel (URL definitiva pendiente)       |
+| Dominio     | ⏳ Pendiente | `madnessexpeditions.com` — configurar   |
+
+**Variables de entorno requeridas en Vercel:**
+- `NEXT_PUBLIC_SANITY_PROJECT_ID` = `6zqw6gnm`
+- `NEXT_PUBLIC_SANITY_DATASET` = `production`
+
+---
+
+## Roadmap — Próximas Tareas
+
+Estado actual: **En pausa — esperando feedback de Pablo** antes de continuar desarrollo.
+
+### 🔧 Funcionalidad
+
+| Tarea | Estado | Notas |
+| ----- | ------ | ----- |
+| Formulario de contacto — backend real | ⏳ Pendiente | Conectar a Resend u otro servicio de email. Hoy solo es UI, no envía nada. |
+| WhatsApp CTAs — mensajes por viaje | ⏳ Pendiente | Verificar que los mensajes pre-cargados por slug estén bien configurados. Actualmente los mensajes están en `siteConfig.whatsappMessages` (genéricos). |
+| Floating WhatsApp button — mobile vs desktop | ⏳ Pendiente | Revisar comportamiento y posicionamiento diferencial. |
+
+### 📈 SEO & Metadata
+
+| Tarea | Estado | Notas |
+| ----- | ------ | ----- |
+| Meta tags completos por página | ⏳ Pendiente | `title` y `description` ya están en algunas páginas — completar todas. |
+| Open Graph para redes sociales | ⏳ Pendiente | Imágenes OG por página. |
+| Sitemap + robots.txt | ⏳ Pendiente | `next-sitemap` o generación manual en App Router. |
+| Structured data Schema.org (tours) | ⏳ Pendiente | JSON-LD para páginas de viajes. |
+
+### ⚡ Performance
+
+| Tarea | Estado | Notas |
+| ----- | ------ | ----- |
+| Optimización de imágenes | ⏳ Pendiente | Auditar uso de `next/image`, formatos WebP, lazy loading. |
+| Core Web Vitals (LCP, CLS) | ⏳ Pendiente | Medir y optimizar en páginas clave. |
+
+### 🧪 Testing
+
+| Tarea | Estado | Notas |
+| ----- | ------ | ----- |
+| Acceptance testing contra UX Scenarios | ⏳ Pendiente | Correr tests sobre las páginas ya buildeadas contra los criterios definidos en `_bmad-output/C-UX-Scenarios/`. |
+
+### 📄 Páginas Pendientes
+
+| Página | Estado | Notas |
+| ------ | ------ | ----- |
+| `/proximas-salidas` | ⏳ Pendiente | Prototipo disponible en `_bmad-output/C-UX-Scenarios/02-martin-validacion-tecnica/02.1-proximas-salidas/`. |
+| `/grandes-expediciones` | ⏳ Pendiente | Prototipo disponible en `_bmad-output/C-UX-Scenarios/03-diego-grandes-expediciones/`. |
+| Datos reales de guías en `/equipo` | ⏳ Pendiente | `GUIDES[]` en `EquipoPage.tsx` tiene datos ficticios. |
+
+### 🚀 Deploy & Infraestructura
+
+| Tarea | Estado | Notas |
+| ----- | ------ | ----- |
+| Configurar dominio `madnessexpeditions.com` | ⏳ Pendiente | Apuntar DNS a Vercel. |
+| Variables de entorno Vercel | ⏳ Pendiente | Verificar que estén seteadas en producción. |
 
 ---
 
