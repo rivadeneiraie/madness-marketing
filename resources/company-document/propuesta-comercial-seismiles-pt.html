@@ -141,9 +141,11 @@
       color: rgba(74,159,212,0.4); font-size: 8px; letter-spacing: 2px; text-transform: uppercase;
     }
 
-    /* ══ PÁGINA 2 — APRESENTAÇÃO ════════════════════════════ */
-    #presentacion { display: flex; flex-direction: column; }
-    #presentacion .body {
+    /* ══ PÁGINAS 2–3 — PRESENTAÇÃO & DESTINO ═════════════════ */
+    #presentacion,
+    #destino { display: flex; flex-direction: column; }
+    #presentacion .body,
+    #destino .body {
       flex: 1; padding: 10mm 18mm 8mm 18mm;
       display: flex; flex-direction: column; gap: 8mm; overflow: hidden;
     }
@@ -403,13 +405,49 @@
 
       <div>
         <div class="section-label">Quem Somos</div>
-        <p class="body-text">
-          Meu nome é <strong>Pablo Fortunato</strong>, CEO da The Madness Expeditions.
-          De Buenos Aires, temos <strong>mais de 12 anos</strong> especializados em expedições de
-          alta montanha. <em style="color:rgba(255,255,255,0.55);">Nosso site está atualmente em atualização.</em>
+        <p class="body-text" style="margin-bottom: 8px;">
+          Meu nome é <strong>Pablo Fortunato</strong>, CEO da The Madness Expeditions, e junto com um grupo de amigos, fundamos a empresa em 2005.
+          Nossa <strong>Base Logística</strong> está localizada em Mendoza, no sopé da Cordilheira dos Andes.
+          Nossa <strong>Base Operacional</strong> fica em Buenos Aires, a capital da Argentina, de onde temos a maior parte do nosso acesso à comunicação com o resto do país.
+        </p>
+        <p class="body-text" style="margin-bottom: 8px;">
+          Desde então, iniciamos esta empresa organizando e guiando grupos por toda a Argentina, na Cordilheira dos Andes, de norte a sul! Com o tempo, começamos a organizar expedições aos picos <strong>Os Seismiles</strong>, a partir de 2012.
+          Ao longo dos anos, desenvolvemos e aprimoramos nossos serviços nesta área, impulsionados pela experiência e pelo desejo de crescimento.
+          Nossa experiência trabalhando no <strong>Aconcágua</strong>, um mercado internacional, nos deu uma visão do que os clientes precisam em termos de conforto, segurança e certeza de alcançar os cumes. Aplicamos todo esse conhecimento a esta região para garantir uma experiência verdadeiramente excepcional.
+          Como esta área é tão "intocada" e o público frequentemente busca essas experiências únicas, concentramos nossa expertise nesta região.
+        </p>
+        <p class="body-text" style="margin: 0;">
+          Temos Experiência na Bolívia, Peru e Equador, bem como em expedições internacionais em outros continentes. Desde a nossa fundação, crescemos e adquirimos experiência em montanhismo em <strong>alta altitude</strong>, oferecendo <strong>serviço, logística, segurança e qualidade</strong> em cada expedição e experiência.
         </p>
       </div>
+    </div>
 
+    <div class="doc-footer">
+      <div>
+        <div class="contact-label">Informações &amp; Reservas</div>
+        <div class="contact-item">pabloflater@hotmail.com · themadnessexpeditions@gmail.com</div>
+        <div class="contact-item">Pablo: +54 9 11 3269-3505 (WhatsApp)</div>
+      </div>
+      <div class="doc-values">
+        Responsabilidade · Segurança<br>
+        Serviço · Compromisso · Garantia
+      </div>
+    </div>
+    <span class="page-num">2 / 6</span>
+  </div>
+
+
+  <!-- FOLHA 3 · O DESTINO ═════════════════════════════════ -->
+  <div class="page" id="destino">
+    <div class="doc-header">
+      <img src="../../web/public/logo-v4.png" alt="Logo">
+      <div>
+        <div class="hdr-brand">The Madness Expeditions · ARG</div>
+        <div class="hdr-tagline">Responsabilidade · Segurança · Serviço · Compromisso</div>
+      </div>
+    </div>
+
+    <div class="body">
       <div>
         <div class="section-label">O Destino</div>
         <p class="body-text" style="margin-bottom: 9px;">
@@ -479,11 +517,11 @@
         Serviço · Compromisso · Garantia
       </div>
     </div>
-    <span class="page-num">2 / 5</span>
+    <span class="page-num">3 / 6</span>
   </div>
 
 
-  <!-- FOLHA 3 · GALERIA DE FOTOS ═══════════════════════════ -->
+  <!-- FOLHA 4 · GALERIA DE FOTOS ═══════════════════════════ -->
   <div class="page" id="galeria">
     <div class="doc-header">
       <img src="../../web/public/logo-v4.png" alt="Logo">
@@ -554,7 +592,7 @@
         Serviço · Compromisso · Garantia
       </div>
     </div>
-    <span class="page-num">3 / 5</span>
+    <span class="page-num">4 / 6</span>
   </div>
 
 
@@ -708,7 +746,7 @@
         Serviço · Compromisso · Garantia
       </div>
     </div>
-    <span class="page-num">4 / 5</span>
+    <span class="page-num">5 / 6</span>
   </div>
 
 
@@ -801,7 +839,7 @@
       </div>
     </div>
 
-    <span class="page-num">5 / 5</span>
+    <span class="page-num">6 / 6</span>
   </div>
 
 </body>
