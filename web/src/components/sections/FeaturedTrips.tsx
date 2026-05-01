@@ -1,6 +1,6 @@
 import Link from "next/link";
 import TripCard, { type TripCardProps } from "../ui/TripCard";
-import { getAllTrips } from "@/lib/trips-data";
+import { getAllTrips } from "@/lib/trips/api";
 
 export default async function FeaturedTrips() {
     const allTrips = await getAllTrips();

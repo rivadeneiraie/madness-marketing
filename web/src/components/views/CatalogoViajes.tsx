@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { type TripCardProps, type TripLevel } from "../ui/TripCard";
 import TripCardHorizontal from "../ui/TripCardHorizontal";
-import { type Trip } from "@/lib/trips-data";
+import { type Trip } from "@/lib/trips/types";
 
 type TripWithZone = TripCardProps & { zone: string };
 

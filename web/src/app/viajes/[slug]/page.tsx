@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import { getTripBySlug, getAllTrips } from "@/lib/trips-data";
+import { getTripBySlug, getAllTrips } from "@/lib/trips/api";
 import FichaViaje from "@/components/views/FichaViaje";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";

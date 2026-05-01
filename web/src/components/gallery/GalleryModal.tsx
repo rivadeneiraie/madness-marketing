@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
-import { type GalleryImage } from "@/lib/gallery-utils";
+import { type GalleryImage } from "./utils";
 import GallerySharedModal from "./GallerySharedModal";
 
 interface GalleryModalProps {

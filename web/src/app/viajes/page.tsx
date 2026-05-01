@@ -2,7 +2,7 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import FloatingWhatsAppButton from "@/components/layout/FloatingWhatsAppButton";
 import CatalogoViajes from "@/components/views/CatalogoViajes";
-import { getAllTrips } from "@/lib/trips-data";
+import { getAllTrips } from "@/lib/trips/api";
 
 export const metadata = {
     title: "Viajes — Madness Expeditions",

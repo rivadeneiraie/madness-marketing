@@ -8,7 +8,7 @@ import {
   animationVariants,
   range,
   type SharedModalProps,
-} from "@/lib/gallery-utils";
+} from "./utils";
 
 function ChevronLeft({ className }: { className?: string }) {
   return (
